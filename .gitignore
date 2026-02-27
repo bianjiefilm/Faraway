@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad
+xcuserdata/
+*.moved-aside
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# App build
+Faraway.app/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
