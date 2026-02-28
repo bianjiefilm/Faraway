@@ -13,11 +13,13 @@ struct StatusBarView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            headerSection
+            // Header - hide when in settings
+            if !showSettings {
+                headerSection
 
-            Divider()
-                .background(Color.white.opacity(0.06))
+                Divider()
+                    .background(Color.white.opacity(0.06))
+            }
 
             // Content based on mode
             if showSettings {
@@ -119,7 +121,7 @@ struct StatusBarView: View {
                 Color.clear.frame(width: 40)
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 10)
+            .padding(.vertical, 12)
             .background(Color(nsColor: NSColor(red: 0.06, green: 0.06, blue: 0.12, alpha: 1)))
 
             Divider()
