@@ -165,58 +165,79 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func createStatusBarIcon(isActive: Bool) -> NSImage {
         let size = NSSize(width: 18, height: 18)
-        let image = NSImage(size: size, flipped: false) { rect in
-            let center = NSPoint(x: rect.midX, y: rect.midY)
-            let opacity: CGFloat = isActive ? 1.0 : 0.3
+        let img = NSImage(size: size)
+        img.lockFocus()
 
-            // Colors from design system
-            let petalColors: [NSColor] = [
-                NSColor(red: 251/255, green: 191/255, blue: 36/255, alpha: opacity),  // Sunflower
-                NSColor(red: 255/255, green: 107/255, blue: 107/255, alpha: opacity),  // Coral
-                NSColor(red: 78/255, green: 205/255, blue: 196/255, alpha: opacity),   // Mint
-                NSColor(red: 167/255, green: 139/255, blue: 250/255, alpha: opacity), // Lavender
-                NSColor(red: 56/255, green: 189/255, blue: 248/255, alpha: opacity), // Sky
-            ]
-
-            // Draw 8 petals around the eye
-            let petalRadius: CGFloat = 1.2
-            let orbitRadius: CGFloat = 5.5
-            let angleStep = (2 * CGFloat.pi) / 8
-
-            for i in 0..<8 {
-                let angle = CGFloat(i) * angleStep - CGFloat.pi / 2
-                let x = center.x + orbitRadius * cos(angle)
-                let y = center.y + orbitRadius * sin(angle)
-                let colorIndex = i % petalColors.count
-
-                let petalRect = NSRect(x: x - petalRadius, y: y - petalRadius, width: petalRadius * 2, height: petalRadius * 2)
-                let petalPath = NSBezierPath(ovalIn: petalRect)
-                petalColors[colorIndex].setFill()
-                petalPath.fill()
-            }
-
-            // Draw eye ellipse
-            let eyeRect = NSRect(x: center.x - 3, y: center.y - 2, width: 6, height: 4)
-            let eyePath = NSBezierPath(ovalIn: eyeRect)
-            NSColor(white: 1.0, alpha: opacity).setStroke()
-            eyePath.lineWidth = 0.8
-            eyePath.stroke()
-
-            // Draw pupil
-            let pupilRect = NSRect(x: center.x - 1, y: center.y - 1, width: 2, height: 2)
-            let pupilPath = NSBezierPath(ovalIn: pupilRect)
-            NSColor(white: 1.0, alpha: opacity).setFill()
-            pupilPath.fill()
-
-            return true
+        if isActive {
+            drawActiveIcon()
+        } else {
+            drawInactiveIcon()
         }
-        return image
+
+        img.unlockFocus()
+        return img
+    }
+
+    private func drawActiveIcon() {
+        let s = NSColor(red: 251/255, green: 191/255, blue: 36/255, alpha: 1)
+        let c = NSColor(red: 255/255, green: 107/255, blue: 107/255, alpha: 1)
+        let m = NSColor(red: 78/255, green: 205/255, blue: 196/255, alpha: 1)
+        let k = NSColor(red: 56/255, green: 189/255, blue: 248/255, alpha: 1)
+
+        // Petals
+        drawDot(x: 9, y: 16, color: s)
+        drawDot(x: 14, y: 14, color: c)
+        drawDot(x: 16, y: 9, color: m)
+        drawDot(x: 14, y: 4, color: k)
+        drawDot(x: 9, y: 2, color: s)
+        drawDot(x: 4, y: 4, color: c)
+        drawDot(x: 2, y: 9, color: m)
+        drawDot(x: 4, y: 14, color: k)
+
+        // Eye
+        NSColor.white.setFill()
+        NSBezierPath(ovalIn: NSRect(x: 5.5, y: 6.5, width: 7, height: 5)).fill()
+        NSColor(red: 0.1, green: 0.1, blue: 0.15, alpha: 1).setStroke()
+        let eye = NSBezierPath(ovalIn: NSRect(x: 5.5, y: 6.5, width: 7, height: 5))
+        eye.lineWidth = 1.0
+        eye.stroke()
+
+        // Pupil
+        s.setFill()
+        NSBezierPath(ovalIn: NSRect(x: 7.8, y: 7.8, width: 2.4, height: 2.4)).fill()
+    }
+
+    private func drawInactiveIcon() {
+        let gray = NSColor(white: 1.0, alpha: 0.4)
+
+        // Petals
+        drawDot(x: 9, y: 16, color: gray)
+        drawDot(x: 14, y: 14, color: gray)
+        drawDot(x: 16, y: 9, color: gray)
+        drawDot(x: 14, y: 4, color: gray)
+        drawDot(x: 9, y: 2, color: gray)
+        drawDot(x: 4, y: 4, color: gray)
+        drawDot(x: 2, y: 9, color: gray)
+        drawDot(x: 4, y: 14, color: gray)
+
+        // Eye
+        gray.setStroke()
+        let eye = NSBezierPath(ovalIn: NSRect(x: 6, y: 7, width: 6, height: 4))
+        eye.lineWidth = 0.8
+        eye.stroke()
+
+        // Pupil
+        gray.setFill()
+        NSBezierPath(ovalIn: NSRect(x: 8, y: 8, width: 2, height: 2)).fill()
+    }
+
+    private func drawDot(x: CGFloat, y: CGFloat, color: NSColor) {
+        color.setFill()
+        NSBezierPath(ovalIn: NSRect(x: x - 1.5, y: y - 1.5, width: 3, height: 3)).fill()
     }
 
     private func updateStatusIcon(isActive: Bool) {
         guard let button = statusItem?.button else { return }
-
-        // Use custom icon based on design system
         button.image = createStatusBarIcon(isActive: isActive)
         button.image?.isTemplate = false
     }
