@@ -127,34 +127,19 @@ struct StatusBarView: View {
             Divider()
                 .background(Color.white.opacity(0.1))
 
-            // Loading indicator
-            if isLoadingApps {
-                VStack(spacing: 12) {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color(red: 251/255, green: 191/255, blue: 36/255)))
-                        .scaleEffect(1.2)
+            // Content
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading, spacing: 16) {
+                    // Mode Selection
+                    settingsModeSection
 
-                    Text("加载中...")
-                        .font(.system(size: 12))
-                        .foregroundColor(.white.opacity(0.5))
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
-            } else {
-                ScrollView(.vertical, showsIndicators: true) {
-                    VStack(alignment: .leading, spacing: 16) {
-                        // Mode Selection
-                        settingsModeSection
+                    Divider()
+                        .background(Color.white.opacity(0.1))
 
-                        Divider()
-                            .background(Color.white.opacity(0.1))
-
-                        // App Selection (only in selectApps mode)
-                        if appMonitor.monitoringMode == .selectApps {
-                            appSelectionSection
-                        }
+                    // App Selection (only in selectApps mode)
+                    if appMonitor.monitoringMode == .selectApps {
+                        appSelectionSection
                     }
-                    .padding(16)
 
                     // Version and Login Toggle
                     VStack(spacing: 12) {
@@ -191,7 +176,7 @@ struct StatusBarView: View {
                         }
                     }
                 }
-                .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
+                .padding(16)
             }
         }
         .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
