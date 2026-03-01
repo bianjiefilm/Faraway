@@ -10,6 +10,7 @@ struct ReminderOverlayView: View {
     @State private var showRing = false
     @State private var showButton = false
     @State private var showGentleNudge = false
+    @State private var hasDismissed = false
     @State private var timer: Timer?
     @State private var bubbleOffsets: [CGFloat] = [0, 0, 0, 0]
     @State private var backgroundImage: String = "插画日落系"
@@ -146,6 +147,8 @@ struct ReminderOverlayView: View {
 
                 // Emergency Skip Button
                 Button(action: {
+                    guard !hasDismissed else { return }
+                    hasDismissed = true
                     timer?.invalidate()
                     onDismiss() // dismiss without recording
                 }) {
@@ -257,6 +260,10 @@ struct ReminderOverlayView: View {
     // MARK: - Dismiss
 
     private func handleDismiss() {
+        // Guard against multiple clicks inflating the counter
+        guard !hasDismissed else { return }
+        hasDismissed = true
+
         // Since the button is disabled during countdown, this is only hit at countdown == 0
         timer?.invalidate()
         

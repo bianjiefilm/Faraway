@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var cancellables = Set<AnyCancellable>()
     private let firstLaunchKey = "Faraway_FirstLaunch"
+    private var isDismissing = false
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Record app launch time
@@ -29,11 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.promptLoginItem()
             }
-        }
-
-        // Set up reminder callback before initializing views
-        timerManager.onShowReminder = { [weak self] in
-            self?.showReminderOverlay()
         }
 
         setupStatusItem()
@@ -74,6 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.image = createStatusBarIcon(isActive: false, secondsRemaining: timerManager.secondsRemaining)
             button.action = #selector(togglePopover)
             button.target = self
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
 
         let popover = NSPopover()
@@ -92,12 +89,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func togglePopover() {
+        // Right-click shows emergency menu
+        if let event = NSApp.currentEvent, event.type == .rightMouseUp {
+            showEmergencyMenu()
+            return
+        }
         guard let popover = popover, let button = statusItem?.button else { return }
         if popover.isShown {
             popover.performClose(nil)
         } else {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
+    }
+
+    private func showEmergencyMenu() {
+        let menu = NSMenu()
+        let closeItem = NSMenuItem(title: "紧急关闭提醒", action: #selector(emergencyDismissOverlay), keyEquivalent: "")
+        closeItem.target = self
+        menu.addItem(closeItem)
+        menu.addItem(NSMenuItem.separator())
+        let quitItem = NSMenuItem(title: "退出 Faraway", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        menu.addItem(quitItem)
+        statusItem?.menu = menu
+        statusItem?.button?.performClick(nil)
+        // Reset menu so left-click still opens popover
+        DispatchQueue.main.async { [weak self] in
+            self?.statusItem?.menu = nil
+        }
+    }
+
+    @objc private func emergencyDismissOverlay() {
+        forceCloseOverlay()
     }
 
     // MARK: - Bindings
@@ -139,7 +161,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             .store(in: &cancellables)
 
-        // Watch for timer completion -> show reminder
+        // Watch for timer completion -> show reminder (single path only)
         timerManager.$shouldShowReminder
             .receive(on: DispatchQueue.main)
             .sink { [weak self] shouldShow in
@@ -163,6 +185,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSNotification.Name("com.apple.screenIsUnlocked"),
             object: nil
         )
+
+        // Watch for system sleep/wake to handle stuck overlays
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(systemWillSleep),
+            name: NSWorkspace.willSleepNotification,
+            object: nil
+        )
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(systemDidWake),
+            name: NSWorkspace.didWakeNotification,
+            object: nil
+        )
     }
 
     @objc private func screenLocked() {
@@ -170,9 +206,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func screenUnlocked() {
+        // If overlay is stuck, dismiss it on unlock
+        if overlayWindow != nil {
+            forceCloseOverlay()
+        }
         // Start timer in global mode or when editing app is active
         if appMonitor.monitoringMode == .global || appMonitor.isEditingAppActive {
             timerManager.startTimer()
+        }
+    }
+
+    @objc private func systemWillSleep() {
+        timerManager.pauseTimer()
+        // If overlay is showing when going to sleep, dismiss it
+        if overlayWindow != nil {
+            forceCloseOverlay()
+        }
+    }
+
+    @objc private func systemDidWake() {
+        // If somehow overlay survived sleep, force close it
+        if overlayWindow != nil {
+            forceCloseOverlay()
+        }
+        // Restart timer after waking
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            if self.appMonitor.monitoringMode == .global || self.appMonitor.isEditingAppActive {
+                self.timerManager.resetAndStart()
+            }
         }
     }
 
@@ -281,7 +343,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Reminder Overlay
 
     func showReminderOverlay() {
-        guard let screen = NSScreen.main else { return }
+        // Guard against double-trigger
+        guard overlayWindow == nil, let screen = NSScreen.main else { return }
+
+        isDismissing = false
 
         let message = MessageProvider.shared.nextMessage()
 
@@ -309,11 +374,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         window.setFrame(screen.frame, display: true)
 
+        // Add Esc key monitor for emergency exit
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            if event.keyCode == 53 { // Esc key
+                self?.forceCloseOverlay()
+                return nil
+            }
+            return event
+        }
+
         self.overlayWindow = window
 
         // Fade in
         window.alphaValue = 0
         window.orderFront(nil)
+        window.makeKeyAndOrderFront(nil)
         NSAnimationContext.runAnimationGroup { ctx in
             ctx.duration = 0.8
             ctx.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -322,17 +397,40 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func dismissOverlay() {
-        guard let window = overlayWindow else { return }
+        guard let window = overlayWindow, !isDismissing else { return }
+        isDismissing = true
+
+        // Start fade-out animation
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.duration = 0.5
             ctx.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             window.animator().alphaValue = 0
         }, completionHandler: { [weak self] in
-            window.orderOut(nil)
-            self?.overlayWindow = nil
-            // Restart timer for next cycle
-            self?.timerManager.resetAndStart()
+            self?.cleanupOverlay()
         })
+
+        // Timeout fallback: if animation callback doesn't fire (e.g. after sleep),
+        // force cleanup after 1.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.cleanupOverlay()
+        }
+    }
+
+    /// Force-close overlay without animation (emergency escape)
+    func forceCloseOverlay() {
+        guard overlayWindow != nil else { return }
+        isDismissing = true
+        cleanupOverlay()
+    }
+
+    /// Shared cleanup: close window and restart timer. Safe to call multiple times.
+    private func cleanupOverlay() {
+        guard let window = overlayWindow else { return }
+        window.orderOut(nil)
+        overlayWindow = nil
+        isDismissing = false
+        // Restart timer for next cycle
+        timerManager.resetAndStart()
     }
 
     // MARK: - Daily Summary
