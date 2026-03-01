@@ -12,22 +12,28 @@ struct StatusBarView: View {
     @State private var launchAtLogin = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header
-            headerSection
+        GeometryReader { geo in
+            VStack(spacing: 0) {
+                // Header
+                headerSection
 
-            Divider()
-                .background(Color.white.opacity(0.06))
+                Divider()
+                    .background(Color.white.opacity(0.06))
 
-            // Content based on mode
-            if showSettings {
-                settingsContent
-            } else {
-                mainContent
+                // Content based on mode
+                if showSettings {
+                    settingsContent
+                } else {
+                    mainContent
+                }
+            }
+            .frame(width: 300, height: 480, alignment: .top)
+            .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
+            .onAppear {
+                print("【布局日志】StatusBarView 已加载。测得边界尺寸: \(geo.size)")
             }
         }
-        .frame(width: 300)
-        .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
+        .frame(width: 300, height: 480)
     }
 
     // MARK: - Header
@@ -84,7 +90,9 @@ struct StatusBarView: View {
 
             // Footer actions
             footerSection
+            Spacer(minLength: 0)
         }
+        .frame(height: 480 - 45, alignment: .top)
     }
 
     // MARK: - Settings Content
@@ -116,7 +124,7 @@ struct StatusBarView: View {
 
                 Spacer()
 
-                Color.clear.frame(width: 40)
+                Color.clear.frame(width: 40, height: 1) // FIXED BUG: previously this was .frame(width: 40) which expands vertically infinitely!
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
@@ -183,15 +191,18 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.0")
+                            Text("1.0.2")
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                         }
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
                 }
                 .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
             }
         }
+        .frame(height: 480 - 45, alignment: .top)
         .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
         .onAppear {
             checkLoginStatus()
@@ -256,6 +267,7 @@ struct StatusBarView: View {
                 .padding(.vertical, 24)
             }
         }
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Active App
