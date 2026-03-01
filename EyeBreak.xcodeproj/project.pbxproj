@@ -19,6 +19,7 @@
 		AA00000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB00000A /* Assets.xcassets */; };
 		AA00000B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000E /* SettingsView.swift */; };
 		AA00000C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000F /* WelcomeView.swift */; };
+		92DA497974EE47E2A6C377AC /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE9B12849CD43178C994A0C /* WeatherManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		AB00000D /* Faraway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faraway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB00000E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AB00000F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		CFE9B12849CD43178C994A0C /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		AD000003 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFE9B12849CD43178C994A0C /* WeatherManager.swift */,
 				AB000003 /* StatusBarView.swift */,
 				AB000004 /* ReminderOverlayView.swift */,
 				AB000005 /* DailySummaryView.swift */,
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92DA497974EE47E2A6C377AC /* WeatherManager.swift in Sources */,
 				AA000001 /* FarawayApp.swift in Sources */,
 				AA000002 /* AppDelegate.swift in Sources */,
 				AA000003 /* StatusBarView.swift in Sources */,

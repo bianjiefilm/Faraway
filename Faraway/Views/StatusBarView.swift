@@ -10,6 +10,9 @@ struct StatusBarView: View {
     @State private var isExpanded = false
     @State private var showQuitAlert = false
     @State private var launchAtLogin = false
+    @AppStorage("isWeatherEnabled") private var isWeatherEnabled = false
+    
+    @StateObject private var weatherManager = WeatherManager.shared
 
     var body: some View {
         GeometryReader { geo in
@@ -177,6 +180,34 @@ struct StatusBarView: View {
                                     toggleLoginItem(enabled: newValue)
                                 }
                         }
+                        
+                        Divider()
+                            .background(Color.white.opacity(0.1))
+                            
+                        // Weather Context Toggle
+                        HStack {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("智能天气文案")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.white)
+                                Text("根据当地天气自动更换护眼文案")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.white.opacity(0.35))
+                            }
+
+                            Spacer()
+
+                            Toggle("", isOn: $isWeatherEnabled)
+                                .toggleStyle(SwitchToggleStyle(tint: Color(red: 251/255, green: 191/255, blue: 36/255)))
+                                .scaleEffect(0.8)
+                                .onChange(of: isWeatherEnabled) { newValue in
+                                    if newValue {
+                                        weatherManager.requestPermissionAndFetch()
+                                    } else {
+                                        weatherManager.disableWeather()
+                                    }
+                                }
+                        }
 
                         // Version Info
                         HStack {
@@ -186,7 +217,7 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.5")
+                            Text("1.0.7")
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                         }
@@ -250,10 +281,11 @@ struct StatusBarView: View {
                     .shadow(color: Color(red: 56/255, green: 189/255, blue: 248/255).opacity(0.3), radius: 8)
                     .padding(.top, 16)
 
-                Text("距离下次休息")
+                Text(appMonitor.isEditingAppActive ? (weatherManager.weatherMessage ?? "距离下次休息") : "等待监测应用启动")
                     .font(.system(size: 11))
                     .foregroundColor(.white.opacity(0.25))
                     .padding(.bottom, 12)
+                    .animation(.easeInOut, value: weatherManager.weatherMessage)
             } else {
                 VStack(spacing: 12) {
                     // Empty state illustration
@@ -297,17 +329,19 @@ struct StatusBarView: View {
                     .cornerRadius(4)
 
                 if appMonitor.monitoringMode == .global {
-                    Text("定时提醒护眼")
+                    Text(weatherManager.weatherMessage ?? "定时提醒护眼")
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
+                        .animation(.easeInOut, value: weatherManager.weatherMessage)
                 } else if let activeApp = appMonitor.currentEditingApp {
                     Text("\(activeApp) 正在运行")
                         .font(.system(size: 11))
                         .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                 } else {
-                    Text("等待监测应用启动")
+                    Text(weatherManager.weatherMessage ?? "等待监测应用启动")
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
+                        .animation(.easeInOut, value: weatherManager.weatherMessage)
                 }
 
                 Spacer()
@@ -521,7 +555,7 @@ struct StatusBarView: View {
             .padding(12)
             .background(
                 appMonitor.monitoringMode == mode
-                    ? Color(red: 78/255, green: 205/255, blue: 196/255).opacity(0.15)
+                    ? Color(red: 78/255, green: 205/255, blue: 196/255).opacity(0.25)
                     : Color.white.opacity(0.05)
             )
             .cornerRadius(10)
@@ -529,9 +563,9 @@ struct StatusBarView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(
                         appMonitor.monitoringMode == mode
-                            ? Color(red: 78/255, green: 205/255, blue: 196/255).opacity(0.3)
+                            ? Color(red: 78/255, green: 205/255, blue: 196/255).opacity(0.8)
                             : Color.clear,
-                        lineWidth: 1
+                        lineWidth: 1.5
                     )
             )
         }

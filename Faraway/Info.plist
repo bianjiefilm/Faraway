@@ -22,6 +22,8 @@
     <string>1</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>我们需要获取您的粗略位置，以便为您提供动态的当地天气情境文案提醒。</string>
     <key>LSMinimumSystemVersion</key>
     <string>$(MACOSX_DEPLOYMENT_TARGET)</string>
     <key>LSUIElement</key>
