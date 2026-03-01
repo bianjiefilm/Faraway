@@ -13,6 +13,33 @@ struct StatusBarView: View {
     @AppStorage("isWeatherEnabled") private var isWeatherEnabled = false
     
     @StateObject private var weatherManager = WeatherManager.shared
+    @StateObject private var milestoneManager = MilestoneManager.shared
+    @StateObject private var dateManager = DateManager.shared
+
+    private func activeMessage(defaultMsg: String) -> String {
+        if let milestone = milestoneManager.currentMilestoneMessage {
+            return milestone
+        }
+        if let dateMsg = dateManager.specialDateMessage {
+            return dateMsg
+        }
+        if let weather = weatherManager.weatherMessage {
+            return weather
+        }
+        return defaultMsg
+    }
+
+    private func hasReachedOneYear() -> Bool {
+        if let installDateString = UserDefaults.standard.string(forKey: "InstallDateString") {
+            let df = DateFormatter()
+            df.dateFormat = "yyyy-MM-dd"
+            if let installDate = df.date(from: installDateString) {
+                let years = Calendar.current.dateComponents([.year], from: installDate, to: Date()).year ?? 0
+                return years >= 1
+            }
+        }
+        return false
+    }
 
     var body: some View {
         GeometryReader { geo in
@@ -34,6 +61,7 @@ struct StatusBarView: View {
             .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
             .onAppear {
                 print("【布局日志】StatusBarView 已加载。测得边界尺寸: \(geo.size)")
+                DateManager.shared.evaluateDates()
             }
         }
         .frame(width: 300, height: 480)
@@ -217,9 +245,16 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.7")
+                            Text("1.0.9")
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
+                        }
+
+                        if hasReachedOneYear() {
+                            Text("给那个教会我看见阳光的人 🌻")
+                                .font(.system(size: 11))
+                                .foregroundColor(.white.opacity(0.2))
+                                .padding(.top, 16)
                         }
                     }
                     .padding(.horizontal, 16)
@@ -281,11 +316,11 @@ struct StatusBarView: View {
                     .shadow(color: Color(red: 56/255, green: 189/255, blue: 248/255).opacity(0.3), radius: 8)
                     .padding(.top, 16)
 
-                Text(appMonitor.isEditingAppActive ? (weatherManager.weatherMessage ?? "距离下次休息") : "等待监测应用启动")
+                Text(appMonitor.isEditingAppActive ? activeMessage(defaultMsg: "距离下次休息") : activeMessage(defaultMsg: "等待监测应用启动"))
                     .font(.system(size: 11))
                     .foregroundColor(.white.opacity(0.25))
                     .padding(.bottom, 12)
-                    .animation(.easeInOut, value: weatherManager.weatherMessage)
+                    .animation(.easeInOut, value: activeMessage(defaultMsg: "距离下次休息"))
             } else {
                 VStack(spacing: 12) {
                     // Empty state illustration
@@ -329,19 +364,19 @@ struct StatusBarView: View {
                     .cornerRadius(4)
 
                 if appMonitor.monitoringMode == .global {
-                    Text(weatherManager.weatherMessage ?? "定时提醒护眼")
+                    Text(activeMessage(defaultMsg: "定时提醒护眼"))
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
-                        .animation(.easeInOut, value: weatherManager.weatherMessage)
+                        .animation(.easeInOut, value: activeMessage(defaultMsg: "定时提醒护眼"))
                 } else if let activeApp = appMonitor.currentEditingApp {
                     Text("\(activeApp) 正在运行")
                         .font(.system(size: 11))
                         .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                 } else {
-                    Text(weatherManager.weatherMessage ?? "等待监测应用启动")
+                    Text(activeMessage(defaultMsg: "等待监测应用启动"))
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
-                        .animation(.easeInOut, value: weatherManager.weatherMessage)
+                        .animation(.easeInOut, value: activeMessage(defaultMsg: "等待监测应用启动"))
                 }
 
                 Spacer()
@@ -477,13 +512,14 @@ struct StatusBarView: View {
                     .foregroundColor(.white.opacity(0.3))
             }
             .buttonStyle(.plain)
-            .alert("确认退出", isPresented: $showQuitAlert) {
-                Button("取消", role: .cancel) { }
-                Button("退出", role: .destructive) {
-                    NSApp.terminate(nil)
-                }
-            } message: {
-                Text("确定要退出 Faraway 吗？")
+            .alert(isPresented: $showQuitAlert) {
+                Alert(
+                    title: Text("照顾好眼睛。去看更远的风景吧 🌻"),
+                    primaryButton: .destructive(Text("退出")) {
+                        NSApp.terminate(nil)
+                    },
+                    secondaryButton: .cancel(Text("继续守护"))
+                )
             }
         }
         .padding(.horizontal, 16)

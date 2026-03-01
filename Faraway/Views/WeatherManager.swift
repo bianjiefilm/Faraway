@@ -62,6 +62,7 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             isLocationAuthorized = false
             DispatchQueue.main.async {
                 self.weatherMessage = nil
+                UserDefaults.standard.set(false, forKey: "isWeatherEnabled")
             }
         case .notDetermined:
             isLocationAuthorized = false

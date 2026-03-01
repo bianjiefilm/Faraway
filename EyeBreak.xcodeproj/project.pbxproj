@@ -20,6 +20,8 @@
 		AA00000B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000E /* SettingsView.swift */; };
 		AA00000C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000F /* WelcomeView.swift */; };
 		92DA497974EE47E2A6C377AC /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE9B12849CD43178C994A0C /* WeatherManager.swift */; };
+		2BC734BED07B4FEEA607627A /* MilestoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA973C6F8944B768353DF07 /* MilestoneManager.swift */; };
+		27F8FE18EEEC4C54A7CEA50B /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4ED383EED4839A3BA0E99 /* DateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		AB00000E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AB00000F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		CFE9B12849CD43178C994A0C /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		2CA973C6F8944B768353DF07 /* MilestoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneManager.swift; sourceTree = "<group>"; };
+		F3B4ED383EED4839A3BA0E99 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 		AD000003 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F3B4ED383EED4839A3BA0E99 /* DateManager.swift */,
+				2CA973C6F8944B768353DF07 /* MilestoneManager.swift */,
 				CFE9B12849CD43178C994A0C /* WeatherManager.swift */,
 				AB000003 /* StatusBarView.swift */,
 				AB000004 /* ReminderOverlayView.swift */,
@@ -184,6 +190,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F8FE18EEEC4C54A7CEA50B /* DateManager.swift in Sources */,
+				2BC734BED07B4FEEA607627A /* MilestoneManager.swift in Sources */,
 				92DA497974EE47E2A6C377AC /* WeatherManager.swift in Sources */,
 				AA000001 /* FarawayApp.swift in Sources */,
 				AA000002 /* AppDelegate.swift in Sources */,

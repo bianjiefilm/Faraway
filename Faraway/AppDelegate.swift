@@ -248,7 +248,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let screen = NSScreen.main else { return }
 
         let message = MessageProvider.shared.nextMessage()
-        sessionTracker.recordBreak()
 
         let overlayView = ReminderOverlayView(
             message: message,

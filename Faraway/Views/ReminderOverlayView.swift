@@ -127,14 +127,14 @@ struct ReminderOverlayView: View {
                 // Dismiss button
                 Button(action: handleDismiss) {
                     Text("我休息好了 ✓")
-                        .font(.system(size: 13))
-                        .foregroundColor(.white.opacity(0.4))
+                        .font(.system(size: 13, weight: countdown == 0 ? .semibold : .regular))
+                        .foregroundColor(countdown == 0 ? .white : .white.opacity(0.3))
                         .padding(.horizontal, 28)
                         .padding(.vertical, 10)
-                        .background(Color.white.opacity(0.08))
+                        .background(countdown == 0 ? Color.white.opacity(0.15) : Color.white.opacity(0.05))
                         .overlay(
                             RoundedRectangle(cornerRadius: 50)
-                                .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                                .stroke(countdown == 0 ? Color.white.opacity(0.4) : Color.white.opacity(0.1), lineWidth: 1)
                         )
                         .cornerRadius(50)
                 }
@@ -142,6 +142,7 @@ struct ReminderOverlayView: View {
                 .opacity(showButton ? 1 : 0)
                 .offset(y: showButton ? 0 : 30)
                 .animation(.spring(response: 0.8, dampingFraction: 0.8).delay(0.9), value: showButton)
+                .disabled(countdown > 0) // Lock button while counting down
 
                 Spacer()
             }
@@ -233,10 +234,7 @@ struct ReminderOverlayView: View {
                 countdown -= 1
             } else {
                 timer?.invalidate()
-                // Auto dismiss after countdown
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    onDismiss()
-                }
+                // Do not auto-dismiss anymore. Wait for user to click.
             }
         }
     }
@@ -244,16 +242,14 @@ struct ReminderOverlayView: View {
     // MARK: - Dismiss
 
     private func handleDismiss() {
-        if countdown > 5 {
-            // Too early, show gentle nudge
-            showGentleNudge = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                showGentleNudge = false
-            }
-        } else {
-            timer?.invalidate()
-            onDismiss()
-        }
+        // Since the button is disabled during countdown, this is only hit at countdown == 0
+        timer?.invalidate()
+        
+        // Record the effective rest locally and in milestones
+        sessionTracker.recordBreak()
+        MilestoneManager.shared.recordEffectiveRest()
+        
+        onDismiss()
     }
 
 }
