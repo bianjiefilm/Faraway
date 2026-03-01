@@ -70,27 +70,33 @@ struct StatusBarView: View {
 
     private var mainContent: some View {
         VStack(spacing: 0) {
+            Spacer(minLength: 0)
+            
             // Timer section
             timerSection
-
-            Divider()
-                .background(Color.white.opacity(0.06))
-
-            // Active app info
-            activeAppSection
-
-            Divider()
-                .background(Color.white.opacity(0.06))
-
-            // Today stats
-            todayStatsSection
-
-            Divider()
-                .background(Color.white.opacity(0.06))
-
-            // Footer actions
-            footerSection
+            
             Spacer(minLength: 0)
+
+            VStack(spacing: 0) {
+                // Card content: Active App & Stats
+                VStack(spacing: 0) {
+                    activeAppSection
+                    
+                    Divider()
+                        .background(Color.white.opacity(0.1))
+                        .padding(.horizontal, 16)
+                    
+                    todayStatsSection
+                }
+                .background(Color.white.opacity(0.04))
+                .cornerRadius(12)
+                .padding(.horizontal, 16)
+                
+                Spacer(minLength: 24)
+
+                // Footer actions (Floating)
+                footerSection
+            }
         }
         .frame(height: 480 - 45, alignment: .top)
     }
@@ -133,20 +139,8 @@ struct StatusBarView: View {
             Divider()
                 .background(Color.white.opacity(0.1))
 
-            // Loading indicator
-            if isLoadingApps {
-                VStack(spacing: 12) {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color(red: 251/255, green: 191/255, blue: 36/255)))
-                        .scaleEffect(1.2)
-
-                    Text("加载中...")
-                        .font(.system(size: 12))
-                        .foregroundColor(.white.opacity(0.5))
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
-            } else {
+            // Loading overlay & Content
+            ZStack {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(alignment: .leading, spacing: 16) {
                         // Mode Selection
@@ -161,6 +155,7 @@ struct StatusBarView: View {
                         }
                     }
                     .padding(16)
+                    .opacity(isLoadingApps ? 0.3 : 1.0) // Dim content while loading
 
                     // Version and Login Toggle
                     VStack(spacing: 12) {
@@ -191,16 +186,31 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.2")
+                            Text("1.0.5")
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                         }
                     }
                     .padding(.horizontal, 16)
                     .padding(.bottom, 24)
+                    .opacity(isLoadingApps ? 0.3 : 1.0)
                 }
-                .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
+
+                if isLoadingApps {
+                    VStack(spacing: 12) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(red: 251/255, green: 191/255, blue: 36/255)))
+                            .scaleEffect(1.2)
+
+                        Text("加载中...")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white.opacity(0.5))
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 0.5))) // Semi-transparent background
+                }
             }
+            .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
         }
         .frame(height: 480 - 45, alignment: .top)
         .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
@@ -235,9 +245,10 @@ struct StatusBarView: View {
         VStack(spacing: 6) {
             if appMonitor.isEditingAppActive {
                 Text(timerManager.formattedTimeRemaining)
-                    .font(.system(size: 42, weight: .medium, design: .monospaced))
+                    .font(.system(size: 64, weight: .light, design: .rounded))
                     .foregroundColor(Color(red: 56/255, green: 189/255, blue: 248/255))
-                    .padding(.top, 12)
+                    .shadow(color: Color(red: 56/255, green: 189/255, blue: 248/255).opacity(0.3), radius: 8)
+                    .padding(.top, 16)
 
                 Text("距离下次休息")
                     .font(.system(size: 11))
@@ -369,17 +380,17 @@ struct StatusBarView: View {
                 label: "守护时长"
             )
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, 16)
     }
 
     private func statCell(value: String, label: String) -> some View {
-        VStack(spacing: 3) {
+        VStack(spacing: 6) {
             Text(value)
-                .font(.system(size: 18, weight: .semibold, design: .monospaced))
+                .font(.system(size: 20, weight: .semibold, design: .rounded))
                 .foregroundColor(.white)
             Text(label)
-                .font(.system(size: 9))
-                .foregroundColor(.white.opacity(0.3))
+                .font(.system(size: 10))
+                .foregroundColor(.white.opacity(0.4))
         }
         .frame(maxWidth: .infinity)
     }
@@ -442,7 +453,7 @@ struct StatusBarView: View {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 10)
+        .padding(.bottom, 16)
     }
 
     // MARK: - Settings Mode Section
