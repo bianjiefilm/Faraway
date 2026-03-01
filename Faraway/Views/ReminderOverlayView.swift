@@ -54,26 +54,6 @@ struct ReminderOverlayView: View {
             // Grain texture overlay
             grainOverlay
 
-            // Emergency Skip Button
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        timer?.invalidate()
-                        onDismiss() // dismiss without recording
-                    }) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 10, weight: .black))
-                            .foregroundColor(.white.opacity(0.2))
-                            .padding(12)
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.top, 24)
-                    .padding(.trailing, 24)
-                }
-                Spacer()
-            }
-
             // Sunflower for special messages
             if message.isSpecial {
                 VStack {
@@ -163,6 +143,21 @@ struct ReminderOverlayView: View {
                 .offset(y: showButton ? 0 : 30)
                 .animation(.spring(response: 0.8, dampingFraction: 0.8).delay(0.9), value: showButton)
                 .disabled(countdown > 0) // Lock button while counting down
+
+                // Emergency Skip Button
+                Button(action: {
+                    timer?.invalidate()
+                    onDismiss() // dismiss without recording
+                }) {
+                    Text("跳过")
+                        .font(.system(size: 12))
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.top, 16)
+                }
+                .buttonStyle(.plain)
+                .opacity(showButton ? 1 : 0)
+                .offset(y: showButton ? 0 : 30)
+                .animation(.spring(response: 0.8, dampingFraction: 0.8).delay(1.0), value: showButton)
 
                 Spacer()
             }

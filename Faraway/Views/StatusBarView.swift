@@ -245,7 +245,7 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.12")
+                            Text("1.0.15")
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                         }

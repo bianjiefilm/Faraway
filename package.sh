@@ -4,6 +4,9 @@
 
 set -e
 
+# Always run from the directory where the script is located
+cd "$(dirname "$0")"
+
 echo "🌻 Building App..."
 ./build.sh
 
