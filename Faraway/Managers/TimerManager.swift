@@ -66,7 +66,7 @@ class TimerManager: ObservableObject {
     /// Trigger reminder immediately
     func triggerReminderNow() {
         pauseTimer()
-        onShowReminder?()
+        shouldShowReminder = true
     }
 
     private func timerCompleted() {
