@@ -70,7 +70,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.image = createStatusBarIcon(isActive: false, secondsRemaining: timerManager.secondsRemaining)
             button.action = #selector(togglePopover)
             button.target = self
-            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
 
         let popover = NSPopover()
@@ -89,37 +88,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func togglePopover() {
-        // Right-click shows emergency menu
-        if let event = NSApp.currentEvent, event.type == .rightMouseUp {
-            showEmergencyMenu()
-            return
-        }
         guard let popover = popover, let button = statusItem?.button else { return }
         if popover.isShown {
             popover.performClose(nil)
         } else {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
-    }
-
-    private func showEmergencyMenu() {
-        let menu = NSMenu()
-        let closeItem = NSMenuItem(title: "紧急关闭提醒", action: #selector(emergencyDismissOverlay), keyEquivalent: "")
-        closeItem.target = self
-        menu.addItem(closeItem)
-        menu.addItem(NSMenuItem.separator())
-        let quitItem = NSMenuItem(title: "退出 Faraway", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
-        menu.addItem(quitItem)
-        statusItem?.menu = menu
-        statusItem?.button?.performClick(nil)
-        // Reset menu so left-click still opens popover
-        DispatchQueue.main.async { [weak self] in
-            self?.statusItem?.menu = nil
-        }
-    }
-
-    @objc private func emergencyDismissOverlay() {
-        forceCloseOverlay()
     }
 
     // MARK: - Bindings
@@ -242,96 +216,118 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func createStatusBarIcon(isActive: Bool, secondsRemaining: Int) -> NSImage {
         let size = NSSize(width: 18, height: 18)
-        let img = NSImage(size: size)
-        img.lockFocus()
-
-        if isActive {
-            drawActiveIcon(secondsRemaining: secondsRemaining)
-        } else {
-            drawInactiveIcon()
+        let img = NSImage(size: size, flipped: false) { rect in
+            if isActive {
+                self.drawActiveIcon(in: rect, secondsRemaining: secondsRemaining)
+            } else {
+                self.drawInactiveIcon(in: rect)
+            }
+            return true
         }
-
-        img.unlockFocus()
         return img
     }
 
-    private func drawActiveIcon(secondsRemaining: Int) {
-        let s = NSColor(red: 251/255, green: 191/255, blue: 36/255, alpha: 1)
-        // Eye Center
-        NSColor.white.setFill()
-        NSBezierPath(ovalIn: NSRect(x: 5.5, y: 6.5, width: 7, height: 5)).fill()
-        NSColor(red: 0.1, green: 0.1, blue: 0.15, alpha: 1).setStroke()
-        let eye = NSBezierPath(ovalIn: NSRect(x: 5.5, y: 6.5, width: 7, height: 5))
-        eye.lineWidth = 1.0
-        eye.stroke()
-
-        // Pupil
-        s.setFill()
-        NSBezierPath(ovalIn: NSRect(x: 7.8, y: 7.8, width: 2.4, height: 2.4)).fill()
+    private func drawActiveIcon(in rect: NSRect, secondsRemaining: Int) {
+        let cx: CGFloat = 9, cy: CGFloat = 9
+        let sunflower = NSColor(red: 251/255, green: 191/255, blue: 36/255, alpha: 1)
 
         if secondsRemaining <= 60 && secondsRemaining > 0 {
-            // Draw progress circle pre-warning
+            // Pre-warning: draw progress ring around eye
             let progress = CGFloat(secondsRemaining) / 60.0
-            
+
+            // Track
             let trackPath = NSBezierPath(ovalIn: NSRect(x: 1.5, y: 1.5, width: 15, height: 15))
-            NSColor.white.withAlphaComponent(0.2).setStroke()
+            NSColor.white.withAlphaComponent(0.15).setStroke()
             trackPath.lineWidth = 1.5
             trackPath.stroke()
-            
-            let center = NSPoint(x: 9, y: 9)
-            let radius: CGFloat = 7.5
-            let path = NSBezierPath()
+
+            // Progress arc
+            let arc = NSBezierPath()
             let endAngle = 90.0 - (360.0 * progress)
-            path.appendArc(withCenter: center, radius: radius, startAngle: 90, endAngle: endAngle, clockwise: true)
-            
-            s.setStroke()
-            path.lineWidth = 1.5
-            path.lineCapStyle = .round
-            path.stroke()
+            arc.appendArc(withCenter: NSPoint(x: cx, y: cy), radius: 7.5, startAngle: 90, endAngle: endAngle, clockwise: true)
+            sunflower.setStroke()
+            arc.lineWidth = 1.5
+            arc.lineCapStyle = .round
+            arc.stroke()
         } else {
-            // Draw regular petals
-            let c = NSColor(red: 255/255, green: 107/255, blue: 107/255, alpha: 1)
-            let m = NSColor(red: 78/255, green: 205/255, blue: 196/255, alpha: 1)
-            let k = NSColor(red: 56/255, green: 189/255, blue: 248/255, alpha: 1)
-
-            drawDot(x: 9, y: 16, color: s)
-            drawDot(x: 14, y: 14, color: c)
-            drawDot(x: 16, y: 9, color: m)
-            drawDot(x: 14, y: 4, color: k)
-            drawDot(x: 9, y: 2, color: s)
-            drawDot(x: 4, y: 4, color: c)
-            drawDot(x: 2, y: 9, color: m)
-            drawDot(x: 4, y: 14, color: k)
+            // Draw 6 smooth petals around center
+            let petalRadius: CGFloat = 7.2
+            let petalSize: CGFloat = 2.8
+            for i in 0..<6 {
+                let angle = CGFloat(i) * (.pi / 3) - .pi / 2
+                let px = cx + cos(angle) * petalRadius
+                let py = cy + sin(angle) * petalRadius
+                let petalRect = NSRect(x: px - petalSize / 2, y: py - petalSize / 2, width: petalSize, height: petalSize)
+                sunflower.withAlphaComponent(0.85).setFill()
+                NSBezierPath(ovalIn: petalRect).fill()
+            }
         }
-    }
 
-    private func drawInactiveIcon() {
-        let gray = NSColor(white: 1.0, alpha: 0.4)
+        // Almond eye shape
+        let eyePath = NSBezierPath()
+        eyePath.move(to: NSPoint(x: 4.5, y: cy))
+        eyePath.curve(to: NSPoint(x: 13.5, y: cy),
+                      controlPoint1: NSPoint(x: 6.5, y: cy + 4),
+                      controlPoint2: NSPoint(x: 11.5, y: cy + 4))
+        eyePath.curve(to: NSPoint(x: 4.5, y: cy),
+                      controlPoint1: NSPoint(x: 11.5, y: cy - 4),
+                      controlPoint2: NSPoint(x: 6.5, y: cy - 4))
+        eyePath.close()
 
-        // Petals
-        drawDot(x: 9, y: 16, color: gray)
-        drawDot(x: 14, y: 14, color: gray)
-        drawDot(x: 16, y: 9, color: gray)
-        drawDot(x: 14, y: 4, color: gray)
-        drawDot(x: 9, y: 2, color: gray)
-        drawDot(x: 4, y: 4, color: gray)
-        drawDot(x: 2, y: 9, color: gray)
-        drawDot(x: 4, y: 14, color: gray)
+        NSColor.white.setFill()
+        eyePath.fill()
+        NSColor(white: 0.2, alpha: 0.6).setStroke()
+        eyePath.lineWidth = 0.6
+        eyePath.stroke()
 
-        // Eye
-        gray.setStroke()
-        let eye = NSBezierPath(ovalIn: NSRect(x: 6, y: 7, width: 6, height: 4))
-        eye.lineWidth = 0.8
-        eye.stroke()
+        // Pupil (brown iris)
+        let irisColor = NSColor(red: 139/255, green: 90/255, blue: 43/255, alpha: 1)
+        irisColor.setFill()
+        NSBezierPath(ovalIn: NSRect(x: 7.2, y: 7.2, width: 3.6, height: 3.6)).fill()
 
-        // Pupil
-        gray.setFill()
+        // Inner pupil
+        NSColor(white: 0.15, alpha: 1).setFill()
         NSBezierPath(ovalIn: NSRect(x: 8, y: 8, width: 2, height: 2)).fill()
+
+        // Catchlight
+        NSColor.white.withAlphaComponent(0.9).setFill()
+        NSBezierPath(ovalIn: NSRect(x: 8.2, y: 9.2, width: 1.0, height: 1.0)).fill()
     }
 
-    private func drawDot(x: CGFloat, y: CGFloat, color: NSColor) {
-        color.setFill()
-        NSBezierPath(ovalIn: NSRect(x: x - 1.5, y: y - 1.5, width: 3, height: 3)).fill()
+    private func drawInactiveIcon(in rect: NSRect) {
+        let cx: CGFloat = 9, cy: CGFloat = 9
+        let gray = NSColor(white: 1.0, alpha: 0.35)
+
+        // 6 soft petals
+        let petalRadius: CGFloat = 7.2
+        let petalSize: CGFloat = 2.8
+        for i in 0..<6 {
+            let angle = CGFloat(i) * (.pi / 3) - .pi / 2
+            let px = cx + cos(angle) * petalRadius
+            let py = cy + sin(angle) * petalRadius
+            let petalRect = NSRect(x: px - petalSize / 2, y: py - petalSize / 2, width: petalSize, height: petalSize)
+            gray.setFill()
+            NSBezierPath(ovalIn: petalRect).fill()
+        }
+
+        // Closed eye (single arc)
+        let closedEye = NSBezierPath()
+        closedEye.move(to: NSPoint(x: 5, y: cy))
+        closedEye.curve(to: NSPoint(x: 13, y: cy),
+                        controlPoint1: NSPoint(x: 7, y: cy + 3),
+                        controlPoint2: NSPoint(x: 11, y: cy + 3))
+        gray.setStroke()
+        closedEye.lineWidth = 1.0
+        closedEye.lineCapStyle = .round
+        closedEye.stroke()
+
+        // Small lashes
+        let lash = NSBezierPath()
+        lash.move(to: NSPoint(x: 9, y: cy + 2.5))
+        lash.line(to: NSPoint(x: 9, y: cy + 3.5))
+        gray.setStroke()
+        lash.lineWidth = 0.6
+        lash.stroke()
     }
 
     private func updateStatusIcon(isActive: Bool, secondsRemaining: Int) {
