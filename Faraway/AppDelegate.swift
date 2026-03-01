@@ -92,6 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if popover.isShown {
             popover.performClose(nil)
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
@@ -216,26 +217,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func createStatusBarIcon(isActive: Bool, secondsRemaining: Int) -> NSImage {
         let size = NSSize(width: 18, height: 18)
-        let img = NSImage(size: size, flipped: false) { rect in
-            if isActive {
-                self.drawActiveIcon(in: rect, secondsRemaining: secondsRemaining)
-            } else {
-                self.drawInactiveIcon(in: rect)
-            }
+
+        // Use countdown ring mode when close to break
+        if isActive && secondsRemaining <= 60 && secondsRemaining > 0 {
+            return createCountdownIcon(secondsRemaining: secondsRemaining, size: size)
+        }
+
+        // Use asset catalog images
+        let imageName = isActive ? "StatusBarActive" : "StatusBarInactive"
+        if let img = NSImage(named: imageName) {
+            img.size = size
+            return img
+        }
+        // Fallback: simple circle if asset not found
+        let fallback = NSImage(size: size, flipped: false) { rect in
+            (isActive ? NSColor.orange : NSColor.gray).setFill()
+            NSBezierPath(ovalIn: rect.insetBy(dx: 3, dy: 3)).fill()
             return true
         }
-        return img
+        return fallback
     }
 
-    private func drawActiveIcon(in rect: NSRect, secondsRemaining: Int) {
-        let cx: CGFloat = 9, cy: CGFloat = 9
-        let sunflower = NSColor(red: 251/255, green: 191/255, blue: 36/255, alpha: 1)
-
-        if secondsRemaining <= 60 && secondsRemaining > 0 {
-            // Pre-warning: draw progress ring around eye
+    private func createCountdownIcon(secondsRemaining: Int, size: NSSize) -> NSImage {
+        let img = NSImage(size: size, flipped: false) { rect in
+            let cx: CGFloat = 9, cy: CGFloat = 9
+            let sunflower = NSColor(red: 251/255, green: 183/255, blue: 36/255, alpha: 1)
             let progress = CGFloat(secondsRemaining) / 60.0
 
-            // Track
+            // Track ring
             let trackPath = NSBezierPath(ovalIn: NSRect(x: 1.5, y: 1.5, width: 15, height: 15))
             NSColor.white.withAlphaComponent(0.15).setStroke()
             trackPath.lineWidth = 1.5
@@ -249,85 +258,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             arc.lineWidth = 1.5
             arc.lineCapStyle = .round
             arc.stroke()
-        } else {
-            // Draw 6 smooth petals around center
-            let petalRadius: CGFloat = 7.2
-            let petalSize: CGFloat = 2.8
-            for i in 0..<6 {
-                let angle = CGFloat(i) * (.pi / 3) - .pi / 2
-                let px = cx + cos(angle) * petalRadius
-                let py = cy + sin(angle) * petalRadius
-                let petalRect = NSRect(x: px - petalSize / 2, y: py - petalSize / 2, width: petalSize, height: petalSize)
-                sunflower.withAlphaComponent(0.85).setFill()
-                NSBezierPath(ovalIn: petalRect).fill()
-            }
+
+            // Small center dot
+            sunflower.setFill()
+            NSBezierPath(ovalIn: NSRect(x: cx - 2, y: cy - 2, width: 4, height: 4)).fill()
+
+            return true
         }
-
-        // Almond eye shape
-        let eyePath = NSBezierPath()
-        eyePath.move(to: NSPoint(x: 4.5, y: cy))
-        eyePath.curve(to: NSPoint(x: 13.5, y: cy),
-                      controlPoint1: NSPoint(x: 6.5, y: cy + 4),
-                      controlPoint2: NSPoint(x: 11.5, y: cy + 4))
-        eyePath.curve(to: NSPoint(x: 4.5, y: cy),
-                      controlPoint1: NSPoint(x: 11.5, y: cy - 4),
-                      controlPoint2: NSPoint(x: 6.5, y: cy - 4))
-        eyePath.close()
-
-        NSColor.white.setFill()
-        eyePath.fill()
-        NSColor(white: 0.2, alpha: 0.6).setStroke()
-        eyePath.lineWidth = 0.6
-        eyePath.stroke()
-
-        // Pupil (brown iris)
-        let irisColor = NSColor(red: 139/255, green: 90/255, blue: 43/255, alpha: 1)
-        irisColor.setFill()
-        NSBezierPath(ovalIn: NSRect(x: 7.2, y: 7.2, width: 3.6, height: 3.6)).fill()
-
-        // Inner pupil
-        NSColor(white: 0.15, alpha: 1).setFill()
-        NSBezierPath(ovalIn: NSRect(x: 8, y: 8, width: 2, height: 2)).fill()
-
-        // Catchlight
-        NSColor.white.withAlphaComponent(0.9).setFill()
-        NSBezierPath(ovalIn: NSRect(x: 8.2, y: 9.2, width: 1.0, height: 1.0)).fill()
-    }
-
-    private func drawInactiveIcon(in rect: NSRect) {
-        let cx: CGFloat = 9, cy: CGFloat = 9
-        let gray = NSColor(white: 1.0, alpha: 0.35)
-
-        // 6 soft petals
-        let petalRadius: CGFloat = 7.2
-        let petalSize: CGFloat = 2.8
-        for i in 0..<6 {
-            let angle = CGFloat(i) * (.pi / 3) - .pi / 2
-            let px = cx + cos(angle) * petalRadius
-            let py = cy + sin(angle) * petalRadius
-            let petalRect = NSRect(x: px - petalSize / 2, y: py - petalSize / 2, width: petalSize, height: petalSize)
-            gray.setFill()
-            NSBezierPath(ovalIn: petalRect).fill()
-        }
-
-        // Closed eye (single arc)
-        let closedEye = NSBezierPath()
-        closedEye.move(to: NSPoint(x: 5, y: cy))
-        closedEye.curve(to: NSPoint(x: 13, y: cy),
-                        controlPoint1: NSPoint(x: 7, y: cy + 3),
-                        controlPoint2: NSPoint(x: 11, y: cy + 3))
-        gray.setStroke()
-        closedEye.lineWidth = 1.0
-        closedEye.lineCapStyle = .round
-        closedEye.stroke()
-
-        // Small lashes
-        let lash = NSBezierPath()
-        lash.move(to: NSPoint(x: 9, y: cy + 2.5))
-        lash.line(to: NSPoint(x: 9, y: cy + 3.5))
-        gray.setStroke()
-        lash.lineWidth = 0.6
-        lash.stroke()
+        return img
     }
 
     private func updateStatusIcon(isActive: Bool, secondsRemaining: Int) {
