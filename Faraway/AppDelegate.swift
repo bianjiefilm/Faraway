@@ -216,7 +216,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Status Icon
 
     private func createStatusBarIcon(isActive: Bool, secondsRemaining: Int) -> NSImage {
-        let size = NSSize(width: 18, height: 18)
+        let size = NSSize(width: 20, height: 20)
 
         // Use countdown ring mode when close to break
         if isActive && secondsRemaining <= 60 && secondsRemaining > 0 {
@@ -240,12 +240,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func createCountdownIcon(secondsRemaining: Int, size: NSSize) -> NSImage {
         let img = NSImage(size: size, flipped: false) { rect in
-            let cx: CGFloat = 9, cy: CGFloat = 9
+            let cx = size.width / 2, cy = size.height / 2
+            let radius = min(size.width, size.height) / 2 - 1.5
             let sunflower = NSColor(red: 251/255, green: 183/255, blue: 36/255, alpha: 1)
             let progress = CGFloat(secondsRemaining) / 60.0
 
             // Track ring
-            let trackPath = NSBezierPath(ovalIn: NSRect(x: 1.5, y: 1.5, width: 15, height: 15))
+            let inset: CGFloat = 1.5
+            let trackPath = NSBezierPath(ovalIn: NSRect(x: inset, y: inset, width: size.width - inset * 2, height: size.height - inset * 2))
             NSColor.white.withAlphaComponent(0.15).setStroke()
             trackPath.lineWidth = 1.5
             trackPath.stroke()
@@ -253,7 +255,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // Progress arc
             let arc = NSBezierPath()
             let endAngle = 90.0 - (360.0 * progress)
-            arc.appendArc(withCenter: NSPoint(x: cx, y: cy), radius: 7.5, startAngle: 90, endAngle: endAngle, clockwise: true)
+            arc.appendArc(withCenter: NSPoint(x: cx, y: cy), radius: radius, startAngle: 90, endAngle: endAngle, clockwise: true)
             sunflower.setStroke()
             arc.lineWidth = 1.5
             arc.lineCapStyle = .round
@@ -261,7 +263,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             // Small center dot
             sunflower.setFill()
-            NSBezierPath(ovalIn: NSRect(x: cx - 2, y: cy - 2, width: 4, height: 4)).fill()
+            NSBezierPath(ovalIn: NSRect(x: cx - 2.5, y: cy - 2.5, width: 5, height: 5)).fill()
 
             return true
         }
