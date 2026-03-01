@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SOURCE="/tmp/cropped_icon.png"
+SOURCE="/tmp/masked_icon.png"
 DEST_DIR="/Users/goodman/works/sseay/EyeBreak/Faraway/Assets.xcassets/AppIcon.appiconset"
 
 mkdir -p "$DEST_DIR"
