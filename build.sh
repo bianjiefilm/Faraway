@@ -9,13 +9,13 @@ echo ""
 
 # Build the app
 xcodebuild -project EyeBreak.xcodeproj \
-    -scheme EyeBreak \
+    -scheme Faraway \
     -configuration Release \
     -derivedDataPath build \
     clean build
 
 # Find the built app
-APP_PATH=$(find build -name "EyeBreak.app" -type d | head -1)
+APP_PATH=$(find build -name "Faraway.app" -type d | head -1)
 
 if [ -z "$APP_PATH" ]; then
     echo "❌ Build failed - app not found"
@@ -24,14 +24,15 @@ fi
 
 # Copy to output
 mkdir -p output
-cp -R "$APP_PATH" output/EyeBreak.app
+rm -rf output/Faraway.app
+cp -R "$APP_PATH" output/Faraway.app
 
 echo ""
 echo "✅ Build successful!"
-echo "📍 App location: output/EyeBreak.app"
+echo "📍 App location: output/Faraway.app"
 echo ""
 echo "To install:"
-echo "  1. Drag 'output/EyeBreak.app' to /Applications"
+echo "  1. Drag 'output/Faraway.app' to /Applications"
 echo "  2. Double-click to launch"
 echo "  3. The 👁️ icon will appear in your menu bar"
 echo ""
