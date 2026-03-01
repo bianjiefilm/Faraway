@@ -54,6 +54,26 @@ struct ReminderOverlayView: View {
             // Grain texture overlay
             grainOverlay
 
+            // Emergency Skip Button
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        timer?.invalidate()
+                        onDismiss() // dismiss without recording
+                    }) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 10, weight: .black))
+                            .foregroundColor(.white.opacity(0.2))
+                            .padding(12)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.top, 24)
+                    .padding(.trailing, 24)
+                }
+                Spacer()
+            }
+
             // Sunflower for special messages
             if message.isSpecial {
                 VStack {

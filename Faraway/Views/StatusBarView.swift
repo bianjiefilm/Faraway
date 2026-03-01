@@ -245,7 +245,7 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.9")
+                            Text("1.0.12")
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                         }
@@ -364,19 +364,17 @@ struct StatusBarView: View {
                     .cornerRadius(4)
 
                 if appMonitor.monitoringMode == .global {
-                    Text(activeMessage(defaultMsg: "定时提醒护眼"))
+                    Text("定时提醒护眼")
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
-                        .animation(.easeInOut, value: activeMessage(defaultMsg: "定时提醒护眼"))
                 } else if let activeApp = appMonitor.currentEditingApp {
                     Text("\(activeApp) 正在运行")
                         .font(.system(size: 11))
                         .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                 } else {
-                    Text(activeMessage(defaultMsg: "等待监测应用启动"))
+                    Text("等待监测应用启动")
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
-                        .animation(.easeInOut, value: activeMessage(defaultMsg: "等待监测应用启动"))
                 }
 
                 Spacer()

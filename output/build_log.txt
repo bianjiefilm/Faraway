@@ -1,0 +1,105 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project EyeBreak.xcodeproj -scheme Faraway -configuration Debug build
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'Faraway' in project 'EyeBreak' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 5261655afa4c6aa745bcfa28bd0a5ff5
+Build description path: /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/XCBuildData/5261655afa4c6aa745bcfa28bd0a5ff5.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk /Users/goodman/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx26.2-25C57-00fa09913b459cbbc988d1f6730289ae.sdkstatcache
+    cd /Users/goodman/works/sseay/EyeBreak/EyeBreak.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -o /Users/goodman/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx26.2-25C57-00fa09913b459cbbc988d1f6730289ae.sdkstatcache
+
+ProcessProductPackaging /Users/goodman/works/sseay/EyeBreak/Faraway/Faraway.entitlements /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway.app.xcent (in target 'Faraway' from project 'EyeBreak')
+    cd /Users/goodman/works/sseay/EyeBreak
+    
+    Entitlements:
+    
+    {
+    "com.apple.security.app-sandbox" = 0;
+    "com.apple.security.get-task-allow" = 1;
+}
+    
+    builtin-productPackagingUtility /Users/goodman/works/sseay/EyeBreak/Faraway/Faraway.entitlements -entitlements -format xml -o /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway.app.xcent
+
+ProcessProductPackagingDER /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway.app.xcent /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway.app.xcent.der (in target 'Faraway' from project 'EyeBreak')
+    cd /Users/goodman/works/sseay/EyeBreak
+    /usr/bin/derq query -f xml -i /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway.app.xcent -o /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway.app.xcent.der --raw
+
+SwiftDriver Faraway normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Faraway' from project 'EyeBreak')
+    cd /Users/goodman/works/sseay/EyeBreak
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Faraway -Onone -enforce-exclusivity\=checked @/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-macos13.0 -g -module-cache-path /Users/goodman/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Products/Debug -F /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Products/Debug -emit-localized-strings -emit-localized-strings-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/goodman/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx26.2-25C57-00fa09913b459cbbc988d1f6730289ae.sdkstatcache -output-file-map /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/goodman/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/goodman/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/goodman/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway_const_extract_protocols.json -Xcc -iquote -Xcc /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-generated-files.hmap -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-own-target-headers.hmap -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-all-target-headers.hmap -Xcc -iquote -Xcc /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-project-headers.hmap -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Products/Debug/include -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources-normal/arm64 -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources/arm64 -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway-Swift.h -working-directory /Users/goodman/works/sseay/EyeBreak -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ Faraway (in target 'Faraway' from project 'EyeBreak')
+
+EmitSwiftModule normal arm64 (in target 'Faraway' from project 'EyeBreak')
+    cd /Users/goodman/works/sseay/EyeBreak
+    
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:7:51: warning: conformance of 'WeatherManager' to protocol 'CLLocationManagerDelegate' crosses into main actor-isolated code and can cause data races; this is an error in the Swift 6 language mode
+class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+                                                  ^
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:7:51: note: isolate this conformance to the main actor with '@MainActor'
+class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+                                                  ^
+                                                  @MainActor 
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:7:7: note: mark all declarations used in the conformance 'nonisolated'
+class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+      ^
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:7:51: note: turn data races into runtime errors with '@preconcurrency'
+class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+                                                  ^
+                                                  @preconcurrency 
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:74:10: note: main actor-isolated instance method 'locationManager(_:didUpdateLocations:)' cannot satisfy nonisolated requirement
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+         ^
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:85:10: note: main actor-isolated instance method 'locationManager(_:didFailWithError:)' cannot satisfy nonisolated requirement
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+         ^
+/Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift:49:10: note: main actor-isolated instance method 'locationManagerDidChangeAuthorization' cannot satisfy nonisolated requirement
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+         ^
+
+SwiftCompile normal arm64 Compiling\ ReminderOverlayView.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/ReminderOverlayView.swift (in target 'Faraway' from project 'EyeBreak')
+SwiftCompile normal arm64 /Users/goodman/works/sseay/EyeBreak/Faraway/Views/ReminderOverlayView.swift (in target 'Faraway' from project 'EyeBreak')
+    cd /Users/goodman/works/sseay/EyeBreak
+    
+
+SwiftCompile normal arm64 Compiling\ AppDelegate.swift /Users/goodman/works/sseay/EyeBreak/Faraway/AppDelegate.swift (in target 'Faraway' from project 'EyeBreak')
+Failed frontend command:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -c /Users/goodman/works/sseay/EyeBreak/Faraway/Views/DateManager.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/MilestoneManager.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/WeatherManager.swift /Users/goodman/works/sseay/EyeBreak/Faraway/FarawayApp.swift -primary-file /Users/goodman/works/sseay/EyeBreak/Faraway/AppDelegate.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/StatusBarView.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/ReminderOverlayView.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/DailySummaryView.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Managers/AppMonitor.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Managers/TimerManager.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Managers/SessionTracker.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Models/ReminderMessage.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/SettingsView.swift /Users/goodman/works/sseay/EyeBreak/Faraway/Views/WelcomeView.swift /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources/GeneratedAssetSymbols.swift -emit-dependencies-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/AppDelegate.d -emit-const-values-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/AppDelegate.swiftconstvalues -emit-reference-dependencies-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/AppDelegate.swiftdeps -serialize-diagnostics-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/AppDelegate.dia -emit-localized-strings -emit-localized-strings-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64 -target arm64-apple-macos13.0 -module-can-import-version AppKit 2685.30.107 2685.30.107 -module-can-import-version DeveloperToolsSupport 23.0.4 23.0.4 -module-can-import-version SwiftUI 7.2.5.1 7.2.5 -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins/libFoundationMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server\#FoundationMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins/libObservationMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server\#ObservationMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins/libPreviewsMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server\#PreviewsMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server\#SwiftMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server\#SwiftUIMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -I /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Products/Debug -F /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Products/Debug -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=4 -module-cache-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -swift-version 5 -enforce-exclusivity\=checked -Onone -D DEBUG -serialize-debugging-options -const-gather-protocols-file /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/Faraway_const_extract_protocols.json -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /Users/goodman/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/goodman/works/sseay/EyeBreak -enable-anonymous-context-mangled-names -file-compilation-dir /Users/goodman/works/sseay/EyeBreak -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc /Users/goodman/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx26.2-25C57-00fa09913b459cbbc988d1f6730289ae.sdkstatcache -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-generated-files.hmap -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-own-target-headers.hmap -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-all-target-headers.hmap -Xcc -iquote -Xcc /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Faraway-project-headers.hmap -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Products/Debug/include -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources-normal/arm64 -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources/arm64 -Xcc -I/Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/DerivedSources -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name Faraway -frontend-parseable-output -disable-clang-spi -target-sdk-version 26.2 -target-sdk-name macosx26.2 -clang-target arm64-apple-macos26.2 -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -o /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Build/Intermediates.noindex/EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/AppDelegate.o -index-unit-output-path /EyeBreak.build/Debug/Faraway.build/Objects-normal/arm64/AppDelegate.o -index-store-path /Users/goodman/Library/Developer/Xcode/DerivedData/EyeBreak-cbrvajezrotzjdbjslduhykhpccj/Index.noindex/DataStore -index-system-modules
+
+SwiftCompile normal arm64 /Users/goodman/works/sseay/EyeBreak/Faraway/AppDelegate.swift (in target 'Faraway' from project 'EyeBreak')
+    cd /Users/goodman/works/sseay/EyeBreak
+    
+/Users/goodman/works/sseay/EyeBreak/Faraway/AppDelegate.swift:74:63: error: missing argument for parameter 'secondsRemaining' in call
+            button.image = createStatusBarIcon(isActive: false)
+                                                              ^
+                                                              , secondsRemaining: <#Int#>
+/Users/goodman/works/sseay/EyeBreak/Faraway/AppDelegate.swift:181:18: note: 'createStatusBarIcon(isActive:secondsRemaining:)' declared here
+    private func createStatusBarIcon(isActive: Bool, secondsRemaining: Int) -> NSImage {
+                 ^
+

@@ -52,10 +52,7 @@ class DateManager: ObservableObject {
         // 2. Exact Calendar Dates
         let md = formatter.string(from: now)
         
-        if md == "03-01" {
-            specialDateMessage = "这个App今天一岁了"
-            return
-        }
+        // Removed hardcoded 03-01 check over here as it's handled automatically by the Anniversary logic below
         
         if md == "07-13" {
             specialDateMessage = "太阳葵，今天多晒一会儿阳光 🌻"

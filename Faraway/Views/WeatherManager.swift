@@ -46,8 +46,10 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     // MARK: - CLLocationManagerDelegate
 
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        updateAuthorizationStatus(manager.authorizationStatus)
+    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        Task { @MainActor in
+            self.updateAuthorizationStatus(manager.authorizationStatus)
+        }
     }
 
     private func updateAuthorizationStatus(_ status: CLAuthorizationStatus) {
@@ -71,18 +73,20 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
 
-        // Throttle fetches: Only fetch if we haven't fetched in the last 2 hours
-        if let last = lastFetchDate, Date().timeIntervalSince(last) < 7200 {
-            return
-        }
+        Task { @MainActor in
+            // Throttle fetches: Only fetch if we haven't fetched in the last 2 hours
+            if let last = self.lastFetchDate, Date().timeIntervalSince(last) < 7200 {
+                return
+            }
 
-        fetchWeatherForLocation(location)
+            self.fetchWeatherForLocation(location)
+        }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("WeatherManager: Location fetch failed: \(error.localizedDescription)")
     }
 

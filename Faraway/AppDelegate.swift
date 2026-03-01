@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
-            button.image = createStatusBarIcon(isActive: false)
+            button.image = createStatusBarIcon(isActive: false, secondsRemaining: timerManager.secondsRemaining)
             button.action = #selector(togglePopover)
             button.target = self
         }
@@ -88,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
         self.popover = popover
 
-        updateStatusIcon(isActive: false)
+        updateStatusIcon(isActive: false, secondsRemaining: timerManager.secondsRemaining)
     }
 
     @objc func togglePopover() {
@@ -108,7 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isActive in
                 guard let self = self else { return }
-                self.updateStatusIcon(isActive: isActive)
+                self.updateStatusIcon(isActive: isActive, secondsRemaining: self.timerManager.secondsRemaining)
                 if isActive {
                     self.timerManager.startTimer()
                 } else {
@@ -120,6 +120,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                        self.sessionTracker.todayBreakCount > 0 {
                         self.showDailySummaryIfNeeded()
                     }
+                }
+            }
+            .store(in: &cancellables)
+
+        // Watch for timer countdown to update icon progress ring
+        timerManager.$secondsRemaining
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] seconds in
+                guard let self = self else { return }
+                let isActive = self.appMonitor.isEditingAppActive || self.appMonitor.monitoringMode == .global
+                if isActive && seconds <= 60 {
+                    self.updateStatusIcon(isActive: true, secondsRemaining: seconds)
+                } else if isActive && seconds == self.timerManager.intervalSeconds {
+                    // Reset to full petals when timer resets
+                    self.updateStatusIcon(isActive: true, secondsRemaining: seconds)
                 }
             }
             .store(in: &cancellables)
@@ -163,13 +178,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Status Icon
 
-    private func createStatusBarIcon(isActive: Bool) -> NSImage {
+    private func createStatusBarIcon(isActive: Bool, secondsRemaining: Int) -> NSImage {
         let size = NSSize(width: 18, height: 18)
         let img = NSImage(size: size)
         img.lockFocus()
 
         if isActive {
-            drawActiveIcon()
+            drawActiveIcon(secondsRemaining: secondsRemaining)
         } else {
             drawInactiveIcon()
         }
@@ -178,23 +193,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return img
     }
 
-    private func drawActiveIcon() {
+    private func drawActiveIcon(secondsRemaining: Int) {
         let s = NSColor(red: 251/255, green: 191/255, blue: 36/255, alpha: 1)
-        let c = NSColor(red: 255/255, green: 107/255, blue: 107/255, alpha: 1)
-        let m = NSColor(red: 78/255, green: 205/255, blue: 196/255, alpha: 1)
-        let k = NSColor(red: 56/255, green: 189/255, blue: 248/255, alpha: 1)
-
-        // Petals
-        drawDot(x: 9, y: 16, color: s)
-        drawDot(x: 14, y: 14, color: c)
-        drawDot(x: 16, y: 9, color: m)
-        drawDot(x: 14, y: 4, color: k)
-        drawDot(x: 9, y: 2, color: s)
-        drawDot(x: 4, y: 4, color: c)
-        drawDot(x: 2, y: 9, color: m)
-        drawDot(x: 4, y: 14, color: k)
-
-        // Eye
+        // Eye Center
         NSColor.white.setFill()
         NSBezierPath(ovalIn: NSRect(x: 5.5, y: 6.5, width: 7, height: 5)).fill()
         NSColor(red: 0.1, green: 0.1, blue: 0.15, alpha: 1).setStroke()
@@ -205,6 +206,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Pupil
         s.setFill()
         NSBezierPath(ovalIn: NSRect(x: 7.8, y: 7.8, width: 2.4, height: 2.4)).fill()
+
+        if secondsRemaining <= 60 && secondsRemaining > 0 {
+            // Draw progress circle pre-warning
+            let progress = CGFloat(secondsRemaining) / 60.0
+            
+            let trackPath = NSBezierPath(ovalIn: NSRect(x: 1.5, y: 1.5, width: 15, height: 15))
+            NSColor.white.withAlphaComponent(0.2).setStroke()
+            trackPath.lineWidth = 1.5
+            trackPath.stroke()
+            
+            let center = NSPoint(x: 9, y: 9)
+            let radius: CGFloat = 7.5
+            let path = NSBezierPath()
+            let endAngle = 90.0 - (360.0 * progress)
+            path.appendArc(withCenter: center, radius: radius, startAngle: 90, endAngle: endAngle, clockwise: true)
+            
+            s.setStroke()
+            path.lineWidth = 1.5
+            path.lineCapStyle = .round
+            path.stroke()
+        } else {
+            // Draw regular petals
+            let c = NSColor(red: 255/255, green: 107/255, blue: 107/255, alpha: 1)
+            let m = NSColor(red: 78/255, green: 205/255, blue: 196/255, alpha: 1)
+            let k = NSColor(red: 56/255, green: 189/255, blue: 248/255, alpha: 1)
+
+            drawDot(x: 9, y: 16, color: s)
+            drawDot(x: 14, y: 14, color: c)
+            drawDot(x: 16, y: 9, color: m)
+            drawDot(x: 14, y: 4, color: k)
+            drawDot(x: 9, y: 2, color: s)
+            drawDot(x: 4, y: 4, color: c)
+            drawDot(x: 2, y: 9, color: m)
+            drawDot(x: 4, y: 14, color: k)
+        }
     }
 
     private func drawInactiveIcon() {
@@ -236,9 +272,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSBezierPath(ovalIn: NSRect(x: x - 1.5, y: y - 1.5, width: 3, height: 3)).fill()
     }
 
-    private func updateStatusIcon(isActive: Bool) {
+    private func updateStatusIcon(isActive: Bool, secondsRemaining: Int) {
         guard let button = statusItem?.button else { return }
-        button.image = createStatusBarIcon(isActive: isActive)
+        button.image = createStatusBarIcon(isActive: isActive, secondsRemaining: secondsRemaining)
         button.image?.isTemplate = false
     }
 
