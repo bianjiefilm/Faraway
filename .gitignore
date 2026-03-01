@@ -24,3 +24,11 @@ Faraway.app/
 
 # Logs
 *.log
+
+# Releases and Build Scripts
+*.dmg
+output/
+build.sh
+package.sh
+update_icon.sh
+set_dmg_icon.swift
