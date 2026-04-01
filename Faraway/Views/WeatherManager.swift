@@ -144,7 +144,7 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 cloudyConditions.contains(dayWeather.condition)
             }
             if areAllCloudy {
-                return "🌻阳光会回来的"
+                return EditionManager.shared.isSunflower ? "🌻阳光会回来的" : "阳光会回来的 ☀️"
             }
         }
 

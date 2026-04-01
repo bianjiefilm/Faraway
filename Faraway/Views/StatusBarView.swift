@@ -10,11 +10,15 @@ struct StatusBarView: View {
     @State private var isExpanded = false
     @State private var showQuitAlert = false
     @State private var launchAtLogin = false
+    @State private var showSecretCodeInput = false
+    @State private var secretCode = ""
+    @State private var secretCodeShake = false
     @AppStorage("isWeatherEnabled") private var isWeatherEnabled = false
-    
+
     @StateObject private var weatherManager = WeatherManager.shared
     @StateObject private var milestoneManager = MilestoneManager.shared
     @StateObject private var dateManager = DateManager.shared
+    @StateObject private var editionManager = EditionManager.shared
 
     private func activeMessage(defaultMsg: String) -> String {
         if let milestone = milestoneManager.currentMilestoneMessage {
@@ -245,13 +249,92 @@ struct StatusBarView: View {
 
                             Spacer()
 
-                            Text("1.0.16")
-                                .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.4))
+                            HStack(spacing: 4) {
+                                if editionManager.isSunflower {
+                                    Text("🌻")
+                                        .font(.system(size: 10))
+                                }
+                                Text("1.0.16")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.white.opacity(0.4))
+                            }
+                            .onLongPressGesture(minimumDuration: 1.0) {
+                                secretCode = ""
+                                showSecretCodeInput = true
+                            }
+                        }
+
+                        // Secret code input popover
+                        if showSecretCodeInput {
+                            VStack(spacing: 10) {
+                                if editionManager.isSunflower {
+                                    Button(action: {
+                                        editionManager.deactivate()
+                                        showSecretCodeInput = false
+                                        DateManager.shared.evaluateDates()
+                                    }) {
+                                        Text("恢复通用版")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.white.opacity(0.6))
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 6)
+                                            .background(Color.white.opacity(0.08))
+                                            .cornerRadius(6)
+                                    }
+                                    .buttonStyle(.plain)
+                                } else {
+                                    Text("输入暗号")
+                                        .font(.system(size: 11))
+                                        .foregroundColor(.white.opacity(0.4))
+
+                                    SecureField("", text: $secretCode)
+                                        .textFieldStyle(.plain)
+                                        .font(.system(size: 14, design: .monospaced))
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .frame(width: 120)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 6)
+                                        .background(Color.white.opacity(0.08))
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                        )
+                                        .offset(x: secretCodeShake ? -6 : 0)
+                                        .animation(.default, value: secretCodeShake)
+                                        .onSubmit {
+                                            if editionManager.activate(code: secretCode) {
+                                                showSecretCodeInput = false
+                                                DateManager.shared.evaluateDates()
+                                            } else {
+                                                // Shake animation on wrong code
+                                                withAnimation(.interpolatingSpring(stiffness: 300, damping: 8)) {
+                                                    secretCodeShake = true
+                                                }
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                    secretCodeShake = false
+                                                }
+                                                secretCode = ""
+                                            }
+                                        }
+                                }
+
+                                Button(action: { showSecretCodeInput = false }) {
+                                    Text("取消")
+                                        .font(.system(size: 11))
+                                        .foregroundColor(.white.opacity(0.3))
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .padding(.vertical, 10)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.white.opacity(0.04))
+                            .cornerRadius(8)
                         }
 
                         if hasReachedOneYear() {
-                            Text("给那个教会我看见阳光的人 🌻")
+                            Text(editionManager.isSunflower ? "给那个教会我看见阳光的人 🌻" : "感谢你一直在用 Faraway")
                                 .font(.system(size: 11))
                                 .foregroundColor(.white.opacity(0.2))
                                 .padding(.top, 16)
@@ -512,7 +595,9 @@ struct StatusBarView: View {
             .buttonStyle(.plain)
             .alert(isPresented: $showQuitAlert) {
                 Alert(
-                    title: Text("照顾好眼睛。去看更远的风景吧 🌻"),
+                    title: Text(editionManager.isSunflower
+                                ? "照顾好眼睛。去看更远的风景吧 🌻"
+                                : "照顾好眼睛，去看更远的风景吧"),
                     primaryButton: .destructive(Text("退出")) {
                         NSApp.terminate(nil)
                     },

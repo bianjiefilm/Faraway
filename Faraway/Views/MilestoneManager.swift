@@ -13,22 +13,47 @@ class MilestoneManager: ObservableObject {
     /// Highest priority message block (if available, overrides any other messages in StatusBarView)
     @Published var currentMilestoneMessage: String?
     
-    private let effectiveRestThresholds: [Int: String] = [
-        1: "第一次，一个好的开始 🌻",
-        50: "50次远眺，眼睛在说谢谢",
-        200: "200次了，已经是一个好习惯",
-        500: "看了500次远方，你看过的风景一定很美",
-        1000: "一千次远眺 🌻",
-        2000: "还在用着啊。有人很高兴 🌻",
-        5000: "这么久了。去看更远的地方吧 🌻"
-    ]
-    
-    private let consecutiveDayThresholds: [Int: String] = [
-        7: "连续一周了，真棒",
-        30: "一个月，护眼已经成为你的习惯了",
-        100: "100天 🌻",
-        365: "一整年了。这个App很开心陪着你"
-    ]
+    private var effectiveRestThresholds: [Int: String] {
+        if EditionManager.shared.isSunflower {
+            return [
+                1: "第一次，一个好的开始 🌻",
+                50: "50次远眺，眼睛在说谢谢",
+                200: "200次了，已经是一个好习惯",
+                500: "看了500次远方，你看过的风景一定很美",
+                1000: "一千次远眺 🌻",
+                2000: "还在用着啊。有人很高兴 🌻",
+                5000: "这么久了。去看更远的地方吧 🌻"
+            ]
+        } else {
+            return [
+                1: "第一次，一个好的开始",
+                50: "50次远眺，眼睛在说谢谢",
+                200: "200次了，已经是一个好习惯",
+                500: "看了500次远方，你看过的风景一定很美",
+                1000: "一千次远眺",
+                2000: "还在用着啊，真好",
+                5000: "这么久了。去看更远的地方吧"
+            ]
+        }
+    }
+
+    private var consecutiveDayThresholds: [Int: String] {
+        if EditionManager.shared.isSunflower {
+            return [
+                7: "连续一周了，真棒",
+                30: "一个月，护眼已经成为你的习惯了",
+                100: "100天 🌻",
+                365: "一整年了。这个App很开心陪着你"
+            ]
+        } else {
+            return [
+                7: "连续一周了，真棒",
+                30: "一个月，护眼已经成为你的习惯了",
+                100: "100天，了不起",
+                365: "一整年了。这个App很开心陪着你"
+            ]
+        }
+    }
 
     private init() {
         checkAndCleanStreaks()
