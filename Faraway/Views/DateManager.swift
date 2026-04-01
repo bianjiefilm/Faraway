@@ -17,6 +17,9 @@ class DateManager: ObservableObject {
         df.dateFormat = "MM-dd"
         return df
     }()
+
+    // Chinese lunar calendar for lunar date checks
+    private let chineseCalendar = Calendar(identifier: .chinese)
     
     // We get the install date from User Defaults (set on first launch)
     @AppStorage("InstallDateString") private var installDateString: String = ""
@@ -59,8 +62,13 @@ class DateManager: ObservableObject {
             return
         }
         
-        // TODO: Lunar string for 5月23日 if needed, skipping complex lunar mapping for now and using Solar as primary.
-        
+        // Lunar calendar date check: 五月廿三 (5th month, 23rd day)
+        let lunarComponents = chineseCalendar.dateComponents([.month, .day], from: now)
+        if lunarComponents.month == 5 && lunarComponents.day == 23 {
+            specialDateMessage = "生日快乐，太阳葵 🎂🌻"
+            return
+        }
+
         // 3. New Year & Eve (Simple approximation: Jan 1)
         if md == "01-01" || md == "12-31" {
             specialDateMessage = "新年快乐，太阳葵 🌻"
