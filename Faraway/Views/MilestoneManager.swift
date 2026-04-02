@@ -8,7 +8,7 @@ class MilestoneManager: ObservableObject {
 
     @AppStorage("Milestone_EffectiveRests") var totalEffectiveRests: Int = 0
     @AppStorage("Milestone_ConsecutiveDays") var consecutiveDays: Int = 0
-    @AppStorage("Milestone_LastActiveDateString") private var lastActiveDateString: String = ""
+    @AppStorage("Milestone_LastActiveDateString") var lastActiveDateString: String = ""
 
     /// Highest priority message block (if available, overrides any other messages in StatusBarView)
     @Published var currentMilestoneMessage: String?

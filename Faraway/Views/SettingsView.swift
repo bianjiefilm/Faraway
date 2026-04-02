@@ -195,7 +195,7 @@ struct SettingsView: View {
                 let knownRunningApps = appMonitor.runningApplications.filter { appMonitor.allAvailableApps[$0.bundleId] != nil }
 
                 if !knownRunningApps.isEmpty {
-                    Text("已知的剪辑软件")
+                    Text(EditionManager.shared.isSunflower ? "已知的剪辑软件" : "已知的常用软件")
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.bottom, 4)

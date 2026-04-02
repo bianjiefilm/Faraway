@@ -1,5 +1,5 @@
 // swift-tools-version: 5.9
-// This is an alternative build method using Swift Package Manager
+// Swift Package Manager build + test configuration
 
 import PackageDescription
 
@@ -9,12 +9,18 @@ let package = Package(
         .macOS(.v13)
     ],
     targets: [
-        .executableTarget(
-            name: "EyeBreak",
-            path: "EyeBreak",
+        .target(
+            name: "FarawayCore",
+            path: "Faraway",
+            exclude: ["FarawayApp.swift"],
             resources: [
                 .process("Assets.xcassets")
             ]
+        ),
+        .testTarget(
+            name: "FarawayTests",
+            dependencies: ["FarawayCore"],
+            path: "Tests"
         )
     ]
 )

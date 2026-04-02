@@ -7,7 +7,7 @@ struct WelcomeView: View {
 
     private let pages: [(image: String, title: String, subtitle: String)] = [
         ("首次启动欢迎页a", "你好", "我是 Faraway，每 20 分钟提醒你休息一下"),
-        ("功能介绍我会提醒你", "我会提醒你", "打开剪辑软件后，自动开始守护你的眼睛"),
+        ("功能介绍我会提醒你", "我会提醒你", "打开应用后，自动开始守护你的眼睛"),
         ("开始使用一起出发", "一起出发", "让每一次远眺都成为美好的时刻")
     ]
 

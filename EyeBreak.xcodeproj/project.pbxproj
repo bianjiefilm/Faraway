@@ -16,6 +16,7 @@
 		AA000007 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000007 /* TimerManager.swift */; };
 		AA000008 /* SessionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000008 /* SessionTracker.swift */; };
 		AA000009 /* ReminderMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000009 /* ReminderMessage.swift */; };
+		EDTN0001 /* EditionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDTN0002 /* EditionManager.swift */; };
 		AA00000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB00000A /* Assets.xcassets */; };
 		AA00000B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000E /* SettingsView.swift */; };
 		AA00000C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000F /* WelcomeView.swift */; };
@@ -34,6 +35,7 @@
 		AB000007 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		AB000008 /* SessionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTracker.swift; sourceTree = "<group>"; };
 		AB000009 /* ReminderMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderMessage.swift; sourceTree = "<group>"; };
+		EDTN0002 /* EditionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditionManager.swift; sourceTree = "<group>"; };
 		AB00000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB00000B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB00000C /* Faraway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Faraway.entitlements; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				AB000009 /* ReminderMessage.swift */,
+				EDTN0002 /* EditionManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				AA000007 /* TimerManager.swift in Sources */,
 				AA000008 /* SessionTracker.swift in Sources */,
 				AA000009 /* ReminderMessage.swift in Sources */,
+				EDTN0001 /* EditionManager.swift in Sources */,
 				AA00000B /* SettingsView.swift in Sources */,
 				AA00000C /* WelcomeView.swift in Sources */,
 			);

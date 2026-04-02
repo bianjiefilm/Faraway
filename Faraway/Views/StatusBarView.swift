@@ -417,11 +417,11 @@ struct StatusBarView: View {
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
 
-                    Text("未检测到剪辑软件")
+                    Text(editionManager.isSunflower ? "未检测到剪辑软件" : "未检测到监测应用")
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.25))
 
-                    Text("打开剪辑软件后自动启动")
+                    Text(editionManager.isSunflower ? "打开剪辑软件后自动启动" : "打开监测应用后自动启动")
                         .font(.system(size: 10))
                         .foregroundColor(.white.opacity(0.15))
                 }
@@ -749,7 +749,7 @@ struct StatusBarView: View {
                 let knownRunningApps = appMonitor.runningApplications.filter { appMonitor.allAvailableApps[$0.bundleId] != nil }
 
                 if !knownRunningApps.isEmpty {
-                    Text("已知的剪辑软件")
+                    Text(editionManager.isSunflower ? "已知的剪辑软件" : "已知的常用软件")
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.bottom, 4)

@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var cancellables = Set<AnyCancellable>()
     private let firstLaunchKey = "Faraway_FirstLaunch"
     private var isDismissing = false
+    private var escKeyMonitor: Any?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Record app launch time
@@ -174,6 +175,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWorkspace.didWakeNotification,
             object: nil
         )
+
+        // Check for date change every minute so stats reset properly at midnight
+        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            self?.sessionTracker.checkDateChange()
+        }.tolerance = 10
     }
 
     @objc private func screenLocked() {
@@ -310,8 +316,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         window.setFrame(screen.frame, display: true)
 
-        // Add Esc key monitor for emergency exit
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+        // Add Esc key monitor for emergency exit (stored so it can be removed on dismiss)
+        escKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             if event.keyCode == 53 { // Esc key
                 self?.forceCloseOverlay()
                 return nil
@@ -365,6 +371,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.orderOut(nil)
         overlayWindow = nil
         isDismissing = false
+        // Remove Esc key monitor to avoid accumulation across multiple overlays
+        if let monitor = escKeyMonitor {
+            NSEvent.removeMonitor(monitor)
+            escKeyMonitor = nil
+        }
         // Restart timer for next cycle
         timerManager.resetAndStart()
     }
