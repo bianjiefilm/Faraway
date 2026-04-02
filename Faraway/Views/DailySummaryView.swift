@@ -30,7 +30,7 @@ struct DailySummaryView: View {
 
                 // Title with warm styling
                 HStack(spacing: 8) {
-                    Text("🌻")
+                    Text(EditionManager.shared.isSunflower ? "🌻" : "✦")
                         .font(.system(size: 18))
                         .rotationEffect(.degrees(sunflowerRotation))
                         .animation(

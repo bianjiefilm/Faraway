@@ -168,7 +168,7 @@ struct ReminderOverlayView: View {
             // Gentle nudge (shows when dismissed too early)
             VStack {
                 Spacer()
-                Text("再看一会儿远处嘛～ 对眼睛好 🌻")
+                Text(EditionManager.shared.isSunflower ? "再看一会儿远处嘛～ 对眼睛好 🌻" : "再看一会儿远处嘛～ 对眼睛好")
                     .font(.system(size: 13))
                     .foregroundColor(.white.opacity(0.35))
                     .opacity(showGentleNudge ? 1 : 0)
