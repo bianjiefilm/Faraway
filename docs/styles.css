@@ -39,6 +39,35 @@ a:focus {
   margin: 0 auto;
 }
 
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.icon-link svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--text-main);
+  transition: fill 0.2s ease;
+}
+
+.icon-link:hover,
+.icon-link:focus-visible {
+  border-color: var(--accent);
+  background: rgba(110, 168, 255, 0.14);
+}
+
+.icon-link:hover svg,
+.icon-link:focus-visible svg {
+  fill: var(--accent);
+}
+
 .skip-link {
   position: absolute;
   left: -999px;
