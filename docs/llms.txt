@@ -44,7 +44,7 @@ Status: Product site is available at https://mayaway.cc/ with releases published
 - Canonical domain: https://mayaway.cc/
 - Build and release source: https://github.com/bianjiefilm/Faraway/releases/latest
 - Source archive: https://github.com/bianjiefilm/Faraway/archive/refs/heads/main.zip
-- Privacy statement: https://mayaway.cc/#privacy
+- Privacy statement: https://mayaway.cc/privacy
 
 ## Recent release snapshot
 - v1.1.0 (2026-04-02): Fixed Esc key monitor leak, reset daily stats correctly at midnight, added 40 unit tests and UX text improvements.
