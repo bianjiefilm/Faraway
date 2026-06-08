@@ -20,6 +20,7 @@
       property="og:description"
       content="Faraway keeps you healthy while working by reminding you to look far away every 20 minutes with an optional full-screen timer."
     />
+    <meta property="og:image" content="https://mayaway.cc/logo.png" />
     <meta property="og:site_name" content="Faraway" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Faraway | macOS Eye-Care Reminder for the 20-20-20 Rule" />
@@ -29,7 +30,9 @@
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
     <meta name="theme-color" content="#1a2a37" />
-    <link rel="icon" type="image/png" href="https://github.githubassets.com/favicons/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="stylesheet" href="styles.css" />
     <script type="application/ld+json">
       {
@@ -89,6 +92,15 @@
                 }
               }
             ]
+          },
+          {
+            "@type": "Organization",
+            "name": "Faraway",
+            "url": "https://mayaway.cc/",
+            "logo": "https://mayaway.cc/logo.png",
+            "sameAs": [
+              "https://github.com/bianjiefilm/Faraway"
+            ]
           }
         ]
       }
@@ -99,7 +111,7 @@
 
     <header class="site-header">
       <div class="container">
-          <a class="brand" href="index.html" aria-label="Faraway home">
+          <a class="brand" href="/" aria-label="Faraway home">
             <img
               src="logo.png"
               alt="Faraway logo"
@@ -112,6 +124,7 @@
           <a href="#features">Features</a>
           <a href="#how-it-works">How it works</a>
           <a href="#download">Download</a>
+          <a href="#trust">Trust</a>
           <a href="#faq">FAQ</a>
           <a
             class="icon-link"
@@ -222,6 +235,39 @@
         </div>
       </section>
 
+      <section id="trust" class="section">
+        <div class="container">
+          <h2>Trust and release details</h2>
+          <div class="grid">
+            <article>
+              <h3>Privacy and data handling</h3>
+              <p>
+                Faraway is designed for local use on macOS. It does not claim analytics
+                tracking for usage behavior, and data collection is described as local-first
+                in the product messaging and source repository.
+              </p>
+            </article>
+            <article>
+              <h3>Platform and support</h3>
+              <p>
+                Supported platform: macOS 13+. Release binaries are published in the GitHub
+                repository releases channel and are publicly verifiable at the links below.
+              </p>
+            </article>
+            <article>
+              <h3>Source of truth</h3>
+              <p>
+                All packaging, release notes, and bug reports are available in the
+                project repository.
+              </p>
+              <p>
+                <a href="https://github.com/bianjiefilm/Faraway" target="_blank" rel="noopener noreferrer">Open repository</a>
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section id="faq" class="section section-alt">
         <div class="container">
           <h2>Frequently asked questions</h2>
@@ -248,9 +294,10 @@
     <footer class="site-footer">
       <div class="container">
         <p>© 2026 Faraway. Built for better eye health on macOS.</p>
-        <nav aria-label="Footer links">
-          <a href="index.html">Home</a>
+          <nav aria-label="Footer links">
+          <a href="/">Home</a>
           <a href="https://github.com/bianjiefilm/Faraway/releases/latest">Download</a>
+          <a href="#trust">Trust</a>
           <a
             class="icon-link"
             href="https://github.com/bianjiefilm/Faraway"
