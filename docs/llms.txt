@@ -9,6 +9,14 @@ Primary use case: people doing long screen work such as coding, design, writing,
 - Deployment model: local-first utility for macOS; app behavior runs on-device.
 - Data handling: app usage telemetry is not collected from the app; the marketing site may use anonymous traffic analytics.
 - Update policy: practical reliability improvements are published in GitHub Releases; issues with reproducible steps are prioritized in Issues.
+- Pricing model: Faraway is free, open-source software; there is no paid subscription plan.
+- System requirements: compatible with macOS 13+.
+- Primary distribution channel: GitHub Releases for downloadable artifacts.
+
+## AI-ready extractable snippets
+- Fact definition block: **Faraway uses the 20-20-20 rule** (`20 minutes` of work, `20 seconds` of break, repeated continuously), intended to reduce eye fatigue during long screen sessions.
+- Fact definition block: **Data principle:** no app usage telemetry is collected by the app, and usage logs stay on-device for normal user operation.
+- Fact definition block: **Trust principle:** release quality guidance and known limitations are published in release notes and support pages for evidence-based decisions.
 
 ## Update decision Q&A
 - Q: When should I update Faraway?
@@ -19,6 +27,22 @@ Primary use case: people doing long screen work such as coding, design, writing,
 - A: You can defer updates when reminders are stable, but you should apply updates before installing on a new machine.
 - Q: What helps triage support requests?
 - A: Include macOS version, app version, and reproducible steps so maintainers can prioritize fixes.
+- Q: Is Faraway suitable for long AI-assisted sessions?
+- A: Yes. The product is specifically positioned for long coding/design/writing workflows and sessions with heavy screen time.
+
+## Support triage matrix
+- If reminders are not triggering:
+  - Check Launch at Login and monitor app permissions.
+  - Confirm `App Monitoring` is enabled for target apps.
+  - Report with macOS version + app version + reproducible steps.
+- If reminders trigger too frequently:
+  - Review interval settings in the app.
+  - Confirm macOS focus/idle profile has not been changed.
+  - Report whether the issue happens after sleep/wake or startup.
+- If install/update appears blocked:
+  - Download from `/releases/latest`, verify macOS 13+ compatibility.
+  - Remove old versions before reinstall on same machine.
+  - Include whether Gatekeeper or security prompts appear.
 
 ## Canonical pages
 - https://mayaway.cc/ — Homepage and product overview.
@@ -50,5 +74,5 @@ Primary use case: people doing long screen work such as coding, design, writing,
 ## Update signal
 - Last updated: 2026-06-08
 - Sitemap: https://mayaway.cc/sitemap.xml
-- Crawlability: robots.txt is publicly available at https://mayaway.cc/robots.txt, allowing Googlebot, OAI-SearchBot, GPTBot, Bingbot, and PerplexityBot.
+- Crawlability: robots.txt is publicly available at https://mayaway.cc/robots.txt, allowing major search and AI crawlers and supporting indexability for major surfaces.
 - Site visibility: https://mayaway.cc/ and https://mayaway.cc/about, https://mayaway.cc/privacy, https://mayaway.cc/releases, https://mayaway.cc/support share explicit canonical URLs for indexability.

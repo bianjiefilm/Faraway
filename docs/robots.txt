@@ -6,16 +6,31 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: GPTBot
 Allow: /
 
+User-agent: GPT-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
 Allow: /
 
 Sitemap: https://mayaway.cc/sitemap.xml

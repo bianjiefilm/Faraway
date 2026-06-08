@@ -48,6 +48,21 @@ Faraway is a menu bar app for macOS based on the [20-20-20 rule](https://www.aoa
 
 Official website: [https://mayaway.cc](https://mayaway.cc)
 
+#### Analytics via Cloudflare Worker (Measurement Protocol)
+
+The marketing site uses GA4 pageview analytics.
+`G-S1FQBX4FK2` is loaded directly in the HTML for standard page analytics.
+For server-side Measurement Protocol events, deploy the included worker:
+
+- `ga4-collector-worker.js`
+- `wrangler.toml`
+
+Deploy steps:
+1) `wrangler auth login`
+2) `wrangler secret put GA4_API_SECRET` (paste the Measurement Protocol API secret)
+3) `wrangler deploy`
+4) Bind the deployed worker route to `mayaway.cc/collect*` in Cloudflare
+
 ### Installation
 
 1. Download the latest `.dmg` from [Releases](https://github.com/bianjiefilm/Faraway/releases)
