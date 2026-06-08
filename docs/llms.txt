@@ -14,6 +14,7 @@ Status: Product site is available at https://mayaway.cc/ with releases published
 - https://mayaway.cc/
 - https://mayaway.cc/about
 - https://mayaway.cc/privacy
+- https://mayaway.cc/releases
 
 ## What you can do
 - Download releases: https://github.com/bianjiefilm/Faraway/releases/latest
