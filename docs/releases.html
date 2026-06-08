@@ -43,13 +43,75 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Faraway Release Notes",
-        "url": "https://mayaway.cc/releases",
-        "description": "Version history and release details for the Faraway macOS menu bar app.",
-        "datePublished": "2026-06-08",
-        "dateModified": "2026-06-08",
-        "inLanguage": "en"
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "name": "Faraway Release Notes",
+            "url": "https://mayaway.cc/releases",
+            "description": "Version history and release details for the Faraway macOS menu bar app.",
+            "datePublished": "2026-06-08",
+            "dateModified": "2026-06-08",
+            "inLanguage": "en"
+          },
+          {
+            "@type": "ItemList",
+            "name": "Faraway release timeline",
+            "description": "Chronological release history for Faraway macOS app updates.",
+            "numberOfItems": 3,
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "v1.1.0",
+                "url": "https://github.com/bianjiefilm/Faraway/releases/tag/v1.1.0",
+                "description": "Esc key listener cleanup, midnight reset behavior, and expanded UI text improvements."
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "v1.0.16",
+                "url": "https://github.com/bianjiefilm/Faraway/releases/tag/v1.0.16",
+                "description": "Reminder reliability and long-idle restoration behavior fixes for crash prevention."
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "v1.0.0",
+                "url": "https://github.com/bianjiefilm/Faraway/releases/tag/v1.0.0",
+                "description": "Initial public release for menu-bar reminders, local schedule controls, and starter setup."
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How often does Faraway get updated?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Faraway updates are published as needed through GitHub Releases, with each version including fixes and small usability improvements."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where are release notes published?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Release notes and full history are published on GitHub Releases, linked from this page."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How are bug reports handled?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bug reports are collected from GitHub Issues. Reproducible steps, environment, and app version details help determine update priority."
+                }
+              }
+            ]
+          }
+        ]
       }
     </script>
   </head>

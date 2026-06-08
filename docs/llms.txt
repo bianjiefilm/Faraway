@@ -18,6 +18,7 @@ Primary use case: people doing long screen work (coding, design, writing, AI-ass
 - Free tool: no paid plan required.
 - Reminder model: local timer-based prompts every 20 minutes, typically for 20 seconds.
 - Maintainer presence: issue filing and support are provided in `/support` and repository Issues.
+- Release model: updates are published via GitHub Releases, with practical reliability fixes prioritized from Issues.
 
 ## How to get started
 - Install: https://github.com/bianjiefilm/Faraway/releases/latest
@@ -33,3 +34,4 @@ Primary use case: people doing long screen work (coding, design, writing, AI-ass
 ## Update signal
 - Last updated: 2026-06-08
 - Sitemap: https://mayaway.cc/sitemap.xml
+- Crawlability: robots.txt is publicly available at https://mayaway.cc/robots.txt, allowing Googlebot, OAI-SearchBot, GPTBot, Bingbot, and PerplexityBot.
