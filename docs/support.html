@@ -11,29 +11,28 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-S1FQBX4FK2");
     </script>
-    <title>Faraway Privacy and Data Policy | macOS Eye-Care Reminder</title>
+    <title>Faraway Support | macOS Eye-Care Reminder</title>
     <meta
       name="description"
-      content="Faraway is local-first on macOS. This page explains what data is used, how issues are reported, and how releases are published."
+      content="Faraway support page for installation, troubleshooting, and bug reporting for the 20-20-20 macOS reminder."
     />
-    <link rel="canonical" href="https://mayaway.cc/privacy" />
+    <link rel="canonical" href="https://mayaway.cc/support" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Faraway Privacy and Data Policy" />
-    <meta property="og:url" content="https://mayaway.cc/privacy" />
+    <meta property="og:title" content="Faraway Support" />
+    <meta property="og:url" content="https://mayaway.cc/support" />
     <meta
       property="og:description"
-      content="Faraway is local-first for macOS reminders. Learn about data handling and issue reporting."
+      content="Get setup help, troubleshooting steps, and issue reporting instructions for Faraway."
     />
     <meta property="og:image" content="https://mayaway.cc/logo.png" />
     <meta property="og:site_name" content="Faraway" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Faraway Privacy and Data Policy" />
+    <meta name="twitter:title" content="Faraway Support | macOS Eye-Care Reminder" />
     <meta
       name="twitter:description"
-      content="Faraway is local-first on macOS. This page explains what is and is not collected."
+      content="Faraway support page for installation, troubleshooting, and bug reporting."
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
     <meta name="theme-color" content="#1a2a37" />
@@ -44,33 +43,10 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebPage",
-            "name": "Faraway Privacy and Data Policy",
-            "url": "https://mayaway.cc/privacy",
-            "description": "Privacy and data handling statement for Faraway.",
-            "datePublished": "2026-06-08",
-            "dateModified": "2026-06-08",
-            "inLanguage": "en"
-          },
-          {
-            "@type": "Article",
-            "name": "Faraway Privacy and Data Policy",
-            "headline": "Faraway Privacy and Data Policy",
-            "author": {
-              "@type": "Organization",
-              "name": "Faraway Team",
-              "url": "https://mayaway.cc/"
-            },
-            "about": {
-              "@type": "SoftwareApplication",
-              "name": "Faraway"
-            },
-            "datePublished": "2026-06-08",
-            "dateModified": "2026-06-08"
-          }
-        ]
+        "@type": "ContactPage",
+        "name": "Faraway Support",
+        "url": "https://mayaway.cc/support",
+        "description": "Support and troubleshooting resources for Faraway users."
       }
     </script>
   </head>
@@ -111,42 +87,53 @@
 
     <main id="main-content" class="section">
       <div class="container">
-        <h1>Privacy and Data Policy</h1>
-        <p class="lead">
-          Faraway is designed to run locally on macOS and keep usage flow transparent.
-          This page explains what the product currently states and how this is supported.
-        </p>
+        <h1>Support</h1>
+        <p class="lead">Faraway is a free product designed for long screen sessions. Use this page to find setup, troubleshooting, and support steps.</p>
 
         <section class="section">
-          <h2>What data is handled by Faraway</h2>
-          <ul>
-            <li>Reminder intervals, app-monitoring preferences, and local execution settings are stored on-device.</li>
-            <li>The public product messaging does not claim analytics tracking or telemetry collection.</li>
-            <li>No user profile content or reminder text is described as being uploaded in product documentation.</li>
-          </ul>
+          <h2>Fast-start help</h2>
+          <ol>
+            <li>Install from <a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">GitHub releases</a>.</li>
+            <li>Move <strong>Faraway.app</strong> to Applications.</li>
+            <li>Open on macOS 13+ and enable menu bar mode.</li>
+            <li>Adjust interval and app-aware mode in preferences.</li>
+          </ol>
         </section>
 
         <section class="section section-alt">
-          <h2>How releases and fixes are published</h2>
-          <p>
-            Release binaries and notes are published in the GitHub repository and issue tracker.
-            Use these URLs for verifiable references:
-          </p>
+          <h2>Troubleshooting</h2>
+          <p>If reminders are not triggering, check the following in order:</p>
           <ul>
-            <li><a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">Latest release</a></li>
-            <li><a href="https://github.com/bianjiefilm/Faraway/releases" target="_blank" rel="noopener noreferrer">Release history</a></li>
-            <li><a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Issue reporting</a></li>
+            <li>App has Accessibility permission and menu-bar visibility is enabled.</li>
+            <li>Reminder interval is not set to an unrealistic value.</li>
+            <li>Selected app monitoring is not restricting all working apps.</li>
+            <li>Try restarting Faraway and re-checking launch at login settings.</li>
           </ul>
         </section>
 
         <section class="section">
-          <h2>Contact</h2>
+          <h2>Report a bug</h2>
+          <p>When reporting issues, include:</p>
+          <ul>
+            <li>macOS version and device model</li>
+            <li>Faraway version</li>
+            <li>Repro steps and expected result</li>
+            <li>Whether app-aware monitoring is enabled</li>
+          </ul>
           <p>
-            If you identify a bug, attach logs if available and report in the repository issue tracker.
+            Create a report in
+            <a href="https://github.com/bianjiefilm/Faraway/issues/new/choose" target="_blank" rel="noopener noreferrer">GitHub Issues</a>.
           </p>
-          <p>
-            <a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Contact support via GitHub Issues</a>
-          </p>
+        </section>
+
+        <section class="section section-alt">
+          <h2>Related pages</h2>
+          <ul>
+            <li><a href="/about">About Faraway</a></li>
+            <li><a href="/releases">Release notes</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="https://github.com/bianjiefilm/Faraway">GitHub repository</a></li>
+          </ul>
         </section>
       </div>
     </main>
@@ -156,6 +143,7 @@
         <p>© 2026 Faraway. Built for better eye health on macOS.</p>
         <nav aria-label="Footer links">
           <a href="/">Home</a>
+          <a href="/about">About</a>
           <a href="/privacy">Privacy</a>
           <a href="/releases">Releases</a>
           <a href="/support">Support</a>
