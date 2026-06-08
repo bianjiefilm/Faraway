@@ -12,6 +12,7 @@ Status: Product site is available at https://mayaway.cc/ with releases published
 
 ## Canonical Pages
 - https://mayaway.cc/
+- https://mayaway.cc/about
 - https://mayaway.cc/privacy
 
 ## What you can do
