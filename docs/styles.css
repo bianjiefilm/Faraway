@@ -100,9 +100,35 @@ a:focus {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  color: var(--text-main);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.brand:hover,
+.brand:focus-visible {
+  color: var(--accent);
+}
+
+.hero-logo {
+  width: min(88px, 20vw);
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 .site-header nav {
