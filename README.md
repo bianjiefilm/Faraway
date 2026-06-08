@@ -15,6 +15,14 @@
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT">
 </p>
 
+<p align="center">
+  <a href="https://mayaway.cc"><strong>Project Website</strong></a>
+  ·
+  <a href="https://github.com/bianjiefilm/Faraway"><strong>GitHub</strong></a>
+  ·
+  <a href="https://github.com/bianjiefilm/Faraway/releases/latest"><strong>Download</strong></a>
+</p>
+
 ---
 
 ## English
@@ -36,9 +44,13 @@ Faraway is a menu bar app for macOS based on the [20-20-20 rule](https://www.aoa
 - 🚀 **Launch at Login** — Option to start automatically on Mac boot
 - 📊 **Daily Summary** — Track your daily eye care progress
 
+### Website
+
+Official website: [https://mayaway.cc](https://mayaway.cc)
+
 ### Installation
 
-1. Download the latest `.dmg` from [Releases](https://github.com/user/faraway/releases)
+1. Download the latest `.dmg` from [Releases](https://github.com/bianjiefilm/Faraway/releases)
 2. Open the DMG file
 3. Drag `Faraway.app` to your Applications folder
 4. Launch Faraway from Applications
@@ -46,8 +58,8 @@ Faraway is a menu bar app for macOS based on the [20-20-20 rule](https://www.aoa
 ### Build from Source
 
 ```bash
-git clone https://github.com/user/faraway.git
-cd faraway
+git clone https://github.com/bianjiefilm/Faraway.git
+cd Faraway
 open Faraway.xcodeproj
 # Build and run (⌘R)
 ```
@@ -116,7 +128,7 @@ Faraway 是一款 macOS 菜单栏应用，基于 [20-20-20 护眼法则](https:/
 
 ### 安装方法
 
-1. 从 [Releases](https://github.com/user/faraway/releases) 下载最新的 `.dmg` 文件
+1. 从 [Releases](https://github.com/bianjiefilm/Faraway/releases) 下载最新的 `.dmg` 文件
 2. 打开 DMG 文件
 3. 将 `Faraway.app` 拖入应用程序文件夹
 4. 从应用程序中启动 Faraway
@@ -124,8 +136,8 @@ Faraway 是一款 macOS 菜单栏应用，基于 [20-20-20 护眼法则](https:/
 ### 从源码构建
 
 ```bash
-git clone https://github.com/user/faraway.git
-cd faraway
+git clone https://github.com/bianjiefilm/Faraway.git
+cd Faraway
 open Faraway.xcodeproj
 # Build and run (⌘R)
 ```
