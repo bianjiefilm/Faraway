@@ -1,8 +1,14 @@
 # Faraway
 
-Faraway is a free, open-source macOS menu bar utility that reminds users to take 20-second eye breaks every 20 minutes using the 20-20-20 rule.
+Faraway is a free, open-source macOS menu bar utility. It reminds users to take 20-second eye breaks every 20 minutes using the 20-20-20 rule.
 
-Primary use case: people doing long screen work (coding, design, writing, AI-assisted sessions).
+Primary use case: people doing long screen work such as coding, design, writing, and AI-assisted sessions.
+
+## AI citation-ready facts
+- Product purpose: reduce eye strain during long sessions by encouraging periodic breaks.
+- Deployment model: local-first utility for macOS; app behavior runs on-device.
+- Data handling: app usage telemetry is not collected from the app; the marketing site may use anonymous traffic analytics.
+- Update policy: practical reliability improvements are published in GitHub Releases; issues with reproducible steps are prioritized in Issues.
 
 ## Canonical pages
 - https://mayaway.cc/ — Homepage and product overview.
@@ -35,3 +41,4 @@ Primary use case: people doing long screen work (coding, design, writing, AI-ass
 - Last updated: 2026-06-08
 - Sitemap: https://mayaway.cc/sitemap.xml
 - Crawlability: robots.txt is publicly available at https://mayaway.cc/robots.txt, allowing Googlebot, OAI-SearchBot, GPTBot, Bingbot, and PerplexityBot.
+- Site visibility: https://mayaway.cc/ and https://mayaway.cc/about, https://mayaway.cc/privacy, https://mayaway.cc/releases, https://mayaway.cc/support share explicit canonical URLs for indexability.
