@@ -14,6 +14,7 @@
 
       gtag("config", "G-S1FQBX4FK2");
     </script>
+    
     <script src="/analytics-collector.js"></script>
     <title>About Faraway | Free macOS 20-20-20 Eye-Care Reminder</title>
     <meta
@@ -29,7 +30,10 @@
       content="Faraway is an open-source project for reducing eye fatigue through periodic screen breaks on macOS."
     />
     <meta property="og:image" content="https://mayaway.cc/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Faraway" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="About Faraway | Free macOS 20-20-20 Reminder" />
     <meta
@@ -37,6 +41,7 @@
       content="Faraway is an open-source macOS menu bar app for 20-20-20 breaks, local-first usage, and screen-work health."
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
+    <meta name="twitter:image:alt" content="Faraway logo and eye-care reminder app interface." />
     <meta name="theme-color" content="#1a2a37" />
     <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -52,9 +57,26 @@
         "dateModified": "2026-06-08",
         "description": "Open-source project page and trust information for the Faraway macOS reminder app.",
         "inLanguage": "en",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://mayaway.cc/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "About",
+              "item": "https://mayaway.cc/about"
+            }
+          ]
+        },
         "publisher": {
           "@type": "Organization",
-          "name": "Faraway Team",
+          "name": "Faraway",
           "url": "https://mayaway.cc/",
           "logo": {
             "@type": "ImageObject",
@@ -69,8 +91,50 @@
             "https://github.com/bianjiefilm/Faraway",
             "https://github.com/bianjiefilm/Faraway/releases",
             "https://github.com/bianjiefilm/Faraway/issues"
-          ]
-        }
+          ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "url": "https://github.com/bianjiefilm/Faraway/issues",
+            "areaServed": "Worldwide",
+            "availableLanguage": [
+              "en",
+              "zh"
+            ]
+          }
+          }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Faraway for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Faraway is for long coding, editing, and AI-assisted sessions where predictable breaks help reduce screen fatigue."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Faraway free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Faraway is free, open-source software, and updates are published through public release notes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Faraway collect app usage telemetry?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Faraway is designed to run locally-first on macOS, and the app does not upload routine usage telemetry."
+            }
+          }
+        ]
       }
     </script>
   </head>
@@ -110,6 +174,7 @@
           Faraway is a focused productivity and eye-health utility for macOS. It helps
           users build consistent break habits with predictable local reminders based on the 20-20-20 rule.
         </p>
+        <p><strong>Answer-first:</strong> if you are deciding whether this product matches your workflow, Faraway is best for long coding, writing, or AI-assisted sessions where predictable breaks are needed and local-first execution is preferred.</p>
 
         <section class="section">
           <h2>What Faraway is</h2>
@@ -125,7 +190,7 @@
           <ul>
             <li>Local-first reminders on macOS 13+.</li>
             <li>Configurable cadence and app-aware scheduling for focused workflows.</li>
-            <li>Public source of truth through GitHub releases, archive, and issue tracker.</li>
+            <li>Public source of truth through the release archive, issue tracker, and source repository.</li>
           </ul>
         </section>
 
@@ -138,7 +203,7 @@
             search systems can verify current claims.
           </p>
           <p><strong>Project contact:</strong> use <a href="/support">/support</a> for troubleshooting and <a href="https://github.com/bianjiefilm/Faraway/issues/new/choose" target="_blank" rel="noopener noreferrer">issue reports</a>.</p>
-          <p><strong>Primary maintainer:</strong> bianjiefilm on GitHub.</p>
+          <p><strong>Primary maintainer:</strong> bianjiefilm on the public code profile.</p>
         </section>
 
         <section class="section">
@@ -161,6 +226,22 @@
             <li>Writers and analysts with frequent screen focus.</li>
             <li>Teams standardizing micro-break habits in local Mac workflows.</li>
           </ul>
+        </section>
+
+        <section class="section">
+          <h2>About page FAQ</h2>
+          <details>
+            <summary>Who is Faraway for?</summary>
+            <p>Faraway is built for long sessions of coding, design, and AI-assisted work where regular breaks keep attention and eye comfort stable.</p>
+          </details>
+          <details>
+            <summary>Is Faraway free to use?</summary>
+            <p>Faraway is free. Delivery and updates are provided through public GitHub releases.</p>
+          </details>
+          <details>
+            <summary>Does Faraway collect usage telemetry?</summary>
+            <p>The app itself runs locally-first on macOS and does not collect routine app-usage telemetry.</p>
+          </details>
         </section>
       </div>
     </main>

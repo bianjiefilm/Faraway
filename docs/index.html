@@ -14,6 +14,7 @@
 
       gtag("config", "G-S1FQBX4FK2");
     </script>
+    
     <script src="/analytics-collector.js"></script>
     <title>Faraway | macOS Eye-Care Reminder for the 20-20-20 Rule</title>
     <meta
@@ -29,7 +30,10 @@
       content="Faraway keeps you healthy while working by reminding you to look far away every 20 minutes with an optional full-screen timer."
     />
     <meta property="og:image" content="https://mayaway.cc/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Faraway" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Faraway | macOS Eye-Care Reminder for the 20-20-20 Rule" />
     <meta
@@ -37,6 +41,7 @@
       content="Take 20-second eye breaks every 20 minutes with Faraway, a macOS menu bar reminder for healthier screen work."
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
+    <meta name="twitter:image:alt" content="Faraway logo and eye-care reminder app interface." />
     <meta name="theme-color" content="#1a2a37" />
     <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -52,6 +57,17 @@
             "url": "https://mayaway.cc/",
             "description": "A menu bar reminder app for the 20-20-20 eye-care rule on macOS.",
             "inLanguage": "en"
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://mayaway.cc/"
+              }
+            ]
           },
           {
             "@type": "WebPage",
@@ -89,7 +105,7 @@
                 "@type": "ListItem",
                 "position": 4,
                 "name": "Release transparency",
-                "description": "Version and release evidence are published in GitHub Releases and issue tracking."
+                "description": "Version and release evidence are published in release archive and issue tracking."
               }
             ]
           },
@@ -113,7 +129,7 @@
             "downloadUrl": "https://github.com/bianjiefilm/Faraway/releases/latest",
             "author": {
               "@type": "Organization",
-              "name": "Faraway Team"
+              "name": "Faraway"
             }
           },
           {
@@ -140,7 +156,7 @@
                 "name": "How can I install Faraway?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Download the latest DMG from GitHub Releases and move Faraway.app to Applications."
+                  "text": "Download the latest DMG from release archive and move Faraway.app to Applications."
                 }
               },
               {
@@ -156,7 +172,7 @@
                 "name": "Where can I review update notes?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Update notes and changelog entries are published in the GitHub Releases section."
+                  "text": "Update notes and changelog entries are published in the release archive section."
                 }
               },
               {
@@ -176,6 +192,7 @@
             "logo": "https://mayaway.cc/logo.png",
             "sameAs": [
               "https://github.com/bianjiefilm/Faraway",
+              "https://github.com/bianjiefilm/Faraway/releases",
               "https://github.com/bianjiefilm/Faraway/issues"
             ],
             "contactPoint": {
@@ -183,7 +200,10 @@
               "contactType": "customer support",
               "url": "https://github.com/bianjiefilm/Faraway/issues",
               "areaServed": "Worldwide",
-              "availableLanguage": ["en"]
+              "availableLanguage": [
+                "en",
+                "zh"
+              ]
             },
             "founder": {
               "@type": "Person",
@@ -232,7 +252,7 @@
     </header>
 
     <main id="main-content">
-      <section class="hero">
+        <section class="hero">
         <div class="container hero-content">
           <img
             class="hero-logo"
@@ -255,6 +275,16 @@
               Download Source Archive
             </a>
           </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2>What Faraway is (in one minute)</h2>
+          <p><strong>Faraway is a free, local-first macOS menu-bar reminder</strong> for the 20-20-20 rule.</p>
+          <p><strong>It helps users reduce long-screen eye fatigue</strong> by triggering a short break prompt every 20 minutes, typically for 20 seconds.</p>
+          <p><strong>It is not a cloud app.</strong> The reminder behavior and preferences are run on your Mac.</p>
+          <p><strong>Source of truth:</strong> all releases, issue reports, and change history are published in the source repository and release page.</p>
         </div>
       </section>
 
@@ -342,7 +372,7 @@
                   <path d="M8 0C3.582 0 0 3.686 0 8.236c0 3.64 2.355 6.73 5.619 7.826.41.075.56-.176.56-.392 0-.192-.007-.701-.011-1.375-2.287.5-2.768-1.115-2.768-1.115-.373-.95-.91-1.203-.91-1.203-.737-.506.056-.496.056-.496.815.058 1.244.84 1.244.84.724 1.251 1.901.89 2.366.68.073-.527.283-.89.515-1.094-1.829-.212-3.75-.923-3.75-4.094 0-.907.31-1.65.823-2.23-.083-.202-.356-1.018.078-2.12 0 0 .672-.216 2.2.852.639-.178 1.324-.267 2.006-.271.681.004 1.367.093 2.007.271 1.526-1.068 2.197-.852 2.197-.852.435 1.102.161 1.918.079 2.12.513.58.822 1.323.822 2.23 0 3.179-1.924 3.881-3.759 4.089.292.252.554.747.554 1.504 0 1.086-.01 1.962-.01 2.229 0 .218.146.472.565.392C13.645 14.964 16 11.876 16 8.236 16 3.686 12.418 0 8.000 0Z"/>
                 </svg>
               </span>
-              <span>Open repository</span>
+              <span class="sr-only">Open source repository</span>
             </a>
           </li>
             <li><a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Issue reporting and support</a></li>
@@ -391,7 +421,7 @@
             Faraway supports macOS 13 or later. The release package includes everything needed to run locally.
           </p>
           <ul>
-            <li>1) Go to <a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">GitHub Releases</a>.</li>
+            <li>1) Go to <a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">Release archive</a>.</li>
             <li>2) Download the latest .dmg installer.</li>
             <li>3) Open the DMG and drag Faraway.app to Applications.</li>
             <li>4) Launch Faraway from Applications or Finder and complete first-run setup.</li>
@@ -413,7 +443,7 @@
             <article>
               <h3>Platform and support</h3>
               <p>
-                Supported platform: macOS 13+. Release binaries are published in the GitHub
+                Supported platform: macOS 13+. Release binaries are published in the release archive
                 repository releases channel and are publicly verifiable at the links below.
               </p>
             </article>
@@ -424,7 +454,7 @@
                 project repository.
               </p>
               <p>
-                <a href="https://github.com/bianjiefilm/Faraway" target="_blank" rel="noopener noreferrer">Open repository</a>
+                <a href="https://github.com/bianjiefilm/Faraway" target="_blank" rel="noopener noreferrer">Source repository</a>
               </p>
               <p>
                 <a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Support and issue tracker</a>
@@ -448,7 +478,7 @@
           </ul>
           <p>
             If you need support or need to report a reproducible issue, use
-            <a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>.
+            <a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Issue tracker</a>.
           </p>
         </div>
       </section>
@@ -456,6 +486,10 @@
       <section id="faq" class="section section-alt">
         <div class="container">
           <h2>Frequently asked questions</h2>
+          <details>
+            <summary>How does Faraway handle privacy and telemetry?</summary>
+            <p>Faraway is local-first: reminder settings, app behavior, and usage flow stay on-device. The website may collect only anonymous traffic analytics for product visibility.</p>
+          </details>
           <details>
             <summary>Is my data uploaded to the cloud?</summary>
             <p>App reminder settings and logs are stored locally on your Mac; the website may collect anonymous page analytics.</p>
@@ -474,7 +508,7 @@
           </details>
           <details>
             <summary>Do I get updates and changelog notes?</summary>
-            <p>Yes. Release notes and updates are published in the GitHub Releases page and can be reviewed before you update.</p>
+            <p>Yes. Release notes and updates are published in the release archive page and can be reviewed before you update.</p>
           </details>
           <details>
             <summary>Can I use Faraway for work and personal use?</summary>

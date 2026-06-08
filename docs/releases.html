@@ -13,6 +13,7 @@
       gtag("js", new Date());
       gtag("config", "G-S1FQBX4FK2");
     </script>
+    
     <script src="/analytics-collector.js"></script>
     <title>Faraway Release Notes | macOS Eye-Care Updates and Stability</title>
     <meta
@@ -28,7 +29,10 @@
       content="Track the latest Faraway releases, version details, and where to get release artifacts."
     />
     <meta property="og:image" content="https://mayaway.cc/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Faraway" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Faraway Release Notes | macOS Eye-Care Updates" />
     <meta
@@ -36,6 +40,7 @@
       content="Track Faraway version history, fixes, and release priorities to keep reminders stable on macOS."
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
+    <meta name="twitter:image:alt" content="Faraway logo and eye-care reminder app interface." />
     <meta name="theme-color" content="#1a2a37" />
     <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -45,6 +50,23 @@
       {
         "@context": "https://schema.org",
         "@graph": [
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://mayaway.cc/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Releases",
+                "item": "https://mayaway.cc/releases"
+              }
+            ]
+          },
           {
             "@type": "WebPage",
             "name": "Faraway Release Notes",
@@ -91,7 +113,7 @@
                 "name": "How often does Faraway get updated?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Faraway updates are published as needed through GitHub Releases, with each version including fixes and small usability improvements."
+                  "text": "Faraway updates are published as needed through release archive, with each version including fixes and small usability improvements."
                 }
               },
               {
@@ -99,7 +121,7 @@
                 "name": "Where are release notes published?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Release notes and full history are published on GitHub Releases, linked from this page."
+                  "text": "Release notes and full history are published on release archive, linked from this page."
                 }
               },
               {
@@ -107,7 +129,7 @@
                 "name": "How are bug reports handled?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Bug reports are collected from GitHub Issues. Reproducible steps, environment, and app version details help determine update priority."
+                  "text": "Bug reports are collected from Issue tracker. Reproducible steps, environment, and app version details help determine update priority."
                 }
               },
               {
@@ -119,6 +141,30 @@
                 }
               }
             ]
+          },
+          {
+            "@type": "Organization",
+            "name": "Faraway",
+            "url": "https://mayaway.cc/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://mayaway.cc/logo.png"
+            },
+            "sameAs": [
+              "https://github.com/bianjiefilm/Faraway",
+              "https://github.com/bianjiefilm/Faraway/releases",
+              "https://github.com/bianjiefilm/Faraway/issues"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "url": "https://github.com/bianjiefilm/Faraway/issues",
+              "areaServed": "Worldwide",
+              "availableLanguage": [
+                "en",
+                "zh"
+              ]
+            }
           }
         ]
       }
@@ -159,6 +205,7 @@
         <p class="lead">
           This page keeps a concise, crawlable release history for updates to the Faraway macOS reminder app.
         </p>
+        <p><strong>Decision summary:</strong> Update quickly if reminders miss, startup is unstable, or you are installing on a new Mac; if usage is stable, updates can follow routine maintenance.</p>
 
         <section class="section section-alt">
           <h2>Release philosophy</h2>
@@ -167,7 +214,7 @@
             stable reminders, timer behavior, and installation clarity for long screen-work sessions.
           </p>
           <ul>
-            <li>Public releases are delivered through GitHub Releases and include version tags.</li>
+            <li>Public releases are delivered through release archive and include version tags.</li>
             <li>Bug reports and reproducible steps are tracked in Issues before fixes are prioritized.</li>
             <li>Release notes stay concise so users can quickly decide whether to update.</li>
           </ul>
@@ -201,6 +248,22 @@
               </tr>
             </tbody>
           </table>
+        </section>
+
+        <section class="section">
+          <h2>Release FAQ</h2>
+          <details>
+            <summary>How often does Faraway update?</summary>
+            <p>Faraway updates are released when reliability issues or practical workflow improvements are ready, and each version includes a concise changelog.</p>
+          </details>
+          <details>
+            <summary>Where are release notes published?</summary>
+            <p>Release notes and full history are published in the GitHub release archive and linked here for quick verification.</p>
+          </details>
+          <details>
+            <summary>When should I install the latest version?</summary>
+            <p>Install immediately when reminders miss or startup is unstable; for stable usage, align updates with routine maintenance.</p>
+          </details>
         </section>
 
         <section class="section">

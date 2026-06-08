@@ -13,6 +13,7 @@
       gtag("js", new Date());
       gtag("config", "G-S1FQBX4FK2");
     </script>
+    
     <script src="/analytics-collector.js"></script>
     <title>Faraway Support | Install, Troubleshoot, and Bug Report</title>
     <meta
@@ -28,7 +29,10 @@
       content="Get setup help, troubleshooting steps, and issue reporting instructions for Faraway."
     />
     <meta property="og:image" content="https://mayaway.cc/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Faraway" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Faraway Support | Troubleshooting Guide" />
     <meta
@@ -36,6 +40,7 @@
       content="Find install help, recovery steps, and bug-report guidance for Faraway on macOS."
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
+    <meta name="twitter:image:alt" content="Faraway logo and eye-care reminder app interface." />
     <meta name="theme-color" content="#1a2a37" />
     <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -45,6 +50,23 @@
       {
         "@context": "https://schema.org",
         "@graph": [
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://mayaway.cc/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Support",
+                "item": "https://mayaway.cc/support"
+              }
+            ]
+          },
           {
             "@type": "ContactPage",
             "name": "Faraway Support",
@@ -58,9 +80,9 @@
               "url": "https://mayaway.cc/"
             },
             "provider": {
-              "@type": "Person",
-              "name": "bianjiefilm",
-              "url": "https://github.com/bianjiefilm"
+              "@type": "Organization",
+              "name": "Faraway",
+              "url": "https://mayaway.cc/"
             }
           },
           {
@@ -71,7 +93,7 @@
                 "name": "How do I install Faraway?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Download the latest DMG from GitHub releases, move Faraway.app to Applications, open it on macOS 13+, and enable menu bar mode."
+                  "text": "Download the latest DMG from release archive, move Faraway.app to Applications, open it on macOS 13+, and enable menu bar mode."
                 }
               },
               {
@@ -86,11 +108,43 @@
                 "@type": "Question",
                 "name": "What details should I include in a bug report?",
                 "acceptedAnswer": {
-                  "@type": "Answer",
+                "@type": "Answer",
                   "text": "Include macOS version, Faraway version, reproducible steps, expected result, and whether app-aware mode is enabled."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Faraway collect usage telemetry or personal data?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Faraway runs locally on macOS and does not upload app usage telemetry. The website uses only anonymous page analytics, and issue reports are optional in the public repository tracker."
                 }
               }
             ]
+          },
+          {
+            "@type": "Organization",
+            "name": "Faraway",
+            "url": "https://mayaway.cc/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://mayaway.cc/logo.png"
+            },
+            "sameAs": [
+              "https://github.com/bianjiefilm/Faraway",
+              "https://github.com/bianjiefilm/Faraway/releases",
+              "https://github.com/bianjiefilm/Faraway/issues"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "url": "https://github.com/bianjiefilm/Faraway/issues",
+              "areaServed": "Worldwide",
+              "availableLanguage": [
+                "en",
+                "zh"
+              ]
+            }
           }
         ]
       }
@@ -129,12 +183,13 @@
         <p class="lead"><strong>Last updated:</strong> 2026-06-08</p>
         <h1>Support</h1>
         <p class="lead">Faraway is a free product designed for long screen sessions. Use this page to find setup, troubleshooting, and support steps.</p>
+        <p><strong>Fast answer:</strong> if reminders fail to show, check Accessibility permission, interval settings, and launch-at-login first, then open a reproducible issue in the issue tracker.</p>
 
         <section class="section">
           <h2>FAQ quick answers</h2>
           <details>
             <summary>How do I install Faraway?</summary>
-            <p>Download the latest DMG from GitHub releases, move Faraway.app to Applications, and launch it on macOS 13+.</p>
+            <p>Download the latest DMG from release archive, move Faraway.app to Applications, and launch it on macOS 13+.</p>
           </details>
           <details>
             <summary>Why are reminders not showing?</summary>
@@ -144,12 +199,16 @@
             <summary>How should I report a bug?</summary>
             <p>Provide system version, app version, steps to reproduce, expected result, and whether app-aware mode is on.</p>
           </details>
+          <details>
+            <summary>Does Faraway collect usage telemetry or personal data?</summary>
+            <p>Faraway runs locally on your Mac and does not upload usage telemetry from the app. The website uses only anonymous page analytics; issue reports are submitted only when users choose to report in the public issue tracker.</p>
+          </details>
         </section>
 
         <section class="section">
           <h2>Fast-start help</h2>
           <ol>
-            <li>Install from <a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">GitHub releases</a>.</li>
+            <li>Install from <a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">release archive</a>.</li>
             <li>Move <strong>Faraway.app</strong> to Applications.</li>
             <li>Open on macOS 13+ and enable menu bar mode.</li>
             <li>Adjust interval and app-aware mode in preferences.</li>
@@ -187,7 +246,7 @@
           </ul>
           <p>
             Create a report in
-            <a href="https://github.com/bianjiefilm/Faraway/issues/new/choose" target="_blank" rel="noopener noreferrer">GitHub Issues</a>.
+            <a href="https://github.com/bianjiefilm/Faraway/issues/new/choose" target="_blank" rel="noopener noreferrer">Issue tracker</a>.
           </p>
         </section>
 
@@ -197,7 +256,7 @@
             <li><a href="/about">About Faraway</a></li>
             <li><a href="/releases">Release notes</a></li>
             <li><a href="/privacy">Privacy</a></li>
-            <li><a href="https://github.com/bianjiefilm/Faraway">GitHub repository</a></li>
+            <li><a href="https://github.com/bianjiefilm/Faraway">Source repository</a></li>
           </ul>
         </section>
       </div>
