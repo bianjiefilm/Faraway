@@ -10,6 +10,16 @@ Primary use case: people doing long screen work such as coding, design, writing,
 - Data handling: app usage telemetry is not collected from the app; the marketing site may use anonymous traffic analytics.
 - Update policy: practical reliability improvements are published in GitHub Releases; issues with reproducible steps are prioritized in Issues.
 
+## Update decision Q&A
+- Q: When should I update Faraway?
+- A: Update immediately if reminders miss or startup/install behavior is unstable. If usage is stable, schedule updates during routine maintenance.
+- Q: Do updates usually change the reminder behavior?
+- A: Updates prioritize reliability first, such as reminder timing and startup stability, while keeping local-first operation.
+- Q: Can I skip an update for now?
+- A: You can defer updates when reminders are stable, but you should apply updates before installing on a new machine.
+- Q: What helps triage support requests?
+- A: Include macOS version, app version, and reproducible steps so maintainers can prioritize fixes.
+
 ## Canonical pages
 - https://mayaway.cc/ — Homepage and product overview.
 - https://mayaway.cc/about — Product trust, mission, and maintainer context.
