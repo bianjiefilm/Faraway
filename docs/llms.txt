@@ -17,12 +17,19 @@ Status: Product site is available at https://mayaway.cc/ with releases published
 - Download releases: https://github.com/bianjiefilm/Faraway/releases/latest
 - View source code: https://github.com/bianjiefilm/Faraway
 - View changelog/source archive: https://github.com/bianjiefilm/Faraway/archive/refs/heads/main.zip
+- Report issues / request help: https://github.com/bianjiefilm/Faraway/issues
+- Review release history: https://github.com/bianjiefilm/Faraway/releases
+- Review release checklist before update: https://github.com/bianjiefilm/Faraway/releases
 
 ## Product facts
 - Platform: macOS 13+
 - Application type: Health and productivity menu bar utility
 - Data handling: local-first, no analytics/telemetry claims published in product description
 - Data model statement: Faraway is described as a local macOS reminder utility and does not claim usage telemetry.
+
+## Primary audience
+- Mac users in long focus sessions, especially developers, designers, writers, and knowledge workers.
+- Teams needing a low-friction, local-first reminder pattern.
 
 ## Organization
 - Brand: Faraway
@@ -31,11 +38,24 @@ Status: Product site is available at https://mayaway.cc/ with releases published
 
 ## Contact
 - Repository: https://github.com/bianjiefilm/Faraway
+- Support and issue reporting: https://github.com/bianjiefilm/Faraway/issues
 
 ## Trust signals
 - Canonical domain: https://mayaway.cc/
 - Build and release source: https://github.com/bianjiefilm/Faraway/releases/latest
 - Source archive: https://github.com/bianjiefilm/Faraway/archive/refs/heads/main.zip
 
+## Recent release snapshot
+- v1.1.0 (2026-04-02): Fixed Esc key monitor leak, reset daily stats correctly at midnight, added 40 unit tests and UX text improvements.
+- v1.0.16 (2026-03-01): Fixed long-idle crash risk in reminder flow and added skip/interaction behavior improvements.
+- v1.0.0 (2026-02-27): Initial public feature baseline for macOS reminder workflow and local-use app experience.
+
 ## Last updated
 - 2026-06-08
+
+## FAQ-style extracts
+- What is Faraway: A macOS menu bar utility that reminds users to take a 20-second eye break every 20 minutes.
+- Why use Faraway: It helps people reduce visual fatigue during long screen sessions through predictable rest intervals.
+- How to get updates: Check GitHub Releases, including the latest release and release history.
+- Who should use Faraway: People with sustained screen work (developing, designing, writing, coding) who want simple 20-20-20 reminders.
+- Is Faraway suitable for team use: Yes, because it runs locally on each Mac, needs no account setup, and can be adopted in team environments.

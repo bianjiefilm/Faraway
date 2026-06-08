@@ -38,6 +38,16 @@
             "@type": "WebSite",
             "name": "Faraway",
             "url": "https://mayaway.cc/",
+            "description": "A menu bar reminder app for the 20-20-20 eye-care rule on macOS.",
+            "inLanguage": "en"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Faraway — macOS Eye-Care Reminder",
+            "url": "https://mayaway.cc/",
+            "description": "Faraway is a lightweight macOS menu bar app that reminds you to take eye breaks using the 20-20-20 rule.",
+            "datePublished": "2026-06-08",
+            "dateModified": "2026-06-08",
             "inLanguage": "en"
           },
           {
@@ -45,6 +55,9 @@
             "name": "Faraway",
             "applicationCategory": "HealthApplication",
             "operatingSystem": "macOS 13+",
+            "datePublished": "2026-04-02",
+            "softwareVersion": "1.1.0",
+            "releaseNotes": "https://github.com/bianjiefilm/Faraway/releases/tag/v1.1.0",
             "offers": {
               "@type": "Offer",
               "price": "0",
@@ -86,6 +99,30 @@
                   "@type": "Answer",
                   "text": "Download the latest DMG from GitHub Releases and move Faraway.app to Applications."
                 }
+              },
+              {
+                "@type": "Question",
+                "name": "Who is Faraway for?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Faraway is for people who work long sessions on macOS, such as developers, designers, writers, and knowledge workers who want regular eye-rest breaks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where can I review update notes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Update notes and changelog entries are published in the GitHub Releases section."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Faraway suitable for team use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The app works in shared Mac environments as well as personal use. It does not require account setup and supports local-first operation."
+                }
               }
             ]
           },
@@ -95,8 +132,16 @@
             "url": "https://mayaway.cc/",
             "logo": "https://mayaway.cc/logo.png",
             "sameAs": [
-              "https://github.com/bianjiefilm/Faraway"
-            ]
+              "https://github.com/bianjiefilm/Faraway",
+              "https://github.com/bianjiefilm/Faraway/issues"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "url": "https://github.com/bianjiefilm/Faraway/issues",
+              "areaServed": "Worldwide",
+              "availableLanguage": ["en"]
+            }
           }
         ]
       }
@@ -120,6 +165,7 @@
           <a href="#features">Features</a>
           <a href="#how-it-works">How it works</a>
           <a href="#download">Download</a>
+          <a href="#release-notes">Release Notes</a>
           <a href="#trust">Trust</a>
           <a href="#faq">FAQ</a>
           <a
@@ -168,6 +214,19 @@
         </div>
       </section>
 
+      <section id="overview" class="section section-alt">
+        <div class="container">
+          <h2>What Faraway does in one minute</h2>
+          <p>
+            Faraway is a lightweight macOS menu bar utility that prompts you to pause every 20 minutes and look away for about 20 seconds.
+            It is built for long focus sessions where eye fatigue and screen strain are common.
+          </p>
+          <p>
+            The value is simple: predictable breaks reduce cumulative strain, help maintain visual comfort, and support sustainable deep-work habits.
+          </p>
+        </div>
+      </section>
+
       <section id="features" class="section">
         <div class="container">
           <h2>Core features</h2>
@@ -193,6 +252,29 @@
         </div>
       </section>
 
+      <section id="release-notes" class="section">
+        <div class="container">
+          <h2>Release and source visibility</h2>
+          <p>
+            Keep aligned with the latest build and change notes by using the official release and source pages.
+          </p>
+          <div>
+            <h3>Recent release snapshot</h3>
+            <ul>
+              <li><strong>v1.1.0</strong> (2026-04-02): Esc key listener leak fixed; daily stats reset correctly at midnight.</li>
+              <li><strong>v1.0.16</strong> (2026-03-01): Fixed sleep/awake crash issues in reminder screens and click-recovery behavior.</li>
+              <li><strong>v1.0.0</strong> (2026-02-27): First major public release, 20-20-20 reminder workflow, and app controls for local-first usage.</li>
+            </ul>
+          </div>
+          <ul>
+            <li><a href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">Latest release</a></li>
+            <li><a href="https://github.com/bianjiefilm/Faraway/releases" target="_blank" rel="noopener noreferrer">Release history</a></li>
+            <li><a href="https://github.com/bianjiefilm/Faraway" target="_blank" rel="noopener noreferrer">Source repository</a></li>
+            <li><a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Issue reporting and support</a></li>
+          </ul>
+        </div>
+      </section>
+
       <section id="how-it-works" class="section section-alt">
         <div class="container two-column">
           <div>
@@ -213,6 +295,17 @@
               Learn more about the 20-20-20 rule
             </a>
           </aside>
+        </div>
+      </section>
+
+      <section id="audience" class="section">
+        <div class="container">
+          <h2>Who Faraway is for</h2>
+          <ul>
+            <li>Long-form developers, writers, designers, and knowledge workers.</li>
+            <li>Anyone who spends prolonged time on a Mac and wants fewer visual distractions from reminders.</li>
+            <li>Teams that want a lightweight, local-first pattern for eye-rest behavior.</li>
+          </ul>
         </div>
       </section>
 
@@ -259,6 +352,9 @@
               <p>
                 <a href="https://github.com/bianjiefilm/Faraway" target="_blank" rel="noopener noreferrer">Open repository</a>
               </p>
+              <p>
+                <a href="https://github.com/bianjiefilm/Faraway/issues" target="_blank" rel="noopener noreferrer">Support and issue tracker</a>
+              </p>
             </article>
           </div>
         </div>
@@ -282,6 +378,18 @@
           <details>
             <summary>Where is the codebase?</summary>
             <p>All source code is available on the project repository at <a href="https://github.com/bianjiefilm/Faraway">the source repo</a>.</p>
+          </details>
+          <details>
+            <summary>Do I get updates and changelog notes?</summary>
+            <p>Yes. Release notes and updates are published in the GitHub Releases page and can be reviewed before you update.</p>
+          </details>
+          <details>
+            <summary>Can I use Faraway for work and personal use?</summary>
+            <p>Yes. The app is usable in focused work sessions and short breaks for everyday use; you can configure intervals to match your workflow.</p>
+          </details>
+          <details>
+            <summary>Can a team adopt Faraway?</summary>
+            <p>Yes. Faraway can be used in team environments since it runs locally, does not need user accounts, and stays focused on your macOS workflow.</p>
           </details>
         </div>
       </section>
