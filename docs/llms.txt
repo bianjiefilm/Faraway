@@ -1,0 +1,19 @@
+# Faraway
+
+Faraway is a macOS menu bar app that helps people working long screen sessions reduce eye strain.
+Primary use case: reminder-based eye breaks based on the 20-20-20 rule.
+
+## Canonical Pages
+- https://mayaway.cc/
+
+## What you can do
+- Download releases: https://github.com/bianjiefilm/Faraway/releases/latest
+- View source code: https://github.com/bianjiefilm/Faraway
+
+## Product facts
+- Platform: macOS 13+
+- Application type: Health and productivity menu bar utility
+- Data handling: local-first, no analytics/telemetry claims published in product description
+
+## Contact
+- Repository: https://github.com/bianjiefilm/Faraway
