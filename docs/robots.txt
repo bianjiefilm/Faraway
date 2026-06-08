@@ -1,3 +1,5 @@
+# Faraway robots policy
+# Generated to allow major search and AI crawlers.
 User-agent: *
 Allow: /
 
