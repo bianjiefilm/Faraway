@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1FQBX4FK2"></script>
     <script>
@@ -15,15 +16,73 @@
       gtag("config", "G-S1FQBX4FK2");
     </script>
     
-    <script src="/analytics-collector.js"></script>
-    <title>About Faraway | Free macOS 20-20-20 Eye-Care Reminder</title>
+    <script>
+(function () {
+  const endpoints = [
+    "https://mayaway.cc/collect",
+    "https://faraway-ga4-collector.ccfilmsichao.workers.dev/collect",
+  ];
+  const clientIdKey = "faraway_analytics_client_id";
+
+  function getClientId() {
+    try {
+      const existing = localStorage.getItem(clientIdKey);
+      if (existing && existing.length > 0) {
+        return existing;
+      }
+      const generated =
+        (crypto.randomUUID && crypto.randomUUID()) ||
+        `${Date.now()}.${Math.random().toString(16).slice(2)}`;
+      localStorage.setItem(clientIdKey, generated);
+      return generated;
+    } catch (error) {
+      return `${Date.now()}.${Math.random().toString(16).slice(2)}`;
+    }
+  }
+
+  async function postAnalytics(endpoint, payload) {
+    const body = JSON.stringify(payload);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body,
+      keepalive: true,
+      mode: "cors",
+    });
+
+    return response.ok;
+  }
+
+  async function sendAnalytics() {
+    const payload = {
+      client_id: getClientId(),
+      page_location: location.href,
+      page_title: document.title,
+      page_referrer: document.referrer || "direct",
+    };
+
+    for (const endpoint of endpoints) {
+      try {
+        if (await postAnalytics(endpoint, payload)) {
+          return;
+        }
+      } catch (error) {
+        continue;
+      }
+    }
+  }
+
+  sendAnalytics().catch(() => {});
+})();
+    </script>
+    <title>About Faraway | macOS Eye-Care Reminder</title>
     <meta
       name="description"
       content="Faraway is an open-source, free macOS menu bar utility for 20-20-20 breaks, designed for creators and knowledge workers who spend long hours on screen work."
     />
     <link rel="canonical" href="https://mayaway.cc/about" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="About Faraway | Free macOS Eye-Care Reminder" />
+    <meta property="og:title" content="About Faraway | macOS Eye-Care Reminder" />
     <meta property="og:url" content="https://mayaway.cc/about" />
     <meta
       property="og:description"
@@ -35,7 +94,7 @@
     <meta property="og:site_name" content="Faraway" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="About Faraway | Free macOS 20-20-20 Reminder" />
+    <meta name="twitter:title" content="About Faraway | macOS Eye-Care Reminder" />
     <meta
       name="twitter:description"
       content="Faraway is an open-source macOS menu bar app for 20-20-20 breaks, local-first usage, and screen-work health."
@@ -87,21 +146,21 @@
             "name": "bianjiefilm",
             "url": "https://github.com/bianjiefilm"
           },
-          "sameAs": [
-            "https://github.com/bianjiefilm/Faraway",
-            "https://github.com/bianjiefilm/Faraway/releases",
-            "https://github.com/bianjiefilm/Faraway/issues"
-          ],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer support",
-            "url": "https://github.com/bianjiefilm/Faraway/issues",
-            "areaServed": "Worldwide",
-            "availableLanguage": [
-              "en",
-              "zh"
-            ]
-          }
+            "sameAs": [
+              "https://github.com/bianjiefilm/Faraway",
+              "https://github.com/bianjiefilm/Faraway/releases",
+              "https://github.com/bianjiefilm/Faraway/issues"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "url": "https://github.com/bianjiefilm/Faraway/issues",
+              "areaServed": "Worldwide",
+              "availableLanguage": [
+                "en",
+                "zh"
+              ]
+            }
           }
       }
     </script>

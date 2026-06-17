@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1FQBX4FK2"></script>
     <script>
@@ -15,19 +16,77 @@
       gtag("config", "G-S1FQBX4FK2");
     </script>
     
-    <script src="/analytics-collector.js"></script>
-    <title>Faraway | macOS Eye-Care Reminder for the 20-20-20 Rule</title>
+    <script>
+(function () {
+  const endpoints = [
+    "https://mayaway.cc/collect",
+    "https://faraway-ga4-collector.ccfilmsichao.workers.dev/collect",
+  ];
+  const clientIdKey = "faraway_analytics_client_id";
+
+  function getClientId() {
+    try {
+      const existing = localStorage.getItem(clientIdKey);
+      if (existing && existing.length > 0) {
+        return existing;
+      }
+      const generated =
+        (crypto.randomUUID && crypto.randomUUID()) ||
+        `${Date.now()}.${Math.random().toString(16).slice(2)}`;
+      localStorage.setItem(clientIdKey, generated);
+      return generated;
+    } catch (error) {
+      return `${Date.now()}.${Math.random().toString(16).slice(2)}`;
+    }
+  }
+
+  async function postAnalytics(endpoint, payload) {
+    const body = JSON.stringify(payload);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body,
+      keepalive: true,
+      mode: "cors",
+    });
+
+    return response.ok;
+  }
+
+  async function sendAnalytics() {
+    const payload = {
+      client_id: getClientId(),
+      page_location: location.href,
+      page_title: document.title,
+      page_referrer: document.referrer || "direct",
+    };
+
+    for (const endpoint of endpoints) {
+      try {
+        if (await postAnalytics(endpoint, payload)) {
+          return;
+        }
+      } catch (error) {
+        continue;
+      }
+    }
+  }
+
+  sendAnalytics().catch(() => {});
+})();
+    </script>
+    <title>Faraway | macOS 20-20-20 Eye-Care Reminder</title>
     <meta
       name="description"
-      content="Faraway is a free macOS menu bar app for 20-20-20 eye care. It reminds users to take 20-second breaks every 20 minutes to reduce long-session screen strain."
+      content="Faraway is a free macOS menu bar app for the 20-20-20 rule. It reminds users to take short eye breaks every 20 minutes and reduce long-session screen strain."
     />
     <link rel="canonical" href="https://mayaway.cc/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Faraway — macOS Eye-Care Reminder" />
+    <meta property="og:title" content="Faraway | macOS 20-20-20 Eye-Care Reminder" />
     <meta property="og:url" content="https://mayaway.cc/" />
     <meta
       property="og:description"
-      content="Faraway keeps you healthy while working by reminding you to look far away every 20 minutes with an optional full-screen timer."
+      content="Faraway reminds you to look far away every 20 minutes with a simple full-screen timer for the 20-20-20 rule."
     />
     <meta property="og:image" content="https://mayaway.cc/logo.png" />
     <meta property="og:image:width" content="1200" />
@@ -35,10 +94,10 @@
     <meta property="og:site_name" content="Faraway" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Faraway | macOS Eye-Care Reminder for the 20-20-20 Rule" />
+    <meta name="twitter:title" content="Faraway | macOS 20-20-20 Eye-Care Reminder" />
     <meta
       name="twitter:description"
-      content="Take 20-second eye breaks every 20 minutes with Faraway, a macOS menu bar reminder for healthier screen work."
+      content="Take short eye breaks every 20 minutes with Faraway, a macOS menu bar reminder for the 20-20-20 rule."
     />
     <meta name="twitter:image" content="https://mayaway.cc/logo.png" />
     <meta name="twitter:image:alt" content="Faraway logo and eye-care reminder app interface." />
@@ -261,11 +320,11 @@
             width="80"
             height="80"
           />
-          <p class="eyebrow">For macOS creators, developers, and knowledge workers</p>
+          <p class="eyebrow">macOS eye-care reminder for long screen sessions</p>
           <h1>Protect your eyes with the 20-20-20 rule</h1>
           <p class="lead">
-            Faraway is a focused menu bar app that reminds you to look away every 20 minutes.
-            It keeps the reminder simple, calm, and effective so you can work longer with less visual fatigue.
+            Faraway is a macOS eye-care reminder app and break timer for the 20-20-20 rule.
+            It reminds you to look away every 20 minutes so you can work longer with less visual fatigue.
           </p>
           <div class="actions">
             <a class="btn btn-primary" href="https://github.com/bianjiefilm/Faraway/releases/latest" target="_blank" rel="noopener noreferrer">
@@ -280,17 +339,17 @@
 
       <section class="section section-alt">
         <div class="container">
-          <h2>What Faraway is (in one minute)</h2>
-          <p><strong>Faraway is a free, local-first macOS menu-bar reminder</strong> for the 20-20-20 rule.</p>
+          <h2>What Faraway is</h2>
+          <p><strong>Faraway is a free, local-first macOS eye-care reminder app</strong> for the 20-20-20 rule.</p>
           <p><strong>It helps users reduce long-screen eye fatigue</strong> by triggering a short break prompt every 20 minutes, typically for 20 seconds.</p>
           <p><strong>It is not a cloud app.</strong> The reminder behavior and preferences are run on your Mac.</p>
-          <p><strong>Source of truth:</strong> all releases, issue reports, and change history are published in the source repository and release page.</p>
+          <p><strong>Source of truth:</strong> all releases, issue reports, and change history are published in the source repository and release archive.</p>
         </div>
       </section>
 
       <section id="overview" class="section section-alt">
         <div class="container">
-          <h2>What Faraway does in one minute</h2>
+          <h2>How the break timer works</h2>
           <p>
             Faraway is a lightweight macOS menu bar utility that prompts you to pause every 20 minutes and look away for about 20 seconds.
             It is built for long focus sessions where eye fatigue and screen strain are common.
@@ -299,7 +358,7 @@
             The value is simple: predictable breaks reduce cumulative strain, help maintain visual comfort, and support sustainable deep-work habits.
           </p>
           <p>
-            Faraway is a free tool because our purpose is to help more people protect their eyes during long editing and coding sessions.
+            Faraway is a free tool because our purpose is to help more people protect their eyes during long coding, design, writing, and AI-assisted sessions.
             We designed it to fit the current rhythm of AI-assisted workflows, where concentration can stretch for long blocks of time.
             If you are sitting in front of a screen for hours, we want Faraway to make a small, useful pause part of your day.
           </p>
@@ -308,10 +367,10 @@
 
       <section id="facts" class="section">
         <div class="container">
-          <h2>Product facts at a glance</h2>
+          <h2>Product facts</h2>
           <dl>
             <dt>Offer type</dt>
-            <dd>Free desktop utility for long-screen reminders.</dd>
+            <dd>Free macOS break timer for long-screen reminders.</dd>
             <dt>Platform</dt>
             <dd>macOS 13+ with menu-bar mode.</dd>
             <dt>Reminder pattern</dt>
@@ -325,7 +384,7 @@
       <section id="features" class="section">
         <div class="container">
           <h2>Core features</h2>
-          <p>Built for real work sessions, Faraway focuses on reminders that help you create consistent rest habits.</p>
+          <p>Built for real work sessions, Faraway focuses on eye-care reminders that help you create consistent rest habits.</p>
           <div class="grid">
             <article>
               <h3>Smart reminders</h3>
@@ -349,9 +408,9 @@
 
       <section id="release-notes" class="section">
         <div class="container">
-          <h2>Release and source visibility</h2>
+          <h2>Release notes and source visibility</h2>
           <p>
-            Keep aligned with the latest build and change notes by using the official release and source pages.
+            Keep aligned with the latest build and change notes by using the official release archive and source repository.
           </p>
           <div>
             <h3>Recent release snapshot</h3>
@@ -383,11 +442,11 @@
       <section id="how-it-works" class="section section-alt">
         <div class="container two-column">
           <div>
-            <h2>How it works</h2>
+            <h2>How Faraway works</h2>
             <ol>
               <li>Install Faraway and allow it to run in the menu bar.</li>
               <li>Choose your preferred monitoring mode and break interval.</li>
-              <li>Work with less worry; you will receive clear, full-screen reminders.</li>
+              <li>Work with less worry; you will receive clear, full-screen eye-care reminders.</li>
               <li>Keep focus while reducing strain by completing a 20-second pause.</li>
             </ol>
           </div>

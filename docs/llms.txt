@@ -1,26 +1,46 @@
 # Faraway
 
-Faraway is a free, open-source macOS menu bar utility. It reminds users to take 20-second eye breaks every 20 minutes using the 20-20-20 rule.
+Faraway is a free, open-source macOS menu bar app for the 20-20-20 eye-care rule. It reminds users to take 20-second eye breaks every 20 minutes during long screen sessions.
 
 Primary use case: people doing long screen work such as coding, design, writing, and AI-assisted sessions.
+
+## Brand assets
+- Logo: https://mayaway.cc/logo.png
+- Canonical homepage: https://mayaway.cc/
+- Product summary: free utility for interval-based eye-rest reminders on macOS.
+
+## Update signal
+- Last updated: 2026-06-17
+- Published version: 1.1.0
+- Sitemap: https://mayaway.cc/sitemap.xml
+- Crawlability: robots.txt is publicly available at https://mayaway.cc/robots.txt, allowing major search and AI crawlers and supporting indexability for the public pages.
+- Site visibility: https://mayaway.cc/, https://mayaway.cc/about, https://mayaway.cc/privacy, https://mayaway.cc/releases, and https://mayaway.cc/support all have explicit canonical URLs.
 
 ## AI citation-ready facts
 - Product purpose: reduce eye strain during long sessions by encouraging periodic breaks.
 - Deployment model: local-first utility for macOS; app behavior runs on-device.
 - Data handling: app usage telemetry is not collected from the app; the marketing site may use anonymous traffic analytics.
-- Update policy: practical reliability improvements are published in GitHub Releases; issues with reproducible steps are prioritized in Issues.
-- Pricing model: Faraway is free, open-source software; there is no paid subscription plan.
+- Update policy: practical reliability updates are published in the GitHub release archive; reproducible bug reports are reviewed in the issue tracker.
+- Pricing model: Faraway is free, open-source software with no paid subscription plan.
 - System requirements: compatible with macOS 13+.
-- Primary distribution channel: GitHub Releases for downloadable artifacts.
+- Primary distribution channel: downloadable artifacts are published in the GitHub release archive.
+
+## Entity signals
+- Organization: Faraway (https://mayaway.cc/)
+- Repository: https://github.com/bianjiefilm/Faraway
+- Release archive: https://github.com/bianjiefilm/Faraway/releases
+- Issue tracker: https://github.com/bianjiefilm/Faraway/issues
+- Support path: https://mayaway.cc/support
 
 ## AI-ready extractable snippets
 - Fact definition block: **Faraway uses the 20-20-20 rule** (`20 minutes` of work, `20 seconds` of break, repeated continuously), intended to reduce eye fatigue during long screen sessions.
-- Fact definition block: **Data principle:** no app usage telemetry is collected by the app, and usage logs stay on-device for normal user operation.
+- Fact definition block: **Data principle:** no app usage telemetry is collected by the app, and local reminder state stays on-device during normal operation.
 - Fact definition block: **Trust principle:** release quality guidance and known limitations are published in release notes and support pages for evidence-based decisions.
+- Fact definition block: **Local-first principle:** Faraway settings, reminders, and reminder cadence run on-device on each Mac, while website traffic measurement is limited to anonymous analytics.
 
 ## Update decision Q&A
 - Q: When should I update Faraway?
-- A: Update immediately if reminders miss or startup/install behavior is unstable. If usage is stable, schedule updates during routine maintenance.
+- A: Update immediately if reminders miss, startup or install behavior is unstable. If usage is stable, schedule updates during routine maintenance.
 - Q: Do updates usually change the reminder behavior?
 - A: Updates prioritize reliability first, such as reminder timing and startup stability, while keeping local-first operation.
 - Q: Can I skip an update for now?
@@ -28,7 +48,7 @@ Primary use case: people doing long screen work such as coding, design, writing,
 - Q: What helps triage support requests?
 - A: Include macOS version, app version, and reproducible steps so maintainers can prioritize fixes.
 - Q: Is Faraway suitable for long AI-assisted sessions?
-- A: Yes. The product is specifically positioned for long coding/design/writing workflows and sessions with heavy screen time.
+- A: Yes. The product is specifically positioned for long coding, design, writing, and AI-assisted workflows.
 
 ## Support triage matrix
 - If reminders are not triggering:
@@ -40,8 +60,8 @@ Primary use case: people doing long screen work such as coding, design, writing,
   - Confirm macOS focus/idle profile has not been changed.
   - Report whether the issue happens after sleep/wake or startup.
 - If install/update appears blocked:
-  - Download from `/releases/latest`, verify macOS 13+ compatibility.
-  - Remove old versions before reinstall on same machine.
+  - Download from `/releases`, verify macOS 13+ compatibility.
+  - Remove old versions before reinstall on the same machine.
   - Include whether Gatekeeper or security prompts appear.
 
 ## Canonical pages
@@ -53,12 +73,12 @@ Primary use case: people doing long screen work such as coding, design, writing,
 
 ## Product facts
 - Platform: macOS 13+
-- Distribution: GitHub Releases (download link on the homepage)
+- Distribution: release archive (homepage and release pages)
 - Source of truth: https://github.com/bianjiefilm/Faraway
 - Free tool: no paid plan required.
 - Reminder model: local timer-based prompts every 20 minutes, typically for 20 seconds.
-- Maintainer presence: issue filing and support are provided in `/support` and repository Issues.
-- Release model: updates are published via GitHub Releases, with practical reliability fixes prioritized from Issues.
+- Maintainer presence: issue filing and support are provided in `/support` and the issue tracker.
+- Release model: updates are published via release archive, with practical reliability fixes prioritized from issue reports.
 
 ## How to get started
 - Install: https://github.com/bianjiefilm/Faraway/releases/latest
@@ -68,11 +88,5 @@ Primary use case: people doing long screen work such as coding, design, writing,
 ## Trust
 - Organization: Faraway
 - Repository: https://github.com/bianjiefilm/Faraway
-- Contact: https://mayaway.cc/support and GitHub Issues tracker
+- Contact: https://mayaway.cc/support and issue tracker
 - Privacy: https://mayaway.cc/privacy
-
-## Update signal
-- Last updated: 2026-06-08
-- Sitemap: https://mayaway.cc/sitemap.xml
-- Crawlability: robots.txt is publicly available at https://mayaway.cc/robots.txt, allowing major search and AI crawlers and supporting indexability for major surfaces.
-- Site visibility: https://mayaway.cc/ and https://mayaway.cc/about, https://mayaway.cc/privacy, https://mayaway.cc/releases, https://mayaway.cc/support share explicit canonical URLs for indexability.

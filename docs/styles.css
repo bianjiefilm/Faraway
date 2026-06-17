@@ -22,6 +22,7 @@ body {
   font-family: "Avenir Next", "Segoe UI", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   background: linear-gradient(150deg, #081226 0%, #0c1830 40%, #0f2a45 100%);
   line-height: 1.65;
+  font-size: 16px;
 }
 
 a {
@@ -32,6 +33,14 @@ a {
 a:hover,
 a:focus {
   text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 3px;
+  text-decoration: none;
 }
 
 .container {
@@ -73,7 +82,9 @@ a:focus {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  padding: 0.35rem;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.35rem 0.65rem;
   border-radius: 999px;
   border: 1px solid var(--border);
   transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -138,6 +149,7 @@ a:focus {
   letter-spacing: 0.02em;
   color: var(--text-main);
   transition: color 0.2s ease, opacity 0.2s ease;
+  min-height: 44px;
 }
 
 .brand img {
@@ -166,6 +178,12 @@ a:focus {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: flex-end;
+}
+
+.site-header nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .hero {
@@ -199,7 +217,10 @@ a:focus {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   padding: 0.72rem 1rem;
   border-radius: 0.65rem;
   font-weight: 700;
@@ -222,7 +243,7 @@ a:focus {
 }
 
 .section {
-  padding: 2.6rem 0;
+  padding: 2.8rem 0;
 }
 
 .section-alt {
@@ -289,6 +310,9 @@ details {
 summary {
   cursor: pointer;
   font-weight: 700;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 details p {
@@ -358,6 +382,11 @@ details p {
   .two-column {
     grid-template-columns: 1fr;
   }
+
+  .site-header nav,
+  .site-footer nav {
+    gap: 0.65rem 0.9rem;
+  }
 }
 
 @media (max-width: 460px) {
@@ -365,8 +394,17 @@ details p {
     padding-top: 3.2rem;
   }
 
+  .hero-content h1 {
+    font-size: clamp(1.9rem, 10vw, 2.45rem);
+  }
+
   .actions .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .site-header nav a,
+  .site-footer nav a {
+    min-height: 40px;
   }
 }
