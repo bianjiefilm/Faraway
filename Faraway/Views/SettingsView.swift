@@ -13,7 +13,7 @@ struct SettingsView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 12, weight: .medium))
-                        Text("返回")
+                        Text(L10n.text("settings.back"))
                             .font(.system(size: 12))
                     }
                     .foregroundColor(.white.opacity(0.6))
@@ -22,7 +22,7 @@ struct SettingsView: View {
 
                 Spacer()
 
-                Text("监测设置")
+                Text(L10n.text("settings.title"))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.white)
 
@@ -64,7 +64,7 @@ struct SettingsView: View {
 
     private var modeSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("监测模式")
+            Text(L10n.text("settings.mode.title"))
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(.white)
 
@@ -99,7 +99,7 @@ struct SettingsView: View {
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(mode.rawValue)
+                    Text(mode.displayTitle)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.white)
 
@@ -139,10 +139,12 @@ struct SettingsView: View {
     private func modeDescriptionText(_ mode: MonitoringMode) -> String {
         switch mode {
         case .global:
-            return "定时提醒护眼，不监测特定软件"
+            return L10n.text("settings.mode.global.desc")
         case .selectApps:
             let count = appMonitor.selectedApps.count
-            return count > 0 ? "已选择 \(count) 个应用" : "点击选择要监测的 App"
+            if count == 0 { return L10n.text("settings.mode.selectApps.desc.none") }
+            if count == 1 { return L10n.text("settings.mode.selectApps.desc.one") }
+            return L10n.format("settings.mode.selectApps.desc.many", count)
         }
     }
 
@@ -151,7 +153,7 @@ struct SettingsView: View {
     private var appSelectionSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("选择 App")
+                Text(L10n.text("settings.selectApps.title"))
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.white)
 
@@ -168,10 +170,10 @@ struct SettingsView: View {
                         .foregroundColor(.white.opacity(0.5))
                 }
                 .buttonStyle(.plain)
-                .help("刷新列表")
+                .help(L10n.text("settings.selectApps.refresh"))
 
                 if !appMonitor.selectedApps.isEmpty {
-                    Button("全清") {
+                    Button(L10n.text("settings.selectApps.clear")) {
                         appMonitor.selectedApps.removeAll()
                     }
                     .font(.system(size: 11))
@@ -180,13 +182,13 @@ struct SettingsView: View {
                 }
             }
 
-            Text("仅在「手动选择」模式下生效")
+            Text(L10n.text("settings.selectApps.onlyManual"))
                 .font(.system(size: 10))
                 .foregroundColor(.white.opacity(0.3))
                 .padding(.bottom, 4)
 
             if appMonitor.runningApplications.isEmpty {
-                Text("当前没有正在运行的 App")
+                Text(L10n.text("settings.selectApps.none"))
                     .font(.system(size: 11))
                     .foregroundColor(.white.opacity(0.4))
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -195,7 +197,7 @@ struct SettingsView: View {
                 let knownRunningApps = appMonitor.runningApplications.filter { appMonitor.allAvailableApps[$0.bundleId] != nil }
 
                 if !knownRunningApps.isEmpty {
-                    Text(EditionManager.shared.isSunflower ? "已知的剪辑软件" : "已知的常用软件")
+                    Text(EditionManager.shared.isSunflower ? L10n.text("settings.selectApps.known.sunflower") : L10n.text("settings.selectApps.known.generic"))
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.bottom, 4)
@@ -209,7 +211,7 @@ struct SettingsView: View {
                         .padding(.vertical, 8)
                 }
 
-                Text("正在运行的所有 App")
+                Text(L10n.text("settings.selectApps.all"))
                     .font(.system(size: 10, weight: .medium))
                     .foregroundColor(.white.opacity(0.4))
                     .padding(.bottom, 4)
@@ -256,7 +258,7 @@ struct SettingsView: View {
                 Spacer()
 
                 if appMonitor.selectedApps.contains(bundleId) {
-                    Text("监测中")
+                    Text(L10n.text("settings.selectApps.active"))
                         .font(.system(size: 9))
                         .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                         .padding(.horizontal, 6)

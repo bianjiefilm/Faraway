@@ -13,6 +13,7 @@ struct StatusBarView: View {
     @State private var showSecretCodeInput = false
     @State private var secretCode = ""
     @State private var secretCodeShake = false
+    @State private var selectedLanguage: AppLanguage = L10n.appLanguage
     @AppStorage("isWeatherEnabled") private var isWeatherEnabled = false
 
     @StateObject private var weatherManager = WeatherManager.shared
@@ -86,14 +87,14 @@ struct StatusBarView: View {
                             : .clear,
                             radius: 4)
 
-                Text(appMonitor.isEditingAppActive ? "守护中" : "待机中")
+                Text(appMonitor.isEditingAppActive ? L10n.text("app.status.active") : L10n.text("app.status.idle"))
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.white.opacity(0.7))
             }
 
             Spacer()
 
-            Text("Faraway")
+            Text(AppInfo.appName)
                 .font(.system(size: 10, weight: .bold, design: .monospaced))
                 .foregroundColor(.white.opacity(0.2))
         }
@@ -150,7 +151,7 @@ struct StatusBarView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 12, weight: .medium))
-                        Text("返回")
+                        Text(L10n.text("settings.back"))
                             .font(.system(size: 12))
                     }
                     .foregroundColor(.white.opacity(0.6))
@@ -159,7 +160,7 @@ struct StatusBarView: View {
 
                 Spacer()
 
-                Text("监测设置")
+                Text(L10n.text("settings.title"))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.white)
 
@@ -178,6 +179,25 @@ struct StatusBarView: View {
             ZStack {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(alignment: .leading, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(L10n.text("language.title"))
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.white)
+
+                            Picker("", selection: $selectedLanguage) {
+                                ForEach(AppLanguage.allCases) { language in
+                                    Text(language.title).tag(language)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            .onChange(of: selectedLanguage) { newValue in
+                                L10n.appLanguage = newValue
+                            }
+                        }
+
+                        Divider()
+                            .background(Color.white.opacity(0.1))
+
                         // Mode Selection
                         settingsModeSection
 
@@ -199,7 +219,7 @@ struct StatusBarView: View {
 
                         // Login Item Toggle
                         HStack {
-                            Text("开机启动")
+                            Text(L10n.text("settings.launchAtLogin"))
                                 .font(.system(size: 13))
                                 .foregroundColor(.white)
 
@@ -219,10 +239,10 @@ struct StatusBarView: View {
                         // Weather Context Toggle
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("智能天气文案")
+                                Text(L10n.text("settings.weather.title"))
                                     .font(.system(size: 13))
                                     .foregroundColor(.white)
-                                Text("根据当地天气自动更换护眼文案")
+                                Text(L10n.text("settings.weather.subtitle"))
                                     .font(.system(size: 10))
                                     .foregroundColor(.white.opacity(0.35))
                             }
@@ -243,7 +263,7 @@ struct StatusBarView: View {
 
                         // Version Info
                         HStack {
-                            Text("版本")
+                                Text(L10n.text("settings.version"))
                                 .font(.system(size: 13))
                                 .foregroundColor(.white)
 
@@ -254,7 +274,7 @@ struct StatusBarView: View {
                                     Text("🌻")
                                         .font(.system(size: 10))
                                 }
-                                Text("1.0.16")
+                                Text(AppInfo.shortVersion)
                                     .font(.system(size: 12))
                                     .foregroundColor(.white.opacity(0.4))
                             }
@@ -273,7 +293,7 @@ struct StatusBarView: View {
                                         showSecretCodeInput = false
                                         DateManager.shared.evaluateDates()
                                     }) {
-                                        Text("恢复通用版")
+                                        Text(L10n.text("settings.secret.restore"))
                                             .font(.system(size: 12))
                                             .foregroundColor(.white.opacity(0.6))
                                             .padding(.horizontal, 12)
@@ -283,7 +303,7 @@ struct StatusBarView: View {
                                     }
                                     .buttonStyle(.plain)
                                 } else {
-                                    Text("输入暗号")
+                                        Text(L10n.text("settings.secret.prompt"))
                                         .font(.system(size: 11))
                                         .foregroundColor(.white.opacity(0.4))
 
@@ -321,7 +341,7 @@ struct StatusBarView: View {
                                 }
 
                                 Button(action: { showSecretCodeInput = false }) {
-                                    Text("取消")
+                                    Text(L10n.text("settings.secret.cancel"))
                                         .font(.system(size: 11))
                                         .foregroundColor(.white.opacity(0.3))
                                 }
@@ -334,7 +354,7 @@ struct StatusBarView: View {
                         }
 
                         if hasReachedOneYear() {
-                            Text(editionManager.isSunflower ? "给那个教会我看见阳光的人 🌻" : "感谢你一直在用 Faraway")
+                            Text(editionManager.isSunflower ? L10n.text("settings.secret.thanks.sunflower") : L10n.text("settings.secret.thanks"))
                                 .font(.system(size: 11))
                                 .foregroundColor(.white.opacity(0.2))
                                 .padding(.top, 16)
@@ -351,7 +371,7 @@ struct StatusBarView: View {
                             .progressViewStyle(CircularProgressViewStyle(tint: Color(red: 251/255, green: 191/255, blue: 36/255)))
                             .scaleEffect(1.2)
 
-                        Text("加载中...")
+                        Text(L10n.text("settings.loading"))
                             .font(.system(size: 12))
                             .foregroundColor(.white.opacity(0.5))
                     }
@@ -364,6 +384,7 @@ struct StatusBarView: View {
         .frame(height: 480 - 45, alignment: .top)
         .background(Color(nsColor: NSColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 1)))
         .onAppear {
+            selectedLanguage = L10n.appLanguage
             checkLoginStatus()
         }
     }
@@ -399,11 +420,11 @@ struct StatusBarView: View {
                     .shadow(color: Color(red: 56/255, green: 189/255, blue: 248/255).opacity(0.3), radius: 8)
                     .padding(.top, 16)
 
-                Text(appMonitor.isEditingAppActive ? activeMessage(defaultMsg: "距离下次休息") : activeMessage(defaultMsg: "等待监测应用启动"))
+                Text(appMonitor.isEditingAppActive ? activeMessage(defaultMsg: L10n.text("timer.nextBreak")) : activeMessage(defaultMsg: L10n.text("timer.waiting")))
                     .font(.system(size: 11))
                     .foregroundColor(.white.opacity(0.25))
                     .padding(.bottom, 12)
-                    .animation(.easeInOut, value: activeMessage(defaultMsg: "距离下次休息"))
+                    .animation(.easeInOut, value: activeMessage(defaultMsg: L10n.text("timer.nextBreak")))
             } else {
                 VStack(spacing: 12) {
                     // Empty state illustration
@@ -413,15 +434,15 @@ struct StatusBarView: View {
                         .frame(height: 60)
                         .opacity(0.8)
 
-                    Text("待机中")
+                    Text(L10n.text("timer.standby"))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
 
-                    Text(editionManager.isSunflower ? "未检测到剪辑软件" : "未检测到监测应用")
+                    Text(editionManager.isSunflower ? L10n.text("timer.noApp") : L10n.text("timer.noApp"))
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.25))
 
-                    Text(editionManager.isSunflower ? "打开剪辑软件后自动启动" : "打开监测应用后自动启动")
+                    Text(editionManager.isSunflower ? L10n.text("timer.launchHint.sunflower") : L10n.text("timer.launchHint.generic"))
                         .font(.system(size: 10))
                         .foregroundColor(.white.opacity(0.15))
                 }
@@ -436,7 +457,7 @@ struct StatusBarView: View {
     private var activeAppSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
-                Text(appMonitor.monitoringMode == .global ? "全局" : "定制")
+                Text(appMonitor.monitoringMode == .global ? L10n.text("timer.mode.global") : L10n.text("timer.mode.custom"))
                     .font(.system(size: 9, weight: .bold))
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -447,15 +468,15 @@ struct StatusBarView: View {
                     .cornerRadius(4)
 
                 if appMonitor.monitoringMode == .global {
-                    Text("定时提醒护眼")
+                    Text(L10n.text("timer.global.desc"))
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
                 } else if let activeApp = appMonitor.currentEditingApp {
-                    Text("\(activeApp) 正在运行")
+                    Text(String(format: L10n.text("timer.running"), activeApp))
                         .font(.system(size: 11))
                         .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                 } else {
-                    Text("等待监测应用启动")
+                    Text(L10n.text("timer.waitingApp"))
                         .font(.system(size: 11))
                         .foregroundColor(.white.opacity(0.35))
                 }
@@ -469,7 +490,9 @@ struct StatusBarView: View {
                         }
                     }) {
                         HStack(spacing: 2) {
-                            Text("\(appMonitor.selectedApps.count) 个应用")
+                            Text(appMonitor.selectedApps.count == 1
+                                ? L10n.text("mode.appsSelected.one")
+                                : L10n.format("mode.appsSelected.many", appMonitor.selectedApps.count))
                                 .font(.system(size: 10))
                             Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                                 .font(.system(size: 8))
@@ -497,7 +520,7 @@ struct StatusBarView: View {
                             Spacer()
 
                             if appMonitor.currentEditingApp == appMonitor.displayName(for: bundleId) {
-                                Text("运行中")
+                                Text(L10n.text("mode.running"))
                                     .font(.system(size: 9))
                                     .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                             }
@@ -519,15 +542,15 @@ struct StatusBarView: View {
         HStack(spacing: 0) {
             statCell(
                 value: "\(sessionTracker.todayBreakCount)",
-                label: "次休息"
+                label: L10n.text("stats.breaks")
             )
             statCell(
                 value: String(format: "%.1f", Double(sessionTracker.todayTotalRelaxSeconds) / 60.0),
-                label: "分钟放松"
+                label: L10n.text("stats.relax")
             )
             statCell(
                 value: String(format: "%.1f", sessionTracker.todayTotalGuardMinutes / 60.0) + "h",
-                label: "守护时长"
+                label: L10n.text("stats.guard")
             )
         }
         .padding(.vertical, 16)
@@ -555,7 +578,7 @@ struct StatusBarView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "eye")
                         .font(.system(size: 10))
-                    Text("立即休息")
+                    Text(L10n.text("footer.restNow"))
                         .font(.system(size: 11))
                 }
                 .foregroundColor(.white.opacity(0.5))
@@ -574,7 +597,7 @@ struct StatusBarView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "gearshape")
                         .font(.system(size: 10))
-                    Text("设置")
+                    Text(L10n.text("footer.settings"))
                         .font(.system(size: 11))
                 }
                 .foregroundColor(.white.opacity(0.5))
@@ -588,7 +611,7 @@ struct StatusBarView: View {
             Button(action: {
                 showQuitAlert = true
             }) {
-                Text("退出")
+                Text(L10n.text("footer.quit"))
                     .font(.system(size: 11))
                     .foregroundColor(.white.opacity(0.3))
             }
@@ -596,12 +619,12 @@ struct StatusBarView: View {
             .alert(isPresented: $showQuitAlert) {
                 Alert(
                     title: Text(editionManager.isSunflower
-                                ? "照顾好眼睛。去看更远的风景吧 🌻"
-                                : "照顾好眼睛，去看更远的风景吧"),
-                    primaryButton: .destructive(Text("退出")) {
+                                ? L10n.text("footer.quit.title.sunflower")
+                                : L10n.text("footer.quit.title")),
+                    primaryButton: .destructive(Text(L10n.text("footer.quit.exit"))) {
                         NSApp.terminate(nil)
                     },
-                    secondaryButton: .cancel(Text("继续守护"))
+                    secondaryButton: .cancel(Text(L10n.text("footer.quit.continue")))
                 )
             }
         }
@@ -613,7 +636,7 @@ struct StatusBarView: View {
 
     private var settingsModeSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("监测模式")
+            Text(L10n.text("settings.mode.title"))
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(.white)
 
@@ -654,7 +677,7 @@ struct StatusBarView: View {
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(mode.rawValue)
+                    Text(mode.displayTitle)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.white)
 
@@ -694,10 +717,12 @@ struct StatusBarView: View {
     private func settingsModeDescriptionText(_ mode: MonitoringMode) -> String {
         switch mode {
         case .global:
-            return "定时提醒护眼，不监测特定软件"
+            return L10n.text("settings.mode.global.desc")
         case .selectApps:
             let count = appMonitor.selectedApps.count
-            return count > 0 ? "已选择 \(count) 个应用" : "点击选择要监测的 App"
+            if count == 0 { return L10n.text("settings.mode.selectApps.desc.none") }
+            if count == 1 { return L10n.text("settings.mode.selectApps.desc.one") }
+            return L10n.format("settings.mode.selectApps.desc.many", count)
         }
     }
 
@@ -706,7 +731,7 @@ struct StatusBarView: View {
     private var appSelectionSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("选择 App")
+                Text(L10n.text("monitor.selectApps"))
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.white)
 
@@ -722,10 +747,10 @@ struct StatusBarView: View {
                         .foregroundColor(.white.opacity(0.5))
                 }
                 .buttonStyle(.plain)
-                .help("刷新列表")
+                .help(L10n.text("monitor.selectApps.refresh"))
 
                 if !appMonitor.selectedApps.isEmpty {
-                    Button("全清") {
+                    Button(L10n.text("monitor.selectApps.clear")) {
                         appMonitor.selectedApps.removeAll()
                     }
                     .font(.system(size: 11))
@@ -734,13 +759,13 @@ struct StatusBarView: View {
                 }
             }
 
-            Text("仅在「手动选择」模式下生效")
+            Text(L10n.text("monitor.selectApps.onlyManual"))
                 .font(.system(size: 10))
                 .foregroundColor(.white.opacity(0.3))
                 .padding(.bottom, 4)
 
             if appMonitor.runningApplications.isEmpty {
-                Text("当前没有正在运行的 App")
+                Text(L10n.text("monitor.selectApps.none"))
                     .font(.system(size: 11))
                     .foregroundColor(.white.opacity(0.4))
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -749,7 +774,7 @@ struct StatusBarView: View {
                 let knownRunningApps = appMonitor.runningApplications.filter { appMonitor.allAvailableApps[$0.bundleId] != nil }
 
                 if !knownRunningApps.isEmpty {
-                    Text(editionManager.isSunflower ? "已知的剪辑软件" : "已知的常用软件")
+                    Text(editionManager.isSunflower ? L10n.text("monitor.known.sunflower") : L10n.text("monitor.known.generic"))
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.bottom, 4)
@@ -763,7 +788,7 @@ struct StatusBarView: View {
                         .padding(.vertical, 8)
                 }
 
-                Text("正在运行的所有 App")
+                Text(L10n.text("monitor.all"))
                     .font(.system(size: 10, weight: .medium))
                     .foregroundColor(.white.opacity(0.4))
                     .padding(.bottom, 4)
@@ -810,7 +835,7 @@ struct StatusBarView: View {
                 Spacer()
 
                 if appMonitor.selectedApps.contains(bundleId) {
-                    Text("监测中")
+                    Text(L10n.text("monitor.active"))
                         .font(.system(size: 9))
                         .foregroundColor(Color(red: 78/255, green: 205/255, blue: 196/255))
                         .padding(.horizontal, 6)

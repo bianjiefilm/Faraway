@@ -4,15 +4,38 @@ import Combine
 
 /// Monitoring mode selection
 enum MonitoringMode: String, CaseIterable {
-    case global = "全局"
-    case selectApps = "手动选择"
+    case global = "global"
+    case selectApps = "selectApps"
+
+    init?(legacyValue: String) {
+        switch legacyValue {
+        case "global", "全局":
+            self = .global
+        case "selectApps", "手动选择":
+            self = .selectApps
+        default:
+            return nil
+        }
+    }
+
+    var displayTitle: String {
+        switch self {
+        case .global:
+            return L10n.text("monitor.global.title")
+        case .selectApps:
+            return L10n.text("monitor.manual.title")
+        }
+    }
 
     var description: String {
         switch self {
         case .global:
-            return "无论是否打开软件，定时提醒护眼"
+            return L10n.text("monitor.global.desc")
         case .selectApps:
-            return "从正在运行的 App 中选择要监测的软件"
+            let count = AppMonitor.shared.selectedApps.count
+            if count == 0 { return L10n.text("monitor.manual.desc.none") }
+            if count == 1 { return L10n.text("monitor.manual.desc.one") }
+            return L10n.format("monitor.manual.desc.many", count)
         }
     }
 }
@@ -53,7 +76,7 @@ class AppMonitor: ObservableObject {
 
     /// Bundle identifiers of video editing apps to monitor
     private let monitoredApps: [String: String] = [
-        "com.lemon.lvpro": "剪映专业版",
+        "com.lemon.lvpro": "CapCut Pro",
         "com.apple.FinalCut": "Final Cut Pro",
         "com.blackmagic-design.DaVinciResolve": "DaVinci Resolve",
         "com.blackmagic-design.DaVinciResolve.ProjectServer": "DaVinci Resolve",
@@ -80,7 +103,7 @@ class AppMonitor: ObservableObject {
     private func loadSettings() {
         // Load monitoring mode
         if let modeString = UserDefaults.standard.string(forKey: "EyeBreak_MonitoringMode"),
-           let mode = MonitoringMode(rawValue: modeString) {
+           let mode = MonitoringMode(legacyValue: modeString) {
             monitoringMode = mode
         }
 
@@ -209,7 +232,7 @@ class AppMonitor: ObservableObject {
         // In global mode, always consider active (timer runs regardless)
         if monitoringMode == .global {
             found = true
-            foundName = "全局守护"
+            foundName = L10n.text("mode.global.short")
         }
 
         DispatchQueue.main.async { [weak self] in

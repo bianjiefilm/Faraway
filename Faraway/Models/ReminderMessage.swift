@@ -27,8 +27,8 @@ class MessageProvider: ObservableObject {
 
     private let genericNormalMessages: [ReminderMessage] = [
         ReminderMessage(
-            text: "看看窗外吧\n远处的风景在等你 🌿",
-            subtitle: "让眼睛去旅行 20 秒",
+            text: L10n.text("reminder.generic.one"),
+            subtitle: L10n.text("reminder.generic.one.subtitle"),
             gradientColors: [
                 Color(red: 1, green: 107/255, blue: 107/255),
                 Color(red: 1, green: 142/255, blue: 83/255),
@@ -37,8 +37,8 @@ class MessageProvider: ObservableObject {
             isSpecial: false
         ),
         ReminderMessage(
-            text: "眼睛辛苦了\n让它呼吸 20 秒 ☁️",
-            subtitle: "深呼吸，看远方",
+            text: L10n.text("reminder.generic.two"),
+            subtitle: L10n.text("reminder.generic.two.subtitle"),
             gradientColors: [
                 Color(red: 78/255, green: 205/255, blue: 196/255),
                 Color(red: 68/255, green: 176/255, blue: 158/255),
@@ -47,8 +47,8 @@ class MessageProvider: ObservableObject {
             isSpecial: false
         ),
         ReminderMessage(
-            text: "世界不止屏幕这么大\n抬头看看 💜",
-            subtitle: "窗外有好风景",
+            text: L10n.text("reminder.generic.three"),
+            subtitle: L10n.text("reminder.generic.three.subtitle"),
             gradientColors: [
                 Color(red: 167/255, green: 139/255, blue: 250/255),
                 Color(red: 129/255, green: 140/255, blue: 248/255),
@@ -57,8 +57,8 @@ class MessageProvider: ObservableObject {
             isSpecial: false
         ),
         ReminderMessage(
-            text: "工作可以晚一点\n眼睛只有一双 ✨",
-            subtitle: "照顾好自己",
+            text: L10n.text("reminder.generic.four"),
+            subtitle: L10n.text("reminder.generic.four.subtitle"),
             gradientColors: [
                 Color(red: 1, green: 60/255, blue: 172/255),
                 Color(red: 1, green: 107/255, blue: 107/255),
@@ -67,8 +67,8 @@ class MessageProvider: ObservableObject {
             isSpecial: false
         ),
         ReminderMessage(
-            text: "事情不会跑掉的\n先让眼睛散散步 🍃",
-            subtitle: "好的状态需要好的眼睛",
+            text: L10n.text("reminder.generic.five"),
+            subtitle: L10n.text("reminder.generic.five.subtitle"),
             gradientColors: [
                 Color(red: 132/255, green: 204/255, blue: 22/255),
                 Color(red: 78/255, green: 205/255, blue: 196/255),
@@ -77,8 +77,8 @@ class MessageProvider: ObservableObject {
             isSpecial: false
         ),
         ReminderMessage(
-            text: "灵感需要休息\n眼睛也是 🌙",
-            subtitle: "放空一下，说不定有新想法",
+            text: L10n.text("reminder.generic.six"),
+            subtitle: L10n.text("reminder.generic.six.subtitle"),
             gradientColors: [
                 Color(red: 99/255, green: 102/255, blue: 241/255),
                 Color(red: 167/255, green: 139/255, blue: 250/255),
@@ -87,8 +87,8 @@ class MessageProvider: ObservableObject {
             isSpecial: false
         ),
         ReminderMessage(
-            text: "工作的节奏很重要\n休息的节奏也是 🎵",
-            subtitle: "张弛有度",
+            text: L10n.text("reminder.generic.seven"),
+            subtitle: L10n.text("reminder.generic.seven.subtitle"),
             gradientColors: [
                 Color(red: 245/255, green: 158/255, blue: 11/255),
                 Color(red: 1, green: 107/255, blue: 107/255),
@@ -102,8 +102,8 @@ class MessageProvider: ObservableObject {
 
     private let genericSpecialMessages: [ReminderMessage] = [
         ReminderMessage(
-            text: "你也需要\n看看远处的阳光",
-            subtitle: "— 来自 Faraway",
+            text: L10n.text("reminder.special.one"),
+            subtitle: L10n.text("reminder.special.one.subtitle"),
             gradientColors: [
                 Color(red: 251/255, green: 191/255, blue: 36/255),
                 Color(red: 245/255, green: 158/255, blue: 11/255),
@@ -112,8 +112,8 @@ class MessageProvider: ObservableObject {
             isSpecial: true
         ),
         ReminderMessage(
-            text: "阳光在等你\n先休息一下",
-            subtitle: "— ☀️",
+            text: L10n.text("reminder.special.two"),
+            subtitle: L10n.text("reminder.special.two.subtitle"),
             gradientColors: [
                 Color(red: 37/255, green: 99/255, blue: 235/255),
                 Color(red: 78/255, green: 205/255, blue: 196/255),
@@ -122,8 +122,8 @@ class MessageProvider: ObservableObject {
             isSpecial: true
         ),
         ReminderMessage(
-            text: "追光的路上\n别忘了你的眼睛",
-            subtitle: "— ✨",
+            text: L10n.text("reminder.special.three"),
+            subtitle: L10n.text("reminder.special.three.subtitle"),
             gradientColors: [
                 Color(red: 251/255, green: 191/255, blue: 36/255),
                 Color(red: 132/255, green: 204/255, blue: 22/255),
@@ -137,9 +137,9 @@ class MessageProvider: ObservableObject {
     // Sunflower edition reuses the generic messages plus the video-editing themed ones
     private var sunflowerNormalMessages: [ReminderMessage] {
         genericNormalMessages.dropLast(3) + [
-            ReminderMessage(
-                text: "视频可以晚一点\n眼睛只有一双 ✨",
-                subtitle: "照顾好自己",
+        ReminderMessage(
+                text: L10n.text("reminder.editing.one"),
+                subtitle: L10n.text("reminder.editing.one.subtitle"),
                 gradientColors: [
                     Color(red: 1, green: 60/255, blue: 172/255),
                     Color(red: 1, green: 107/255, blue: 107/255),
@@ -147,9 +147,9 @@ class MessageProvider: ObservableObject {
                 ],
                 isSpecial: false
             ),
-            ReminderMessage(
-                text: "时间线不会跑掉的\n先让眼睛散散步 🍃",
-                subtitle: "好的作品需要好的眼睛",
+        ReminderMessage(
+                text: L10n.text("reminder.editing.two"),
+                subtitle: L10n.text("reminder.editing.two.subtitle"),
                 gradientColors: [
                     Color(red: 132/255, green: 204/255, blue: 22/255),
                     Color(red: 78/255, green: 205/255, blue: 196/255),
@@ -157,9 +157,9 @@ class MessageProvider: ObservableObject {
                 ],
                 isSpecial: false
             ),
-            ReminderMessage(
-                text: "剪辑的节奏很重要\n休息的节奏也是 🎵",
-                subtitle: "张弛有度",
+        ReminderMessage(
+                text: L10n.text("reminder.editing.three"),
+                subtitle: L10n.text("reminder.editing.three.subtitle"),
                 gradientColors: [
                     Color(red: 245/255, green: 158/255, blue: 11/255),
                     Color(red: 1, green: 107/255, blue: 107/255),
@@ -174,8 +174,8 @@ class MessageProvider: ObservableObject {
 
     private let sunflowerSpecialMessages: [ReminderMessage] = [
         ReminderMessage(
-            text: "太阳葵也需要\n看看远处的阳光",
-            subtitle: "— 来自一个关心你的人",
+            text: L10n.text("reminder.sunflower.one"),
+            subtitle: L10n.text("reminder.sunflower.one.subtitle"),
             gradientColors: [
                 Color(red: 251/255, green: 191/255, blue: 36/255),
                 Color(red: 245/255, green: 158/255, blue: 11/255),
@@ -184,8 +184,8 @@ class MessageProvider: ObservableObject {
             isSpecial: true
         ),
         ReminderMessage(
-            text: "有人帮你晒着阳光\n你先休息一下",
-            subtitle: "— ☀️",
+            text: L10n.text("reminder.sunflower.two"),
+            subtitle: L10n.text("reminder.sunflower.two.subtitle"),
             gradientColors: [
                 Color(red: 37/255, green: 99/255, blue: 235/255),
                 Color(red: 78/255, green: 205/255, blue: 196/255),
@@ -194,8 +194,8 @@ class MessageProvider: ObservableObject {
             isSpecial: true
         ),
         ReminderMessage(
-            text: "向日葵追太阳\n你也别忘了追光的眼睛",
-            subtitle: "— 🌻",
+            text: L10n.text("reminder.sunflower.three"),
+            subtitle: L10n.text("reminder.sunflower.three.subtitle"),
             gradientColors: [
                 Color(red: 251/255, green: 191/255, blue: 36/255),
                 Color(red: 132/255, green: 204/255, blue: 22/255),

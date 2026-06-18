@@ -45,11 +45,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func promptLoginItem() {
         if #available(macOS 13.0, *) {
             let alert = NSAlert()
-            alert.messageText = "开机启动 Faraway？"
-            alert.informativeText = "选择开机自动启动 Faraway，以便更好地提醒您休息。"
+            alert.messageText = L10n.text("startup.prompt.title")
+            alert.informativeText = L10n.text("startup.prompt.body")
             alert.alertStyle = .informational
-            alert.addButton(withTitle: "开机启动")
-            alert.addButton(withTitle: "暂不")
+            alert.addButton(withTitle: L10n.text("startup.prompt.enable"))
+            alert.addButton(withTitle: L10n.text("startup.prompt.later"))
 
             let response = alert.runModal()
             if response == .alertFirstButtonReturn {

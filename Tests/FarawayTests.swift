@@ -64,7 +64,13 @@ final class MessageProviderTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        L10n.appLanguage = .chineseSimplified
         em.deactivate()
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        L10n.appLanguage = .english
     }
 
     func testGenericNormalMessagesCount() {
@@ -158,6 +164,7 @@ final class DateManagerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        L10n.appLanguage = .chineseSimplified
         em.deactivate()
         dm.injectedDate = nil
         dm.specialDateMessage = nil
@@ -166,6 +173,7 @@ final class DateManagerTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         dm.injectedDate = nil
+        L10n.appLanguage = .english
     }
 
     // Helper to create a Date from components
@@ -343,8 +351,14 @@ final class MilestoneManagerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        L10n.appLanguage = .chineseSimplified
         em.deactivate()
         mm.currentMilestoneMessage = nil
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        L10n.appLanguage = .english
     }
 
     private func yesterday() -> String {
@@ -465,5 +479,39 @@ final class MilestoneManagerTests: XCTestCase {
         mm.currentMilestoneMessage = nil
         mm.recordEffectiveRest()
         XCTAssertNil(mm.currentMilestoneMessage, "No milestone message at count 11, streak 4")
+    }
+}
+
+// MARK: - Localization Tests
+
+final class LocalizationTests: XCTestCase {
+    override func tearDown() {
+        super.tearDown()
+        L10n.appLanguage = .english
+    }
+
+    func testDefaultLanguageIsEnglish() {
+        UserDefaults.standard.removeObject(forKey: "Faraway_AppLanguage")
+        XCTAssertEqual(L10n.appLanguage, .english)
+        XCTAssertEqual(L10n.currentLanguage, .english)
+    }
+
+    func testChineseTranslationsCoverEnglishKeys() {
+        let englishKeys = Set(L10n.translations[.english]?.keys.map { $0 } ?? [])
+        let chineseKeys = Set(L10n.translations[.chineseSimplified]?.keys.map { $0 } ?? [])
+        XCTAssertEqual(chineseKeys, englishKeys)
+    }
+
+    func testEnglishTranslationsCoverAllKnownKeys() {
+        let englishKeys = Set(L10n.translations[.english]?.keys.map { $0 } ?? [])
+        XCTAssertEqual(englishKeys, L10n.allTranslationKeys)
+    }
+
+    func testLanguageSwitchReturnsLocalizedCopy() {
+        L10n.appLanguage = .english
+        XCTAssertEqual(L10n.text("language.title"), "Language")
+
+        L10n.appLanguage = .chineseSimplified
+        XCTAssertEqual(L10n.text("language.title"), "语言")
     }
 }

@@ -6,9 +6,9 @@ struct WelcomeView: View {
     @State private var currentPage = 0
 
     private let pages: [(image: String, title: String, subtitle: String)] = [
-        ("首次启动欢迎页a", "你好", "我是 Faraway，每 20 分钟提醒你休息一下"),
-        ("功能介绍我会提醒你", "我会提醒你", "打开应用后，自动开始守护你的眼睛"),
-        ("开始使用一起出发", "一起出发", "让每一次远眺都成为美好的时刻")
+        ("首次启动欢迎页a", L10n.text("welcome.title"), L10n.text("welcome.subtitle")),
+        ("功能介绍我会提醒你", L10n.text("welcome.title"), L10n.text("welcome.feature")),
+        ("开始使用一起出发", L10n.text("welcome.finish"), L10n.text("welcome.feature"))
     ]
 
     var body: some View {
@@ -62,7 +62,7 @@ struct WelcomeView: View {
 
                 // Button
                 Button(action: handleButtonTap) {
-                    Text(currentPage == pages.count - 1 ? "开始使用" : "下一步")
+                    Text(currentPage == pages.count - 1 ? L10n.text("welcome.finish") : L10n.text("welcome.next"))
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(Color(red: 10/255, green: 10/255, blue: 20/255))
                         .frame(maxWidth: .infinity)

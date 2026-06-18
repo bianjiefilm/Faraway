@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>zh_CN</string>
+    <string>en</string>
     <key>CFBundleDisplayName</key>
     <string>Faraway</string>
     <key>CFBundleExecutable</key>
@@ -17,13 +17,13 @@
     <key>CFBundlePackageType</key>
     <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.16</string>
+    <string>1.1.1</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>我们需要获取您的粗略位置，以便为您提供动态的当地天气情境文案提醒。</string>
+    <string>We use your approximate location to tailor eye-care reminders to local weather.</string>
     <key>LSMinimumSystemVersion</key>
     <string>$(MACOSX_DEPLOYMENT_TARGET)</string>
     <key>LSUIElement</key>

@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "EyeBreak",
+    defaultLocalization: "en",
     platforms: [
         .macOS(.v13)
     ],
@@ -12,9 +13,11 @@ let package = Package(
         .target(
             name: "FarawayCore",
             path: "Faraway",
-            exclude: ["FarawayApp.swift"],
+            exclude: ["FarawayApp.swift", "Info.plist", "Faraway.entitlements", "png"],
             resources: [
-                .process("Assets.xcassets")
+                .process("Assets.xcassets"),
+                .process("en.lproj"),
+                .process("zh-Hans.lproj")
             ]
         ),
         .testTarget(

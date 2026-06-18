@@ -119,7 +119,7 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         ]
         
         if rainyConditions.contains(current.condition) {
-            return "下雨的日子，适合慢一点"
+            return L10n.text("weather.rain")
         }
         
         // 2. Check for clear sky (occasionally returning)
@@ -128,7 +128,7 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if clearConditions.contains(current.condition) {
             // Give it a 30% chance to show up so it doesn't get repetitive
             if Int.random(in: 1...100) <= 30 {
-                return "今天可以去晒着阳光充充电 ☀️"
+                return L10n.text("weather.clear")
             }
             return nil
         }
@@ -144,7 +144,7 @@ class WeatherManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 cloudyConditions.contains(dayWeather.condition)
             }
             if areAllCloudy {
-                return EditionManager.shared.isSunflower ? "🌻阳光会回来的" : "阳光会回来的 ☀️"
+                return L10n.text("weather.cloudy")
             }
         }
 

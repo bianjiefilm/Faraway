@@ -20,6 +20,8 @@
 		AA00000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB00000A /* Assets.xcassets */; };
 		AA00000B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000E /* SettingsView.swift */; };
 		AA00000C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00000F /* WelcomeView.swift */; };
+		AA00000D /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000010 /* Localization.swift */; };
+		AA00000E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB000013 /* InfoPlist.strings */; };
 		92DA497974EE47E2A6C377AC /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE9B12849CD43178C994A0C /* WeatherManager.swift */; };
 		2BC734BED07B4FEEA607627A /* MilestoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA973C6F8944B768353DF07 /* MilestoneManager.swift */; };
 		27F8FE18EEEC4C54A7CEA50B /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4ED383EED4839A3BA0E99 /* DateManager.swift */; };
@@ -42,6 +44,9 @@
 		AB00000D /* Faraway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faraway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB00000E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AB00000F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		AB000010 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		AB000011 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AB000012 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CFE9B12849CD43178C994A0C /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		2CA973C6F8944B768353DF07 /* MilestoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneManager.swift; sourceTree = "<group>"; };
 		F3B4ED383EED4839A3BA0E99 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -57,6 +62,18 @@
 		};
 /* End PBXFrameworksBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		AB000013 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB000011 /* en */,
+				AB000012 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin PBXGroup section */
 		AD000001 = {
 			isa = PBXGroup;
@@ -71,11 +88,13 @@
 			children = (
 				AB000001 /* FarawayApp.swift */,
 				AB000002 /* AppDelegate.swift */,
+				AB000010 /* Localization.swift */,
 				AD000003 /* Views */,
 				AD000004 /* Models */,
 				AD000005 /* Managers */,
 				AB00000A /* Assets.xcassets */,
 				AB00000B /* Info.plist */,
+				AB000013 /* InfoPlist.strings */,
 				AB00000C /* Faraway.entitlements */,
 			);
 			path = Faraway;
@@ -183,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA00000A /* Assets.xcassets in Resources */,
+				AA00000E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +228,7 @@
 				EDTN0001 /* EditionManager.swift in Sources */,
 				AA00000B /* SettingsView.swift in Sources */,
 				AA00000C /* WelcomeView.swift in Sources */,
+				AA00000D /* Localization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eyebreak.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -362,7 +383,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eyebreak.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

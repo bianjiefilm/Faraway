@@ -16,23 +16,23 @@ class MilestoneManager: ObservableObject {
     private var effectiveRestThresholds: [Int: String] {
         if EditionManager.shared.isSunflower {
             return [
-                1: "第一次，一个好的开始 🌻",
-                50: "50次远眺，眼睛在说谢谢",
-                200: "200次了，已经是一个好习惯",
-                500: "看了500次远方，你看过的风景一定很美",
-                1000: "一千次远眺 🌻",
-                2000: "还在用着啊。有人很高兴 🌻",
-                5000: "这么久了。去看更远的地方吧 🌻"
+                1: L10n.text("milestone.one.sunflower"),
+                50: L10n.text("milestone.50"),
+                200: L10n.text("milestone.200"),
+                500: L10n.text("milestone.500"),
+                1000: L10n.text("milestone.1000.sunflower"),
+                2000: L10n.text("milestone.2000.sunflower"),
+                5000: L10n.text("milestone.5000")
             ]
         } else {
             return [
-                1: "第一次，一个好的开始",
-                50: "50次远眺，眼睛在说谢谢",
-                200: "200次了，已经是一个好习惯",
-                500: "看了500次远方，你看过的风景一定很美",
-                1000: "一千次远眺",
-                2000: "还在用着啊，真好",
-                5000: "这么久了。去看更远的地方吧"
+                1: L10n.text("milestone.one.generic"),
+                50: L10n.text("milestone.50"),
+                200: L10n.text("milestone.200"),
+                500: L10n.text("milestone.500"),
+                1000: L10n.text("milestone.1000.generic"),
+                2000: L10n.text("milestone.2000.generic"),
+                5000: L10n.text("milestone.5000")
             ]
         }
     }
@@ -40,17 +40,17 @@ class MilestoneManager: ObservableObject {
     private var consecutiveDayThresholds: [Int: String] {
         if EditionManager.shared.isSunflower {
             return [
-                7: "连续一周了，真棒",
-                30: "一个月，护眼已经成为你的习惯了",
-                100: "100天 🌻",
-                365: "一整年了。这个App很开心陪着你"
+                7: L10n.text("milestone.week"),
+                30: L10n.text("milestone.month"),
+                100: L10n.text("milestone.100.generic"),
+                365: L10n.text("milestone.365")
             ]
         } else {
             return [
-                7: "连续一周了，真棒",
-                30: "一个月，护眼已经成为你的习惯了",
-                100: "100天，了不起",
-                365: "一整年了。这个App很开心陪着你"
+                7: L10n.text("milestone.week"),
+                30: L10n.text("milestone.month"),
+                100: L10n.text("milestone.100.sunflower"),
+                365: L10n.text("milestone.365")
             ]
         }
     }

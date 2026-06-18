@@ -114,7 +114,7 @@ struct ReminderOverlayView: View {
                             .contentTransition(.numericText())
                             .animation(.snappy, value: countdown)
 
-                        Text("SEC")
+                            Text(L10n.text("reminder.countdown"))
                             .font(.system(size: 12, weight: .regular, design: .monospaced))
                             .foregroundColor(.white.opacity(0.6))
                             .tracking(3)
@@ -127,7 +127,7 @@ struct ReminderOverlayView: View {
 
                 // Dismiss button
                 Button(action: handleDismiss) {
-                    Text("我休息好了 ✓")
+                    Text(L10n.text("reminder.done"))
                         .font(.system(size: 13, weight: countdown == 0 ? .semibold : .regular))
                         .foregroundColor(countdown == 0 ? .white : .white.opacity(0.3))
                         .padding(.horizontal, 28)
@@ -152,7 +152,7 @@ struct ReminderOverlayView: View {
                     timer?.invalidate()
                     onDismiss() // dismiss without recording
                 }) {
-                    Text("跳过")
+                    Text(L10n.text("reminder.skip"))
                         .font(.system(size: 12))
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.top, 16)
@@ -168,7 +168,7 @@ struct ReminderOverlayView: View {
             // Gentle nudge (shows when dismissed too early)
             VStack {
                 Spacer()
-                Text(EditionManager.shared.isSunflower ? "再看一会儿远处嘛～ 对眼睛好 🌻" : "再看一会儿远处嘛～ 对眼睛好")
+                Text(EditionManager.shared.isSunflower ? L10n.text("reminder.gentle.sunflower") : L10n.text("reminder.gentle"))
                     .font(.system(size: 13))
                     .foregroundColor(.white.opacity(0.35))
                     .opacity(showGentleNudge ? 1 : 0)

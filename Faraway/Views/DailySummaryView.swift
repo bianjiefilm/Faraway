@@ -38,7 +38,7 @@ struct DailySummaryView: View {
                             value: sunflowerRotation
                         )
 
-                    Text("今日护眼报告")
+                    Text(L10n.text("daily.title"))
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundColor(.white)
                         .tracking(2)
@@ -53,15 +53,15 @@ struct DailySummaryView: View {
                 HStack(spacing: 30) {
                     statItem(
                         value: "\(breakCount)",
-                        label: "次休息"
+                        label: L10n.text("daily.breaks")
                     )
                     statItem(
                         value: String(format: "%.1f", Double(totalRelaxSeconds) / 60.0),
-                        label: "分钟放松"
+                        label: L10n.text("daily.relax")
                     )
                     statItem(
                         value: String(format: "%.1f", guardHours) + "h",
-                        label: "守护时长"
+                        label: L10n.text("daily.guard")
                     )
                 }
                 .opacity(showStats ? 1 : 0)
@@ -71,12 +71,12 @@ struct DailySummaryView: View {
 
                 // Warm message
                 VStack(spacing: 8) {
-                    Text("今天辛苦了，眼睛感谢你每一次的停下来 ✦")
+                    Text(L10n.text("daily.message"))
                         .font(.system(size: 14))
                         .foregroundColor(.white.opacity(0.8))
                         .multilineTextAlignment(.center)
 
-                    Text("明天也要记得休息哦")
+                    Text(L10n.text("daily.message.followup"))
                         .font(.system(size: 12))
                         .foregroundColor(.white.opacity(0.5))
                 }
@@ -87,7 +87,7 @@ struct DailySummaryView: View {
 
                 // Close button - always visible at bottom
                 Button(action: onDismiss) {
-                    Text("晚安 ✦")
+                    Text(L10n.text("daily.goodnight") + " ✦")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white)
                         .padding(.horizontal, 32)
